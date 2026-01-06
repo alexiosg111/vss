@@ -163,6 +163,29 @@
             width: 0%;
             transition: width 0.3s ease;
         }
+        
+        .manual-check {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .check-button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0.5rem;
+        }
+        
+        .check-button:hover {
+            background: #1d4ed8;
+        }
     </style>
 </head>
 <body>
@@ -170,29 +193,21 @@
         <div class="header">
             <div class="logo">VSS Website</div>
             <h1>🚀 Setup Status Monitor</h1>
-            <p>Live Status der VSS Website Installation</p>
+            <p>Überwache den VSS Website Setup-Prozess</p>
         </div>
         
         <div class="status-card">
             <div class="status-item">
-                <div class="status-icon" id="node-icon">⏳</div>
-                <span id="node-status">Prüfe Node.js...</span>
+                <div class="status-icon status-success">✅</div>
+                <span>Setup-Monitor aktiv</span>
             </div>
             <div class="status-item">
-                <div class="status-icon" id="npm-icon">⏳</div>
-                <span id="npm-status">Prüfe npm...</span>
+                <div class="status-icon status-success">✅</div>
+                <span>Browser-Fenster geöffnet</span>
             </div>
             <div class="status-item">
-                <div class="status-icon" id="deps-icon">⏳</div>
-                <span id="deps-status">Installiere Dependencies...</span>
-            </div>
-            <div class="status-item">
-                <div class="status-icon" id="build-icon">⏳</div>
-                <span id="build-status">Teste Build...</span>
-            </div>
-            <div class="status-item">
-                <div class="status-icon" id="server-icon">⏳</div>
-                <span id="server-status">Starte Development Server...</span>
+                <div class="status-icon status-pending" id="server-icon">⏳</div>
+                <span id="server-status">Warte auf Server-Start...</span>
             </div>
         </div>
         
@@ -201,32 +216,42 @@
         </div>
         
         <div class="url-card" id="url-card">
-            <h2 id="url-title">Server wird gestartet...</h2>
-            <a href="#" class="url-link" id="url-link" style="display: none;">Website öffnen</a>
-            <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
-                <div>🎯 Preview: <span id="preview-url">http://localhost:3000/preview</span></div>
-                <div>🧪 Features: Container-Scroll-Animation, Responsive Design</div>
+            <h2 id="url-title">🚀 Setup läuft - Server wird gestartet</h2>
+            <div id="server-info" style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                <p>⏳ Server wird gestartet... (normalerweise 30-60 Sekunden)</p>
+                <p>🧪 Setup-Schritte laufen parallel im Hintergrund</p>
             </div>
         </div>
         
+        <div class="manual-check">
+            <h3>🔍 Server Status prüfen</h3>
+            <p>Klicken Sie auf den Button, um zu prüfen, ob die Website bereits erreichbar ist:</p>
+            <button class="check-button" onclick="checkServer()">🌐 Website prüfen</button>
+            <button class="check-button" onclick="openWebsite()">🚀 Website öffnen</button>
+            <div id="check-result" style="margin-top: 1rem;"></div>
+        </div>
+        
         <div class="logs" id="logs">
-            <div class="log-entry log-info">[INFO] Setup Monitor gestartet...</div>
+            <div class="log-entry log-info">[INFO] Setup-Monitor gestartet</div>
+            <div class="log-entry log-info">[INFO] Browser-Fenster erfolgreich geöffnet</div>
+            <div class="log-entry log-info">[INFO] Setup-Prozess läuft im Hintergrund</div>
         </div>
     </div>
 
     <script>
-        let setupProgress = 0;
+        let progress = 0;
+        let checkCount = 0;
         
         function updateProgress(percentage) {
             const progressFill = document.getElementById('progress-fill');
             progressFill.style.width = percentage + '%';
         }
         
-        function updateStatus(elementId, status, type) {
-            const element = document.getElementById(elementId);
-            const icon = document.getElementById(elementId.replace('-status', '-icon'));
+        function updateStatus(status, type) {
+            const icon = document.getElementById('server-icon');
+            const text = document.getElementById('server-status');
             
-            element.textContent = status;
+            text.textContent = status;
             
             if (type === 'success') {
                 icon.textContent = '✅';
@@ -252,81 +277,107 @@
         function showServerReady() {
             const urlCard = document.getElementById('url-card');
             const urlTitle = document.getElementById('url-title');
-            const urlLink = document.getElementById('url-link');
+            const serverInfo = document.getElementById('server-info');
             
             urlCard.classList.add('ready');
             urlTitle.textContent = '🎉 Website ist online!';
-            urlLink.style.display = 'block';
-            urlLink.href = 'http://localhost:3000';
+            serverInfo.innerHTML = `
+                <p>✅ Server läuft auf Port 3000</p>
+                <p>🌐 Website ist erreichbar</p>
+                <p>🎯 Klicken Sie auf die Buttons unten zum Öffnen</p>
+            `;
             
-            updateStatus('server-status', 'Server läuft auf Port 3000', 'success');
+            updateStatus('Server läuft - Website ist erreichbar!', 'success');
+            updateProgress(100);
             
             addLog('✅ Website erfolgreich gestartet!', 'success');
-            addLog('🌐 Browser wird automatisch geöffnet...', 'info');
+            addLog('🌐 Server ist bereit für Zugriffe', 'success');
             
-            // Öffne Website automatisch nach 2 Sekunden
+            // Automatisches Öffnen nach 3 Sekunden
             setTimeout(() => {
-                window.open('http://localhost:3000', '_blank');
-                window.open('http://localhost:3000/preview', '_blank');
-            }, 2000);
+                if (confirm('Website ist bereit! Automatisch öffnen?')) {
+                    openWebsite();
+                }
+            }, 3000);
         }
         
-        // Simulate setup progress
-        let step = 0;
-        const steps = [
-            () => {
-                updateStatus('node-status', 'Node.js gefunden', 'success');
-                addLog('✅ Node.js gefunden', 'success');
-                updateProgress(20);
-            },
-            () => {
-                updateStatus('npm-status', 'npm gefunden', 'success');
-                addLog('✅ npm gefunden', 'success');
-                updateProgress(40);
-            },
-            () => {
-                updateStatus('deps-status', 'Dependencies installiert', 'success');
-                addLog('✅ Dependencies installiert', 'success');
-                updateProgress(60);
-            },
-            () => {
-                updateStatus('build-status', 'Build erfolgreich', 'success');
-                addLog('✅ Build erfolgreich', 'success');
-                updateProgress(80);
-            },
-            () => {
-                addLog('🚀 Starte Development Server...', 'info');
-                setTimeout(() => {
-                    updateStatus('server-status', 'Server wird gestartet...', 'pending');
-                    updateProgress(90);
-                    
-                    // Prüfe ob Server läuft
-                    const checkServer = () => {
-                        fetch('http://localhost:3000')
-                            .then(() => {
-                                showServerReady();
-                                updateProgress(100);
-                            })
-                            .catch(() => {
-                                setTimeout(checkServer, 2000);
-                            });
-                    };
-                    
-                    setTimeout(checkServer, 3000);
-                }, 1000);
-            }
-        ];
-        
-        // Start simulation
-        setTimeout(() => {
-            addLog('🚀 VSS Website Setup gestartet...', 'info');
-            steps[0]();
+        function checkServer() {
+            const result = document.getElementById('check-result');
+            checkCount++;
             
-            setTimeout(() => steps[1](), 1000);
-            setTimeout(() => steps[2](), 3000);
-            setTimeout(() => steps[3](), 5000);
-            setTimeout(() => steps[4](), 7000);
-        }, 500);
+            addLog(`🔍 Prüfe Server-Status (Versuch ${checkCount})`, 'info');
+            
+            // Timeout nach 10 Sekunden
+            const timeout = setTimeout(() => {
+                result.innerHTML = '<p style="color: #fbbf24;">⏳ Server antwortet noch nicht... Versuchen Sie es in ein paar Sekunden erneut.</p>';
+                addLog('⏳ Server noch nicht bereit - später erneut versuchen', 'info');
+            }, 10000);
+            
+            fetch('http://localhost:3000', { 
+                method: 'HEAD',
+                mode: 'no-cors'
+            })
+            .then(() => {
+                clearTimeout(timeout);
+                result.innerHTML = '<p style="color: #10b981;">✅ Server antwortet! Website ist erreichbar.</p>';
+                showServerReady();
+            })
+            .catch(() => {
+                clearTimeout(timeout);
+                // Versuche Alternative mit XMLHttpRequest
+                const xhr = new XMLHttpRequest();
+                xhr.timeout = 5000;
+                
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        result.innerHTML = '<p style="color: #10b981;">✅ Server antwortet! Website ist erreichbar.</p>';
+                        showServerReady();
+                    } else {
+                        result.innerHTML = '<p style="color: #fbbf24;">⏳ Server wird noch gestartet... Versuchen Sie es in 30 Sekunden erneut.</p>';
+                        updateProgress(Math.min(progress + 20, 90));
+                    }
+                };
+                
+                xhr.onerror = function() {
+                    result.innerHTML = '<p style="color: #fbbf24;">⏳ Server wird noch gestartet... Versuchen Sie es in 30 Sekunden erneut.</p>';
+                    updateProgress(Math.min(progress + 20, 90));
+                };
+                
+                xhr.ontimeout = function() {
+                    result.innerHTML = '<p style="color: #fbbf24;">⏳ Server wird noch gestartet... Versuchen Sie es in 30 Sekunden erneut.</p>';
+                    updateProgress(Math.min(progress + 20, 90));
+                };
+                
+                xhr.open('GET', 'http://localhost:3000', true);
+                xhr.send();
+            });
+        }
+        
+        function openWebsite() {
+            addLog('🌐 Öffne Website...', 'info');
+            window.open('http://localhost:3000', '_blank');
+            window.open('http://localhost:3000/preview', '_blank');
+        }
+        
+        // Simulate progress
+        function simulateProgress() {
+            if (progress < 80) {
+                progress += 10;
+                updateProgress(progress);
+                setTimeout(simulateProgress, 5000);
+            }
+        }
+        
+        // Initial setup
+        addLog('🚀 VSS Website Setup-Monitor bereit', 'success');
+        updateProgress(30);
+        setTimeout(simulateProgress, 3000);
+        
+        // Auto-check every 30 seconds
+        setTimeout(() => {
+            addLog('🔄 Automatische Server-Prüfung gestartet', 'info');
+            checkServer();
+        }, 30000);
     </script>
 </body>
 </html>
