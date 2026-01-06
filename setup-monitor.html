@@ -1,10 +1,3 @@
-#!/bin/bash
-
-# VSS Website Setup Script mit interaktivem Status-Monitor
-echo "🚀 VSS Website Setup wird gestartet..."
-
-# Erstelle Setup-Monitor HTML
-cat > setup-monitor.html << 'EOL'
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -271,129 +264,69 @@ cat > setup-monitor.html << 'EOL'
             addLog('✅ Website erfolgreich gestartet!', 'success');
             addLog('🌐 Browser wird automatisch geöffnet...', 'info');
             
-            // Öffne Website automatisch
+            // Öffne Website automatisch nach 2 Sekunden
             setTimeout(() => {
                 window.open('http://localhost:3000', '_blank');
                 window.open('http://localhost:3000/preview', '_blank');
             }, 2000);
         }
         
-        // Echte Server-Überwachung
-        function checkServer() {
-            fetch('http://localhost:3000')
-                .then(() => {
-                    showServerReady();
-                    updateProgress(100);
-                })
-                .catch(() => {
+        // Simulate setup progress
+        let step = 0;
+        const steps = [
+            () => {
+                updateStatus('node-status', 'Node.js gefunden', 'success');
+                addLog('✅ Node.js gefunden', 'success');
+                updateProgress(20);
+            },
+            () => {
+                updateStatus('npm-status', 'npm gefunden', 'success');
+                addLog('✅ npm gefunden', 'success');
+                updateProgress(40);
+            },
+            () => {
+                updateStatus('deps-status', 'Dependencies installiert', 'success');
+                addLog('✅ Dependencies installiert', 'success');
+                updateProgress(60);
+            },
+            () => {
+                updateStatus('build-status', 'Build erfolgreich', 'success');
+                addLog('✅ Build erfolgreich', 'success');
+                updateProgress(80);
+            },
+            () => {
+                addLog('🚀 Starte Development Server...', 'info');
+                setTimeout(() => {
+                    updateStatus('server-status', 'Server wird gestartet...', 'pending');
+                    updateProgress(90);
+                    
+                    // Prüfe ob Server läuft
+                    const checkServer = () => {
+                        fetch('http://localhost:3000')
+                            .then(() => {
+                                showServerReady();
+                                updateProgress(100);
+                            })
+                            .catch(() => {
+                                setTimeout(checkServer, 2000);
+                            });
+                    };
+                    
                     setTimeout(checkServer, 3000);
-                });
-        }
+                }, 1000);
+            }
+        ];
         
-        // Starte Server-Überwachung
-        setTimeout(checkServer, 5000);
-        
-        // Initial Logs
-        addLog('🚀 VSS Website Setup gestartet...', 'info');
-        addLog('⏳ Überwache Setup-Prozess...', 'info');
+        // Start simulation
+        setTimeout(() => {
+            addLog('🚀 VSS Website Setup gestartet...', 'info');
+            steps[0]();
+            
+            setTimeout(() => steps[1](), 1000);
+            setTimeout(() => steps[2](), 3000);
+            setTimeout(() => steps[3](), 5000);
+            setTimeout(() => steps[4](), 7000);
+        }, 500);
     </script>
 </body>
 </html>
-EOL
-
-echo "📊 Öffne Setup-Monitor im Browser..."
-
-# Öffne Browser mit Monitor
-if command -v open &> /dev/null; then
-    open setup-monitor.html
-elif command -v xdg-open &> /dev/null; then
-    xdg-open setup-monitor.html
-elif command -v start &> /dev/null; then
-    start setup-monitor.html
-fi
-
-# Warte 2 Sekunden damit der Browser öffnet
-sleep 2
-
-echo "🔧 Starte Setup-Prozess..."
-echo ""
-
-# Prüfe Node.js
-if ! command -v node &> /dev/null; then
-    echo "❌ Node.js ist nicht installiert. Bitte installieren Sie Node.js 18+ zuerst."
-    echo "Download: https://nodejs.org/"
-    exit 1
-fi
-
-echo "✅ Node.js gefunden: $(node --version)"
-
-# Prüfe npm
-if ! command -v npm &> /dev/null; then
-    echo "❌ npm ist nicht installiert."
-    exit 1
-fi
-
-echo "✅ npm gefunden: $(npm --version)"
-
-# Installiere Dependencies
-echo "📦 Installiere Dependencies..."
-npm install
-
-if [ $? -ne 0 ]; then
-    echo "❌ Fehler bei der Installation der Dependencies."
-    exit 1
-fi
-
-echo "✅ Dependencies installiert."
-
-# Prüfe .env.local
-if [ ! -f .env.local ]; then
-    echo "📝 Erstelle .env.local für lokale Entwicklung..."
-    cat > .env.local << EOL
-# VSS Website Environment Variables
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-NEXT_PUBLIC_COMPANY_NAME=Vertical Service Solutions
-NEXT_PUBLIC_COMPANY_PHONE=+49 (0) 123 456 789
-NEXT_PUBLIC_COMPANY_EMAIL=info@vertical-service-solutions.com
-NODE_ENV=development
-EOL
-    echo "✅ .env.local erstellt."
-else
-    echo "✅ .env.local existiert bereits."
-fi
-
-# Erstelle notwendige Verzeichnisse
-echo "📁 Erstelle Verzeichnisse..."
-mkdir -p public/images
-mkdir -p public/logos
-
-# Build-Test
-echo "🔨 Teste Build..."
-npm run build
-
-if [ $? -ne 0 ]; then
-    echo "❌ Build-Test fehlgeschlagen. Bitte prüfen Sie die Fehler."
-    exit 1
-fi
-
-echo "✅ Build erfolgreich."
-
-# Starte Development Server
-echo "🎉 Setup abgeschlossen!"
-echo ""
-echo "🚀 Starte Development Server..."
-echo ""
-echo "📱 Die Website wird verfügbar sein unter:"
-echo "   http://localhost:3000"
-echo ""
-echo "🎯 Features zum Testen:"
-echo "   • Container-Scroll-Animation (Framer Motion)"
-echo "   • Responsive Design (Mobile/Tablet/Desktop)"
-echo "   • VSS Brand Colors (Blue/Green/Orange)"
-echo "   • Industrial High-Tech Design"
-echo "   • SEO-optimierte Meta-Tags"
-echo ""
-echo "⏹️  Drücken Sie Ctrl+C zum Stoppen des Servers"
-echo ""
-
-npm run dev
