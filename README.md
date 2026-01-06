@@ -2,7 +2,7 @@
 
 Eine moderne Next.js-Website mit Tailwind CSS für Vertical Service Solutions, inspiriert von 21st.dev Design-Patterns.
 
-## 🚀 Version 0.1.0 - Initial Release + Setup System
+## 🚀 Version 0.6.0 - Robust Setup System
 
 ### ✅ Verfügbare Features
 
@@ -232,18 +232,38 @@ import { ContainerScroll } from '@/components/ui/container-scroll-animation'
 - **Repository:** https://github.com/alexiosg111/vss
 - **Testing Guide:** `./TESTING.md`
 - **Preview Page:** http://localhost:3000/preview
-- **Version:** v0.1.0 + Setup System
-- **Branch:** feat-vss-redesign-nextjs-tailwind-21stdev
+- **Version:** v0.6.0
+- **Branch:** fix-vss-website-setup-missing-setup-monitor-html
 
 ## 📄 Changelog
 
-### v0.1.0 + Setup System (Latest)
+### v0.6.0 - Robust Setup System (Latest) 🛠️
+- 🐛 **Critical Fix:** "setup-monitor.html nicht gefunden" behoben
+- ✅ **Robust Paths:** Skripte funktionieren egal von wo gestartet
+- ✅ **Windows:** Verbesserte setup.bat mit UTF-8 Support
+- ✅ **Linux/Mac:** Robuste Pfad-Erkennung in setup.sh & preview.sh
+- ✅ **Cross-Platform:** Konsistentes Verhalten auf allen Systemen
+
+### v0.5.0 - Advanced Setup Monitor
+- ✨ **Enhanced Dashboard:** Statistics, Quick Actions, System Info
+- ✨ **Real-time Stats:** Server checks, uptime tracking
+- ✨ **Quick Actions:** One-click website/preview opening
+
+### v0.4.0 - Enhanced Monitoring
+- ✨ **Enhanced Monitoring:** Live server status dashboard
+- ✨ **Auto-opening:** Website + preview on server ready
+
+### v0.3.0 - Interactive Setup
+- ✨ **Setup Monitor:** Interactive HTML monitor with live status
+- ✨ **Live Progress:** Visual progress bar during setup
+
+### v0.2.0 - Preview System
+- ✨ **Preview Page:** Viewport testing, status overview
+- ✨ **Live Preview:** Automatic browser opening
+
+### v0.1.0 - Initial Release
 - ✨ **One-Click Setup:** Linux/Mac/Windows Scripts
-- ✨ **Live Preview:** Automatische Browser-Öffnung
-- ✨ **Interactive Preview Page:** Viewport Testing, Status Overview
 - ✨ **Docker Integration:** Development + Production Container
-- ✨ **Testing Suite:** Umfassende Test-Dokumentation
-- ✨ **Cross-Platform:** Windows/Linux/Mac Kompatibilität
 - ✨ **Container-Scroll-Animation:** 3D Effects mit Framer Motion
 - ✨ **VSS Brand Integration:** Industrial High-Tech Design
 - ✨ **Performance Optimiert:** 156 kB First Load JS
@@ -252,4 +272,4 @@ import { ContainerScroll } from '@/components/ui/container-scroll-animation'
 
 **🎯 Sofort starten:** `./setup.sh` (Linux/Mac) oder `setup.bat` (Windows)
 
-**VSS Website Redesign v0.1.0 | Next.js 15 + Tailwind CSS + Framer Motion + Setup System | Industrial High-Tech Design**
+**VSS Website Redesign v0.6.0 | Next.js 15 + Tailwind CSS + Framer Motion | Robust Setup System | Production Ready**
