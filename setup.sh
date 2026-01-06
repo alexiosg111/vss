@@ -1,10 +1,15 @@
 #!/bin/bash
 
 # VSS Website Setup Script mit Setup-Monitor
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR" || exit 1
+
 echo "🚀 VSS Website Setup wird gestartet..."
 
-# Prüfe ob HTML-Monitor existiert
-if [ ! -f setup-monitor.html ]; then
+MONITOR_PATH="$SCRIPT_DIR/setup-monitor.html"
+
+# Prüfe ob HTML-Monitor existiert (relativ zum Script-Verzeichnis)
+if [ ! -f "$MONITOR_PATH" ]; then
     echo "❌ setup-monitor.html nicht gefunden!"
     echo "Stelle sicher, dass alle Dateien korrekt heruntergeladen wurden."
     exit 1
@@ -15,11 +20,9 @@ echo "✅ Setup-Monitor gefunden: setup-monitor.html"
 # Öffne Browser mit Monitor
 echo "📊 Öffne Setup-Monitor im Browser..."
 if command -v open &> /dev/null; then
-    open "file://$(pwd)/setup-monitor.html"
+    open "file://$MONITOR_PATH"
 elif command -v xdg-open &> /dev/null; then
-    xdg-open "file://$(pwd)/setup-monitor.html"
-elif command -v start &> /dev/null; then
-    start "file://$(pwd)/setup-monitor.html"
+    xdg-open "file://$MONITOR_PATH"
 fi
 
 # Warte 2 Sekunden damit der Browser öffnet

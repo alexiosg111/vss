@@ -1,10 +1,18 @@
 @echo off
+setlocal
+
+REM Ensure we run from the directory this script is located in
+cd /d "%~dp0"
+
+REM Enable UTF-8 output where possible (helps with umlauts/emojis)
+chcp 65001 >nul
+
 echo 🚀 VSS Website Setup wird gestartet...
 
 echo 📊 Prüfe Setup-Monitor...
 
-REM Prüfe ob HTML-Monitor existiert
-if not exist setup-monitor.html (
+REM Prüfe ob HTML-Monitor existiert (relativ zum Script-Verzeichnis)
+if not exist "%~dp0setup-monitor.html" (
     echo ❌ setup-monitor.html nicht gefunden!
     echo Stelle sicher, dass alle Dateien korrekt heruntergeladen wurden.
     pause
@@ -15,7 +23,7 @@ echo ✅ Setup-Monitor gefunden: setup-monitor.html
 
 REM Öffne Browser mit Monitor
 echo 📊 Öffne Setup-Monitor im Browser...
-start "file://%CD%\setup-monitor.html"
+start "" "%~dp0setup-monitor.html"
 
 REM Warte 2 Sekunden damit der Browser öffnet
 timeout /t 2 /nobreak >nul
