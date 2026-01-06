@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
-  "description": "VSS Website Redesign with Container-Scroll-Animation - Industrial High-Tech Design + Enhanced Setup Monitor v0.4.0",
+  "description": "VSS Website Redesign with Container-Scroll-Animation - Advanced Setup Monitor v0.5.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -63,24 +63,23 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.4.0",
+    "version": "0.5.0",
     "date": "2024-01-06",
     "features": [
-      "Enhanced Setup Monitor with Statistics Dashboard",
-      "Live Server Stats (checks, uptime, status)",
-      "Quick Actions Panel (Server check, Open website, Preview, Copy URLs)",
-      "System Info Display (URLs, Monitoring status)",
-      "Improved Progress Tracking",
+      "Advanced Setup Monitor v0.5.0",
+      "Enhanced Statistics Dashboard",
+      "Quick Actions Panel",
+      "System Info Display",
       "Auto-open all pages on server ready",
       "Copy URLs to clipboard functionality"
     ],
     "improvements": [
-      "Better user experience with quick action buttons",
-      "Real-time statistics dashboard",
-      "Clear system information display",
+      "Better user experience",
+      "Real-time statistics",
+      "Clear system information",
       "Faster server detection",
       "Enhanced visual feedback",
-      "Uptime tracking when server is online"
+      "Uptime tracking"
     ]
   }
 }
