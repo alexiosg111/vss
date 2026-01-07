@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.5.0",
+  "version": "0.7.0",
   "private": true,
-  "description": "VSS Website Redesign with Container-Scroll-Animation - Advanced Setup Monitor v0.5.0",
+  "description": "VSS Website Redesign with Above-The-Fold Split Screen - v0.7.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -43,17 +43,16 @@
     "tailwindcss",
     "framer-motion",
     "vss",
-    "container-scroll-animation",
+    "above-the-fold",
+    "split-screen",
+    "diagonal-split",
+    "inverse-hover",
     "industrial",
     "high-tech",
-    "setup-system",
-    "one-click",
-    "docker",
-    "live-monitor",
-    "setup-monitor",
-    "interactive-setup",
-    "enhanced-monitoring",
-    "stats-dashboard"
+    "mobilfunk",
+    "aufzuge",
+    "vss-redesign",
+    "exact-replica"
   ],
   "author": "VSS Development Team",
   "license": "MIT",
@@ -63,23 +62,24 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.5.0",
-    "date": "2024-01-06",
+    "version": "0.7.0",
+    "date": "2024-01-07",
     "features": [
-      "Advanced Setup Monitor v0.5.0",
-      "Enhanced Statistics Dashboard",
-      "Quick Actions Panel",
-      "System Info Display",
-      "Auto-open all pages on server ready",
-      "Copy URLs to clipboard functionality"
+      "Above-The-Fold Split Screen Design",
+      "Diagonal Split Layout (backslash style)",
+      "Inverse Hover Logic",
+      "Authentic VSS Color Palette",
+      "Exact VSS Website Replica",
+      "Mobilfunk & Fahrstuhl Sections",
+      "Production-Ready Implementation"
     ],
     "improvements": [
-      "Better user experience",
-      "Real-time statistics",
-      "Clear system information",
-      "Faster server detection",
-      "Enhanced visual feedback",
-      "Uptime tracking"
+      "Modern split-screen design",
+      "Enhanced visual hierarchy",
+      "Improved user interaction",
+      "Better brand representation",
+      "Responsive layout",
+      "Accessibility compliance"
     ]
   }
 }

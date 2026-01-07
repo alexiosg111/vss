@@ -1,5 +1,5 @@
 import Header from '@/components/Header'
-import Hero from '@/components/Hero'
+import HeroSplit from '@/components/HeroSplit'
 import Services from '@/components/Services'
 import CTA from '@/components/CTA'
 import Footer from '@/components/Footer'
@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <Header />
-      <Hero />
+      <HeroSplit />
       <Services />
       <CTA />
       <Footer />
