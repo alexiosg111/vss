@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.5.0",
+  "version": "0.7.0",
   "private": true,
-  "description": "VSS Website Redesign with Container-Scroll-Animation - Advanced Setup Monitor v0.5.0",
+  "description": "VSS Website Redesign v0.7.0 - Exact Above-The-Fold Homepage Split-Screen (Diagonal) + Inverse Hover",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -53,7 +53,10 @@
     "setup-monitor",
     "interactive-setup",
     "enhanced-monitoring",
-    "stats-dashboard"
+    "stats-dashboard",
+    "above-the-fold",
+    "diagonal-split",
+    "inverse-hover"
   ],
   "author": "VSS Development Team",
   "license": "MIT",
@@ -63,23 +66,21 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.5.0",
-    "date": "2024-01-06",
+    "version": "0.7.0",
+    "date": "2026-01-07",
     "features": [
-      "Advanced Setup Monitor v0.5.0",
-      "Enhanced Statistics Dashboard",
-      "Quick Actions Panel",
-      "System Info Display",
-      "Auto-open all pages on server ready",
-      "Copy URLs to clipboard functionality"
+      "Exact VSS Homepage Above-The-Fold recreation (Split-Screen)",
+      "Diagonal split (\\) with smooth clip-path transitions",
+      "Inverse hover: Hover Mobilfunk -> effect on Aufzüge (and vice versa)",
+      "Authentic 2-color palette extracted from original VSS homepage",
+      "Integrated original homepage images (Mobilfunk + Aufzüge)",
+      "New routes: /aufzug and /mobilfunk"
     ],
     "improvements": [
-      "Better user experience",
-      "Real-time statistics",
-      "Clear system information",
-      "Faster server detection",
-      "Enhanced visual feedback",
-      "Uptime tracking"
+      "Improved authenticity vs. original website",
+      "Clearer visual hierarchy above-the-fold",
+      "Better text readability via overlays",
+      "Responsive fallback (stacked panels on mobile)"
     ]
   }
 }
