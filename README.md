@@ -2,17 +2,17 @@
 
 Eine moderne Next.js-Website mit Tailwind CSS für Vertical Service Solutions, inspiriert von 21st.dev Design-Patterns.
 
-## 🚀 Version 0.1.0 - Initial Release + Setup System
+## 🚀 Version 0.7.0 - Startseite (Above-The-Fold Split-Screen)
 
 ### ✅ Verfügbare Features
 
-- **Modern Design:** Industrial High-Tech Styling basierend auf 21st.dev Ästhetik
-- **3D Scroll Animation:** Container-Scroll-Animation mit Framer Motion
+- **Exakte Above-The-Fold Nachbildung** der originalen VSS-Startseite (ohne Scroll)
+- **Diagonal Split (\\)** via `clip-path`
+- **Inverse Hover-Logik:** Hover Mobilfunk → Effekt auf Aufzüge (und umgekehrt)
+- **Authentische 2-Farb-Palette:** `#FCA817` (Primary) + `#43BC75` (Secondary)
+- **Originale Homepage-Bilder integriert** (Mobilfunk + Aufzüge) inkl. Overlay für Text-Lesbarkeit
+- **Responsive:** Mobile/Tablet Fallback als stacked Panels
 - **One-Click Setup:** Automatische Installation und Preview
-- **Responsive:** Mobile-first Design für alle Geräte
-- **Fast:** Next.js 15 mit TypeScript und optimierten Builds (156 kB First Load JS)
-- **Accessible:** WCAG-konforme Implementierung
-- **SEO-optimiert:** Meta-Tags, Open Graph, strukturierte Daten
 - **Docker Ready:** Vollständige Containerisierung
 - **Testing Suite:** Umfassende Test-Dokumentation
 
@@ -22,7 +22,7 @@ Eine moderne Next.js-Website mit Tailwind CSS für Vertical Service Solutions, i
 - **Styling:** Tailwind CSS
 - **Sprache:** TypeScript
 - **Icons:** Lucide React
-- **Animationen:** Framer Motion
+- **Animationen:** CSS Transitions (clip-path/filter/transform)
 - **Fonts:** Inter & JetBrains Mono (Google Fonts)
 - **Containerisierung:** Docker + Docker Compose
 - **Deployment:** Vercel-ready
@@ -75,25 +75,26 @@ npm run dev
 
 ## 🎯 Test-Features
 
-### Container-Scroll-Animation testen:
+### 1) Above-The-Fold Split-Screen testen
 1. **URL:** http://localhost:3000
-2. **Scrollen:** Zur dunklen Sektion mit Animation
-3. **Erwartung:** Card rotiert 20°→0°, skaliert, 60fps smooth
+2. **Erwartung (Initial State):** Header (Logo + Intro), danach Split-Screen mit diagonalem Schnitt und Footer.
+3. **Hover/Focus:**
+   - Maus/Fokus auf **Mobilfunk** → **Aufzüge** wird vergrößert/akzentuiert
+   - Maus/Fokus auf **Aufzüge** → **Mobilfunk** wird vergrößert/akzentuiert
+4. **Transitions:** Smooth, ohne Sprünge (clip-path animiert)
 
-### Responsive Design testen:
+### 2) Responsive Design testen
 1. **F12** → Device Toolbar (Mobile Icon)
-2. **Mobile:** iPhone/Android - optimierte Skalierung
-3. **Tablet:** iPad - angepasste Layouts
-4. **Desktop:** Vollständige Features
+2. **Mobile/Tablet:** Panels sind **untereinander** (stacked) statt diagonal
+3. **Desktop:** Diagonal Split aktiv
 
-### Preview-Seite testen:
+### 3) Preview-Seite testen
 1. **URL:** http://localhost:3000/preview
-2. **Features:** Viewport Testing, Status Overview, Performance Metrics
-3. **Live Toggle:** Preview-Modus aktivieren/deaktivieren
+2. **Features:** Viewport Testing, Status Overview, Quick Actions
 
-### Cross-Browser testen:
+### Cross-Browser testen
 - ✅ Chrome, Firefox, Safari, Edge
-- ✅ Container-Scroll-Animation in allen Browsern
+- ✅ `clip-path` + Transitions (Diagonal Split)
 
 ## 🏗️ Erweiterte Setup-Optionen
 
@@ -108,29 +109,15 @@ npm run setup          # Setup Script ausführen
 npm run preview        # Live Preview starten
 npm run docker:dev     # Docker Development
 npm run docker:prod    # Docker Production
+npm run docker:down    # Docker Stop
 npm run test           # Build Test
 npm run analyze        # Bundle Analyse
 npm run lint           # Code Linting
 ```
 
-## 📊 Performance & Monitoring
-
-### Erwartete Werte:
-- **First Load JS:** 156 kB (optimiert)
-- **Lighthouse Score:** 90+ (alle Kategorien)
-- **Container Animation:** 60fps smooth
-- **Mobile Performance:** 90+ Score
-- **Bundle Impact:** +45KB für Framer Motion
-
-### Debug Tools:
-- **Browser DevTools:** F12 → Performance/Lighthouse
-- **Preview Page:** http://localhost:3000/preview
-- **Console:** Framer Motion Debugging
-- **Network:** Throttling Tests (Slow 3G)
-
 ## 🐛 Troubleshooting
 
-### Häufige Probleme:
+### Häufige Probleme
 
 **Port 3000 belegt:**
 ```bash
@@ -145,86 +132,28 @@ npm install
 npm run build
 ```
 
-**Docker Probleme:**
-```bash
-docker-compose down
-docker system prune -f
-docker-compose up --build
-```
+**Split nicht sichtbar / Layout wirkt falsch:**
+1. Browser Cache leeren
+2. Mobile/Tablet: stacked Layout ist erwartet
+3. Desktop: Browser Support für `clip-path` prüfen
 
-**Animation nicht sichtbar:**
-1. Browser Console prüfen
-2. Framer Motion Installation: `npm list framer-motion`
-3. Incognito/Private Mode testen
-
-## 📁 Erweiterte Projektstruktur
+## 📁 Projektstruktur (Auszug)
 
 ```
 /src
   /app
-    /page.tsx           # Hauptseite
-    /layout.tsx         # Root Layout
-    /preview/
-      /page.tsx         # Preview-Seite
-    /globals.css        # Global Styles
+    /page.tsx            # Startseite (Above-The-Fold Split)
+    /aufzug/page.tsx     # Placeholder Zielseite
+    /mobilfunk/page.tsx  # Placeholder Zielseite
+    /preview/page.tsx    # Preview-Seite
+    /layout.tsx          # Root Layout
   /components
-    /ui/
-      /container-scroll-animation.tsx  # 3D Scroll Animation
-    /Header.tsx         # Navigation
-    /Hero.tsx           # Hero + Animation
-    /Services.tsx       # Services
-    /CTA.tsx            # Kontakt
-    /Footer.tsx          # Footer
+    /Hero.tsx            # Above-The-Fold Split-Screen
     /Preview.tsx         # Preview Interface
-    /demo.tsx           # VSS Demo
-/styles
-  /globals.css          # Tailwind + Custom
-/public                 # Static Assets
-Dockerfile             # Production Container
-Dockerfile.dev         # Development Container
-docker-compose.yml     # Multi-Container Setup
-nginx.conf             # Production Nginx
-setup.sh               # Linux/Mac Setup
-setup.bat              # Windows Setup
-preview.sh             # Live Preview Script
-TESTING.md             # Umfassende Test-Anleitung
-```
-
-## 🚀 Deployment
-
-### Vercel (Empfohlen)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/alexiosg111/vss)
-
-### Docker Production
-```bash
-docker build -t vss-website .
-docker run -p 3000:3000 vss-website
-```
-
-### Static Export
-```bash
-npm run build
-# Output: .next/ Ordner
-```
-
-## 🔧 Entwicklung
-
-### Neue Features hinzufügen:
-1. **Komponente erstellen** in `/src/components/`
-2. **TypeScript definieren** für Type Safety
-3. **Tailwind verwenden** für Styling
-4. **In Page importieren**
-5. **Testen** mit Preview-System
-
-### Container-Scroll-Animation verwenden:
-```tsx
-import { ContainerScroll } from '@/components/ui/container-scroll-animation'
-
-<ContainerScroll
-  titleComponent={<h1>Your Title</h1>}
->
-  <YourContent />
-</ContainerScroll>
+  /styles
+    /globals.css         # Tailwind + Custom
+/public
+  /vss/homepage/*        # Original Homepage Assets (Bilder + Logo)
 ```
 
 ## 📞 Support & Testing
@@ -232,24 +161,26 @@ import { ContainerScroll } from '@/components/ui/container-scroll-animation'
 - **Repository:** https://github.com/alexiosg111/vss
 - **Testing Guide:** `./TESTING.md`
 - **Preview Page:** http://localhost:3000/preview
-- **Version:** v0.1.0 + Setup System
-- **Branch:** feat-vss-redesign-nextjs-tailwind-21stdev
+- **Version:** v0.7.0
+- **Branch:** vss-redesign-above-fold-v0.7.0-diagonal-split
 
 ## 📄 Changelog
 
-### v0.1.0 + Setup System (Latest)
-- ✨ **One-Click Setup:** Linux/Mac/Windows Scripts
-- ✨ **Live Preview:** Automatische Browser-Öffnung
-- ✨ **Interactive Preview Page:** Viewport Testing, Status Overview
-- ✨ **Docker Integration:** Development + Production Container
-- ✨ **Testing Suite:** Umfassende Test-Dokumentation
-- ✨ **Cross-Platform:** Windows/Linux/Mac Kompatibilität
-- ✨ **Container-Scroll-Animation:** 3D Effects mit Framer Motion
-- ✨ **VSS Brand Integration:** Industrial High-Tech Design
-- ✨ **Performance Optimiert:** 156 kB First Load JS
+### v0.7.0 (Latest)
+- ✨ Exakte Above-The-Fold Nachbildung der originalen VSS-Startseite
+- ✨ Diagonal Split (\\) mit Smooth Transitions
+- ✨ Inverse Hover-Logik (Bereich A beeinflusst Bereich B)
+- ✨ Authentische 2-Farb-Palette (#FCA817 + #43BC75)
+- ✨ Original-Bilder integriert: Mobilfunk + Aufzüge
+
+### v0.1.0 + Setup System
+- ✨ One-Click Setup: Linux/Mac/Windows Scripts
+- ✨ Live Preview: Automatische Browser-Öffnung
+- ✨ Interactive Preview Page: Viewport Testing, Status Overview
+- ✨ Docker Integration: Development + Production Container
 
 ---
 
 **🎯 Sofort starten:** `./setup.sh` (Linux/Mac) oder `setup.bat` (Windows)
 
-**VSS Website Redesign v0.1.0 | Next.js 15 + Tailwind CSS + Framer Motion + Setup System | Industrial High-Tech Design**
+**VSS Website Redesign v0.7.0 | Next.js 15 + Tailwind CSS | Above-The-Fold Split-Screen**
