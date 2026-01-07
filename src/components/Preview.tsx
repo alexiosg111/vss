@@ -17,45 +17,45 @@ const PreviewPage = () => {
   const features = [
     {
       icon: Zap,
-      title: '3D Scroll Animation',
-      description: 'Container-Scroll-Animation mit Framer Motion',
-      status: '✅ Active',
-      details: 'Rotation (20°→0°) und Skalierung beim Scrollen'
-    },
-    {
-      icon: Palette,
-      title: 'VSS Brand Colors',
-      description: 'Blue, Green, Orange Farbschema',
-      status: '✅ Integrated',
-      details: '#0284c7, #10b981, #f59e0b'
+      title: 'Above-The-Fold Split-Screen',
+      description: 'Exakte Nachbildung der VSS-Startseite (Viewport-only)',
+      status: '✅ Implemented',
+      details: 'Header + Diagonal Split + Footer in einem Viewport'
     },
     {
       icon: MobileIcon,
-      title: 'Responsive Design',
-      description: 'Mobile-first Approach',
-      status: '✅ Optimized',
-      details: 'Skalierung 0.7→0.9 auf Mobile'
+      title: 'Diagonal Split + Inverse Hover',
+      description: 'Smooth clip-path transitions und inverse Hover-Logik',
+      status: '✅ Active',
+      details: 'Hover Mobilfunk -> Aufzüge betont (und vice versa)'
+    },
+    {
+      icon: Palette,
+      title: 'Authentic 2-Color Palette',
+      description: 'Aus der Original-Homepage extrahiert',
+      status: '✅ Integrated',
+      details: '#FCA817 (Primary) + #43BC75 (Secondary)'
     },
     {
       icon: Code,
-      title: 'TypeScript',
-      description: 'Strict mode, 0 Fehler',
-      status: '✅ Clean',
-      details: 'Vollständige TypeScript-Integration'
+      title: 'Original Images',
+      description: 'Mobilfunk + Aufzüge Bildmaterial lokal integriert',
+      status: '✅ Included',
+      details: 'public/vss/homepage/*'
     },
     {
       icon: CheckCircle,
-      title: 'Performance',
-      description: '156 kB First Load JS',
+      title: 'Responsive Layout',
+      description: 'Mobile/Tablet Fallback als stacked Panels',
       status: '✅ Optimized',
-      details: 'Bundle-Splitting und Optimierung'
+      details: 'Desktop: diagonal | Mobile: stacked'
     },
     {
       icon: AlertCircle,
       title: 'Build Status',
       description: 'Production-ready',
       status: '✅ Ready',
-      details: '4/4 Seiten erfolgreich generiert'
+      details: 'Next.js App Router + TypeScript + Tailwind'
     }
   ]
 
@@ -82,7 +82,7 @@ const PreviewPage = () => {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-dark-900">VSS Website Preview</h1>
-                <p className="text-sm text-dark-600">Version 0.1.0 - Container-Scroll-Animation</p>
+                <p className="text-sm text-dark-600">Version 0.7.0 - Above-The-Fold Split-Screen</p>
               </div>
             </div>
             
@@ -204,7 +204,7 @@ const PreviewPage = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-dark-900">Preview aktiv</h3>
-                      <p className="text-sm text-dark-600">Scrollen Sie in der Hauptseite, um die Animation zu sehen</p>
+                      <p className="text-sm text-dark-600">Öffnen Sie die Hauptseite, um den Above-The-Fold Split zu sehen</p>
                     </div>
                     <Link
                       href="/"

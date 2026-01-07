@@ -81,7 +81,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-blue-900 dark:to-indigo-950 antialiased">
+      <body className="min-h-screen bg-white antialiased">
         <div className="relative flex min-h-screen flex-col">
           <div className="flex-1">{children}</div>
         </div>

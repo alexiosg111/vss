@@ -127,5 +127,26 @@ package.json
 
 ---
 
+## Phase 4: v0.7.0 – Above-The-Fold (Original-Startseite nachgebaut)
+
+### Original-Startseite (ohne Scroll)
+Die VSS-Startseite zeigt im initialen Viewport:
+- Header mit **Logo** und kurzer Einleitung ("Aufzüge & Mobilfunk")
+- Große **Split-Area** mit zwei Business-Bereichen
+- **Diagonal-Split** + Hover-Interaktion
+
+### Extrahierte Farben (Original CSS-Variablen)
+- `--thm-base`: `#FCA817` (Primary)
+- `--thm-primary`: `#43BC75` (Secondary)
+- `--thm-black`: `#1F2026` (Neutral/Dark für Text & Overlays)
+
+### Umsetzung im Redesign
+- Umsetzung in `src/components/Hero.tsx` als viewportfüllendes Grid (Header / Split / Footer)
+- Diagonal-Split via `clip-path` mit animierten Parametern (Initial + Hover)
+- Semi-transparent Overlays für Text-Lesbarkeit
+- Originalbilder liegen lokal unter `public/vss/homepage/*`
+
+---
+
 **Status:** Ready for Implementation
 **Next Step:** Projektstruktur erstellen und Entwicklung beginnen

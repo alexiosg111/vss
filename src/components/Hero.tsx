@@ -1,130 +1,202 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useMemo, useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, Zap, Shield, Cog, Phone, Mail, ChevronRight } from 'lucide-react'
-import { ContainerScroll } from './ui/container-scroll-animation'
-import { HeroScrollDemo } from './demo'
+import { ArrowRight } from 'lucide-react'
+
+type ActivePanel = 'mobilfunk' | 'aufzuege' | null
+
+const VSS_HOMEPAGE_COLORS = {
+  primary: '#fca817',
+  secondary: '#43bc75',
+  dark: '#1f2026',
+} as const
 
 const Hero = () => {
-  const [isVisible, setIsVisible] = useState(false)
+  const [activePanel, setActivePanel] = useState<ActivePanel>(null)
 
-  useEffect(() => {
-    setIsVisible(true)
-  }, [])
+  const split = useMemo(() => {
+    if (activePanel === 'mobilfunk') {
+      return { top: 48, bottom: 62 }
+    }
+
+    if (activePanel === 'aufzuege') {
+      return { top: 68, bottom: 82 }
+    }
+
+    return { top: 58, bottom: 74 }
+  }, [activePanel])
+
+  const mobilfunkClip = `polygon(0 0, ${split.top}% 0, ${split.bottom}% 100%, 0 100%)`
+  const aufzuegeClip = `polygon(${split.top}% 0, 100% 0, 100% 100%, ${split.bottom}% 100%)`
+
+  const isMobilfunkEmphasized = activePanel === 'aufzuege'
+  const isAufzuegeEmphasized = activePanel === 'mobilfunk'
 
   return (
-    <>
-      {/* Initial Hero Section with CTA */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-blue-900 dark:to-indigo-950">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%230284c7%22 fill-opacity=%220.05%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40"></div>
-          
-          {/* Floating Elements */}
-          <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-vss-blue/20 to-vss-green/20 rounded-full blur-xl animate-float"></div>
-          <div className="absolute top-40 right-20 w-32 h-32 bg-gradient-to-br from-vss-green/20 to-vss-orange/20 rounded-full blur-xl animate-float" style={{animationDelay: '2s'}}></div>
-          <div className="absolute bottom-40 left-20 w-24 h-24 bg-gradient-to-br from-vss-orange/20 to-vss-blue/20 rounded-full blur-xl animate-float" style={{animationDelay: '4s'}}></div>
-        </div>
+    <section className="bg-white" style={{ color: VSS_HOMEPAGE_COLORS.dark }}>
+      <div className="min-h-[100svh] grid grid-rows-[auto_1fr_auto]">
+        {/* Header (Logo + Intro Text) */}
+        <header className="px-4 sm:px-6 lg:px-8 py-4">
+          <div className="mx-auto max-w-7xl grid grid-cols-[auto_1fr] items-center gap-6">
+            <Link href="/" className="inline-flex items-center" aria-label="Vertical Service Solutions - Startseite">
+              <Image
+                src="/vss/homepage/vss-logo.png"
+                alt="Vertical Service Solutions"
+                width={180}
+                height={56}
+                priority
+              />
+            </Link>
 
-        <div className="relative z-10 container-padding">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center space-y-8">
-              
-              {/* Badge */}
-              <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 shadow-lg">
-                <Zap className="h-4 w-4 text-vss-blue" />
-                <span className="text-sm font-medium text-dark-800">Industrial & Mobile Tech Experts</span>
-              </div>
-
-              {/* Main Headline */}
-              <div className="space-y-4">
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-dark-900 leading-tight">
-                  Vertical Service
-                  <span className="block text-gradient-vss">
-                    Solutions
-                  </span>
-                </h1>
-                <p className="text-xl md:text-2xl text-dark-600 font-medium max-w-3xl mx-auto">
-                  Ihr Partner für professionelle Aufzug-Lösungen und Mobilfunk-Infrastruktur
+            <article className="hidden md:block max-w-3xl">
+              <h1 className="uppercase tracking-wide text-lg font-medium text-[#1f2026]">
+                <span>Aufzüge</span> <span className="font-normal">&</span> <span>Mobilfunk</span>
+              </h1>
+              <div className="mt-2 text-sm leading-relaxed text-[#40464f]">
+                <p>
+                  Bei Vertical Service Solutions bieten wir Ihnen zuverlässigen und auf Ihre Bedürfnisse abgestimmten Service in den zwei
+                  Geschäftsfeldern: Aufzüge &amp; Mobilfunk.
+                </p>
+                <p className="mt-2">
+                  Bitte <strong>wählen</strong> Sie das gewünschte Geschäftsfeld:
                 </p>
               </div>
+            </article>
+          </div>
+        </header>
 
-              {/* Description */}
-              <p className="text-lg text-dark-600 max-w-4xl mx-auto leading-relaxed">
-                Mit jahrelanger Expertise in der Industrie- und Mobilfunkbranche liefern wir 
-                zuverlässige, innovative Lösungen für moderne Unternehmen. Von Aufzug-Systemen 
-                bis zur Mobilfunk-Infrastruktur – wir sind Ihr vertrauensvoller Partner.
-              </p>
-
-              {/* Key Features Grid */}
-              <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                <div className="flex items-center space-x-4 bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                  <div className="w-12 h-12 bg-gradient-to-br from-vss-blue to-vss-blue/80 rounded-lg flex items-center justify-center">
-                    <Cog className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-semibold text-dark-900">Aufzüge</div>
-                    <div className="text-sm text-dark-600">Moderne Liftsysteme</div>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4 bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                  <div className="w-12 h-12 bg-gradient-to-br from-vss-green to-vss-green/80 rounded-lg flex items-center justify-center">
-                    <Zap className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-semibold text-dark-900">Mobilfunk</div>
-                    <div className="text-sm text-dark-600">Netzwerk-Infrastruktur</div>
+        {/* Split Area */}
+        <div className="relative overflow-hidden">
+          {/* Mobile/Tablet (stacked) */}
+          <div className="lg:hidden h-full grid grid-rows-2">
+            <Link
+              href="/aufzug"
+              className="relative vss-split-panel"
+              style={{ backgroundImage: 'url(/vss/homepage/aufzuege.jpg)' }}
+            >
+              <div className="absolute inset-0 bg-black/35" />
+              <div className="relative h-full p-4 flex items-start justify-end">
+                <div className="vss-split-card">
+                  <h2 className="vss-split-title">Aufzüge</h2>
+                  <div className="vss-split-subtitle" style={{ color: VSS_HOMEPAGE_COLORS.primary }}>
+                    Bereich besuchen <ArrowRight className="inline-block h-4 w-4 ml-1" />
                   </div>
                 </div>
               </div>
+            </Link>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link 
-                  href="#kontakt"
-                  className="group btn-primary text-center flex items-center justify-center space-x-2"
-                >
-                  <span>Kostenloses Beratungsgespräch</span>
-                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-                </Link>
-                <Link 
-                  href="#services"
-                  className="group btn-outline text-center flex items-center justify-center space-x-2"
-                >
-                  <span>Unsere Services</span>
-                  <ChevronRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-                </Link>
-              </div>
-
-              {/* Contact Info */}
-              <div className="flex flex-col sm:flex-row gap-6 justify-center pt-4">
-                <div className="flex items-center space-x-2 text-dark-600">
-                  <Phone className="h-4 w-4 text-vss-blue" />
-                  <span className="font-medium">+49 (0) 123 456 789</span>
-                </div>
-                <div className="flex items-center space-x-2 text-dark-600">
-                  <Mail className="h-4 w-4 text-vss-green" />
-                  <span className="font-medium">info@vertical-service-solutions.com</span>
+            <Link
+              href="/mobilfunk"
+              className="relative vss-split-panel"
+              style={{ backgroundImage: 'url(/vss/homepage/mobilfunk.jpg)' }}
+            >
+              <div className="absolute inset-0 bg-black/35" />
+              <div className="relative h-full p-4 flex items-end justify-start">
+                <div className="vss-split-card">
+                  <h2 className="vss-split-title">Mobilfunk</h2>
+                  <div className="vss-split-subtitle" style={{ color: VSS_HOMEPAGE_COLORS.secondary }}>
+                    Bereich besuchen <ArrowRight className="inline-block h-4 w-4 ml-1" />
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
+          </div>
+
+          {/* Desktop (diagonal split with inverse hover) */}
+          <div className="hidden lg:block absolute inset-0">
+            {/* Mobilfunk (left / bottom-left) */}
+            <Link
+              href="/mobilfunk"
+              onMouseEnter={() => setActivePanel('mobilfunk')}
+              onMouseLeave={() => setActivePanel(null)}
+              onFocus={() => setActivePanel('mobilfunk')}
+              onBlur={() => setActivePanel(null)}
+              className="absolute inset-0 vss-split-panel"
+              style={{
+                clipPath: mobilfunkClip,
+                backgroundImage: 'url(/vss/homepage/mobilfunk.jpg)',
+                filter: isMobilfunkEmphasized ? 'saturate(1.1) brightness(1.05)' : activePanel ? 'brightness(0.75)' : 'none',
+                transform: isMobilfunkEmphasized ? 'scale(1.01)' : 'scale(1)',
+              }}
+            >
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: `linear-gradient(135deg, rgba(0,0,0,${isMobilfunkEmphasized ? 0.25 : 0.35}) 0%, rgba(0,0,0,${
+                    activePanel && !isMobilfunkEmphasized ? 0.6 : 0.35
+                  }) 100%)`,
+                }}
+              />
+
+              <div className="relative h-full p-10 flex items-end justify-start">
+                <div className="vss-split-card">
+                  <h2 className="vss-split-title">Mobilfunk</h2>
+                  <div className="vss-split-subtitle" style={{ color: VSS_HOMEPAGE_COLORS.secondary }}>
+                    Bereich besuchen <ArrowRight className="inline-block h-4 w-4 ml-1" />
+                  </div>
+                </div>
+              </div>
+            </Link>
+
+            {/* Aufzüge (right / top-right) */}
+            <Link
+              href="/aufzug"
+              onMouseEnter={() => setActivePanel('aufzuege')}
+              onMouseLeave={() => setActivePanel(null)}
+              onFocus={() => setActivePanel('aufzuege')}
+              onBlur={() => setActivePanel(null)}
+              className="absolute inset-0 vss-split-panel"
+              style={{
+                clipPath: aufzuegeClip,
+                backgroundImage: 'url(/vss/homepage/aufzuege.jpg)',
+                filter: isAufzuegeEmphasized ? 'saturate(1.1) brightness(1.05)' : activePanel ? 'brightness(0.75)' : 'none',
+                transform: isAufzuegeEmphasized ? 'scale(1.01)' : 'scale(1)',
+              }}
+            >
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: `linear-gradient(315deg, rgba(0,0,0,${isAufzuegeEmphasized ? 0.25 : 0.35}) 0%, rgba(0,0,0,${
+                    activePanel && !isAufzuegeEmphasized ? 0.6 : 0.35
+                  }) 100%)`,
+                }}
+              />
+
+              <div className="relative h-full p-10 flex items-start justify-end">
+                <div className="vss-split-card">
+                  <h2 className="vss-split-title">Aufzüge</h2>
+                  <div className="vss-split-subtitle" style={{ color: VSS_HOMEPAGE_COLORS.primary }}>
+                    Bereich besuchen <ArrowRight className="inline-block h-4 w-4 ml-1" />
+                  </div>
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-dark-300 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-dark-300 rounded-full mt-2 animate-pulse"></div>
+        {/* Footer */}
+        <footer className="px-4 sm:px-6 lg:px-8 py-3 bg-white text-[#40464f]">
+          <div className="mx-auto max-w-7xl flex items-center justify-between text-xs">
+            <p>
+              Copyright &copy; <span className="font-medium">Vertical Service Solutions GmbH</span>
+            </p>
+            <p className="hidden sm:block">
+              Developed by{' '}
+              <a
+                href="https://www.pixeldives.gr/en"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:opacity-80"
+              >
+                pixeldives.gr
+              </a>
+            </p>
           </div>
-        </div>
-      </section>
-
-      {/* Container Scroll Animation Section */}
-      <section className="bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900">
-        <HeroScrollDemo />
-      </section>
-    </>
+        </footer>
+      </div>
+    </section>
   )
 }
 
