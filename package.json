@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.5.0",
+  "version": "0.8.0",
   "private": true,
-  "description": "VSS Website Redesign with Container-Scroll-Animation - Advanced Setup Monitor v0.5.0",
+  "description": "VSS Website Redesign with Above-the-fold Diagonal Split - Release v0.8.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -53,7 +53,11 @@
     "setup-monitor",
     "interactive-setup",
     "enhanced-monitoring",
-    "stats-dashboard"
+    "stats-dashboard",
+    "hero-split",
+    "diagonal-split",
+    "above-the-fold",
+    "split-screen"
   ],
   "author": "VSS Development Team",
   "license": "MIT",
@@ -63,23 +67,25 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.5.0",
-    "date": "2024-01-06",
+    "version": "0.8.0",
+    "date": "2024-01-07",
     "features": [
-      "Advanced Setup Monitor v0.5.0",
-      "Enhanced Statistics Dashboard",
-      "Quick Actions Panel",
-      "System Info Display",
-      "Auto-open all pages on server ready",
-      "Copy URLs to clipboard functionality"
+      "Above-the-fold diagonal split with HeroSplit",
+      "Interactive split-screen layout",
+      "Inverse hover effects between sides",
+      "Diagonal divider with animations",
+      "Center brand logo with glass morphism",
+      "Contact info bar integration",
+      "Floating animation elements",
+      "Split-screen CTAs for each service"
     ],
     "improvements": [
-      "Better user experience",
-      "Real-time statistics",
-      "Clear system information",
-      "Faster server detection",
-      "Enhanced visual feedback",
-      "Uptime tracking"
+      "Modern split-screen design",
+      "Better visual hierarchy",
+      "Interactive hover states",
+      "Enhanced animations",
+      "Mobile responsive split layout",
+      "Professional brand presentation"
     ]
   }
 }
