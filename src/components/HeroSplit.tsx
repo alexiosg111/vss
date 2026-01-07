@@ -24,14 +24,14 @@ const HeroSplit = () => {
       <div className="relative w-full h-screen">
         {/* Mobilfunk Section - Bottom Left */}
         <div
-          className={`absolute bottom-0 left-0 w-1/2 h-1/2 ${vssBlue} transition-all duration-500 ease-in-out`}
+          className={`absolute bottom-0 left-0 w-full h-full ${vssBlue} transition-all duration-500 ease-in-out`}
           style={{ clipPath: 'polygon(0 100%, 100% 0, 100% 100%)' }}
           onMouseEnter={() => setHoveredSection('mobilfunk')}
           onMouseLeave={() => setHoveredSection(null)}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-blue-700 opacity-90"></div>
           <div className="relative z-10 h-full flex flex-col justify-end p-8 text-white">
-            <div className="bg-black/20 backdrop-blur-sm rounded-lg p-6">
+            <div className="bg-black/20 backdrop-blur-sm rounded-lg p-6 max-w-sm">
               <h2 className="text-2xl font-bold mb-2">Mobilfunk</h2>
               <p className="text-blue-100 mb-4">Netzwerk-Infrastruktur für moderne Unternehmen</p>
               <Link
@@ -54,14 +54,14 @@ const HeroSplit = () => {
 
         {/* Fahrstuhl Section - Top Right */}
         <div
-          className={`absolute top-0 right-0 w-1/2 h-1/2 ${vssGreen} transition-all duration-500 ease-in-out`}
+          className={`absolute top-0 right-0 w-full h-full ${vssGreen} transition-all duration-500 ease-in-out`}
           style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }}
           onMouseEnter={() => setHoveredSection('fahrstuhl')}
           onMouseLeave={() => setHoveredSection(null)}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-green-700 opacity-90"></div>
           <div className="relative z-10 h-full flex flex-col justify-start p-8 text-white">
-            <div className="bg-black/20 backdrop-blur-sm rounded-lg p-6 mt-8">
+            <div className="bg-black/20 backdrop-blur-sm rounded-lg p-6 mt-8 max-w-sm">
               <h2 className="text-2xl font-bold mb-2">Aufzüge</h2>
               <p className="text-green-100 mb-4">Moderne Liftsysteme für Industrie und Gewerbe</p>
               <Link
@@ -84,10 +84,10 @@ const HeroSplit = () => {
 
         {/* Inverse Hover Effects */}
         {hoveredSection === 'mobilfunk' && (
-          <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-white/10 backdrop-blur-sm border-l-2 border-b-2 border-white/20"></div>
+          <div className="absolute top-0 right-0 w-full h-full bg-white/10 backdrop-blur-sm border-l-2 border-b-2 border-white/20"></div>
         )}
         {hoveredSection === 'fahrstuhl' && (
-          <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-white/10 backdrop-blur-sm border-r-2 border-t-2 border-white/20"></div>
+          <div className="absolute bottom-0 left-0 w-full h-full bg-white/10 backdrop-blur-sm border-r-2 border-t-2 border-white/20"></div>
         )}
 
         {/* Center Content - Main Branding */}

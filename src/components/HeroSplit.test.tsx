@@ -52,6 +52,29 @@ describe('HeroSplit Component', () => {
     expect(fahrstuhlSection).toHaveStyle('clipPath: polygon(0 0, 100% 0, 100% 100%)')
   })
 
+  it('has full viewport sections', () => {
+    render(<HeroSplit />)
+    
+    const mobilfunkSection = screen.getByText('Mobilfunk').closest('div')
+    const fahrstuhlSection = screen.getByText('Aufzüge').closest('div')
+    
+    // The sections should be full width and height
+    expect(mobilfunkSection).toHaveClass('w-full h-full')
+    expect(fahrstuhlSection).toHaveClass('w-full h-full')
+  })
+
+  it('has above the fold content visible', () => {
+    render(<HeroSplit />)
+    
+    // Check that all above-the-fold content is visible
+    expect(screen.getByText('Vertical Service')).toBeVisible()
+    expect(screen.getByText('Solutions')).toBeVisible()
+    expect(screen.getByText('Mobilfunk')).toBeVisible()
+    expect(screen.getByText('Aufzüge')).toBeVisible()
+    expect(screen.getByText('+49 (0) 123 456 789')).toBeVisible()
+    expect(screen.getByText('info@vertical-service-solutions.com')).toBeVisible()
+  })
+
   it('has VSS brand colors', () => {
     render(<HeroSplit />)
     
