@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "private": true,
-  "description": "VSS Website Redesign with Enhanced Setup Monitor - Release v0.9.0",
+  "description": "VSS Website Redesign with SplitShowcase Diagonal Split - Release v0.10.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -61,7 +61,11 @@
     "above-the-fold",
     "split-screen",
     "enhanced-setup",
-    "setup-v0.9.0"
+    "setup-v0.9.0",
+    "split-showcase",
+    "three-js",
+    "shader-effects",
+    "inverse-logic"
   ],
   "author": "VSS Development Team",
   "license": "MIT",
@@ -71,26 +75,23 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.9.0",
+    "version": "0.10.0",
     "date": "2024-01-08",
     "features": [
-      "Enhanced Setup-Monitor v0.9.0",
-      "Advanced Browser Detection",
-      "Container/Headless Environment Support",
-      "Silent Mode Support (VSS_SILENT_MODE)",
-      "Enhanced Node.js Version Validation",
-      "Improved Error Handling & Troubleshooting",
-      "Background Browser Opening",
-      "Cross-Platform Compatibility Improvements"
+      "SplitShowcase Component with Diagonal Split",
+      "Three.js Shader Background with Original RGB Colors",
+      "Inverse Mouse Interaction Logic",
+      "MOBILFUNK (Bottom-Left) and FAHRSTUHL (Top-Right) Sections",
+      "Smooth CSS Clip-Path Animations",
+      "Full-Screen Interactive Landing Experience"
     ],
     "improvements": [
-      "Better Setup Script Reliability",
-      "Enhanced User Experience",
-      "Automated Troubleshooting",
-      "Development Environment Optimization",
-      "Production Readiness",
-      "Better Error Messages",
-      "Improved Setup Flow"
+      "Enhanced Visual Impact with Shader Effects",
+      "Improved User Engagement through Inverse Logic",
+      "Better Performance with Optimized Three.js Implementation",
+      "Responsive Design for All Device Sizes",
+      "Smooth 60fps Animations and Transitions",
+      "Professional Typography and Layout"
     ]
   }
 }
