@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Play, Monitor, Smartphone, Tablet, Github, ExternalLink, CheckCircle, AlertCircle, Zap, Code, Palette, Smartphone as MobileIcon } from 'lucide-react'
+import { Play, Monitor, Smartphone, Tablet, Github, ExternalLink, CheckCircle, AlertCircle, Zap, Code, Palette } from 'lucide-react'
 
 const PreviewPage = () => {
   const [currentViewport, setCurrentViewport] = useState('desktop')
@@ -17,45 +17,45 @@ const PreviewPage = () => {
   const features = [
     {
       icon: Zap,
-      title: '3D Scroll Animation',
-      description: 'Container-Scroll-Animation mit Framer Motion',
+      title: 'SplitShowcase Diagonal Split',
+      description: 'Hero-Layout mit CSS Clip-Path',
       status: '✅ Active',
-      details: 'Rotation (20°→0°) und Skalierung beim Scrollen'
+      details: 'Diagonaler Split (/) mit smooth Transition'
     },
     {
       icon: Palette,
-      title: 'VSS Brand Colors',
-      description: 'Blue, Green, Orange Farbschema',
-      status: '✅ Integrated',
-      details: '#0284c7, #10b981, #f59e0b'
+      title: 'Three.js Shader Background',
+      description: 'WebGL Shader mit originalen RGB-Farben',
+      status: '✅ Enabled',
+      details: 'Performance-optimiert und responsiv'
     },
     {
-      icon: MobileIcon,
+      icon: Smartphone,
       title: 'Responsive Design',
-      description: 'Mobile-first Approach',
+      description: 'Mobile/Tablet/Desktop optimiert',
       status: '✅ Optimized',
-      details: 'Skalierung 0.7→0.9 auf Mobile'
+      details: 'Layout & Interaktion skaliert sauber'
     },
     {
       icon: Code,
       title: 'TypeScript',
-      description: 'Strict mode, 0 Fehler',
+      description: 'Type-safe Components',
       status: '✅ Clean',
-      details: 'Vollständige TypeScript-Integration'
+      details: 'Strict Mode und saubere Typen'
     },
     {
       icon: CheckCircle,
-      title: 'Performance',
-      description: '156 kB First Load JS',
-      status: '✅ Optimized',
-      details: 'Bundle-Splitting und Optimierung'
+      title: 'Clean Setup',
+      description: 'npm-only Development Workflow',
+      status: '✅ No Docker',
+      details: 'npm install → npm run dev'
     },
     {
       icon: AlertCircle,
       title: 'Build Status',
       description: 'Production-ready',
       status: '✅ Ready',
-      details: '4/4 Seiten erfolgreich generiert'
+      details: 'Routes: /, /preview, /setup-monitor'
     }
   ]
 
@@ -82,7 +82,7 @@ const PreviewPage = () => {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-dark-900">VSS Website Preview</h1>
-                <p className="text-sm text-dark-600">Version 0.1.0 - Container-Scroll-Animation</p>
+                <p className="text-sm text-dark-600">Version 0.11.0 - SplitShowcase + Clean Setup</p>
               </div>
             </div>
             
@@ -204,7 +204,7 @@ const PreviewPage = () => {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-dark-900">Preview aktiv</h3>
-                      <p className="text-sm text-dark-600">Scrollen Sie in der Hauptseite, um die Animation zu sehen</p>
+                      <p className="text-sm text-dark-600">Bewegen Sie die Maus auf der Hauptseite, um SplitShowcase & Shader zu erleben</p>
                     </div>
                     <Link
                       href="/"
@@ -251,7 +251,7 @@ const PreviewPage = () => {
               </div>
               <div className="flex items-center space-x-3 text-sm">
                 <CheckCircle className="h-4 w-4 text-vss-green" />
-                <span className="text-dark-600">Container-Scroll-Animation aktiv</span>
+                <span className="text-dark-600">SplitShowcase aktiv</span>
               </div>
             </div>
           </div>
@@ -260,16 +260,16 @@ const PreviewPage = () => {
             <h3 className="text-lg font-semibold text-dark-900 mb-4">📊 Performance</h3>
             <div className="space-y-3">
               <div className="flex justify-between items-center text-sm">
-                <span className="text-dark-600">First Load JS</span>
-                <span className="font-medium text-vss-blue">156 kB</span>
+                <span className="text-dark-600">First Load JS (/)</span>
+                <span className="font-medium text-vss-blue">247 kB</span>
               </div>
               <div className="flex justify-between items-center text-sm">
                 <span className="text-dark-600">Bundle Splitting</span>
                 <span className="font-medium text-vss-green">✅ Active</span>
               </div>
               <div className="flex justify-between items-center text-sm">
-                <span className="text-dark-600">Static Generation</span>
-                <span className="font-medium text-vss-green">4/4 Pages</span>
+                <span className="text-dark-600">Routes</span>
+                <span className="font-medium text-vss-green">4 Pages</span>
               </div>
               <div className="flex justify-between items-center text-sm">
                 <span className="text-dark-600">TypeScript</span>
