@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "private": true,
-  "description": "VSS Website Redesign with Above-the-fold Diagonal Split - Release v0.8.0",
+  "description": "VSS Website Redesign with Enhanced Setup Monitor - Release v0.9.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -57,7 +57,9 @@
     "hero-split",
     "diagonal-split",
     "above-the-fold",
-    "split-screen"
+    "split-screen",
+    "enhanced-setup",
+    "setup-v0.9.0"
   ],
   "author": "VSS Development Team",
   "license": "MIT",
@@ -67,25 +69,26 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.8.0",
-    "date": "2024-01-07",
+    "version": "0.9.0",
+    "date": "2024-01-08",
     "features": [
-      "Above-the-fold diagonal split with HeroSplit",
-      "Interactive split-screen layout",
-      "Inverse hover effects between sides",
-      "Diagonal divider with animations",
-      "Center brand logo with glass morphism",
-      "Contact info bar integration",
-      "Floating animation elements",
-      "Split-screen CTAs for each service"
+      "Enhanced Setup-Monitor v0.9.0",
+      "Advanced Browser Detection",
+      "Container/Headless Environment Support",
+      "Silent Mode Support (VSS_SILENT_MODE)",
+      "Enhanced Node.js Version Validation",
+      "Improved Error Handling & Troubleshooting",
+      "Background Browser Opening",
+      "Cross-Platform Compatibility Improvements"
     ],
     "improvements": [
-      "Modern split-screen design",
-      "Better visual hierarchy",
-      "Interactive hover states",
-      "Enhanced animations",
-      "Mobile responsive split layout",
-      "Professional brand presentation"
+      "Better Setup Script Reliability",
+      "Enhanced User Experience",
+      "Automated Troubleshooting",
+      "Development Environment Optimization",
+      "Production Readiness",
+      "Better Error Messages",
+      "Improved Setup Flow"
     ]
   }
 }
