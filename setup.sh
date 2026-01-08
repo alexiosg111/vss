@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# VSS Website Setup Script v0.9.0 mit Enhanced Setup-Monitor
-echo "🚀 VSS Website Setup v0.9.0 wird gestartet..."
+# VSS Website Setup Script v0.10.0 mit Enhanced Setup-Monitor
+echo "🚀 VSS Website Setup v0.10.0 wird gestartet..."
 
 # Erweiterte Browser-Detection für Container-Umgebungen
 echo "🔍 Prüfe Browser-Verfügbarkeit..."
@@ -22,35 +22,6 @@ elif [ -n "$DISPLAY" ]; then
 else
     echo "⚠️ Kein Browser verfügbar (Container/Headless Umgebung)"
 fi
-
-# Öffne Browser mit Monitor (nur wenn Browser verfügbar)
-if [ "$browser_found" = true ]; then
-    echo "📊 Öffne Setup-Monitor im Browser..."
-    if command -v open &> /dev/null; then
-        open "file://$(pwd)/setup-monitor.html" &> /dev/null &
-    elif command -v xdg-open &> /dev/null; then
-        xdg-open "file://$(pwd)/setup-monitor.html" &> /dev/null &
-    elif command -v start &> /dev/null; then
-        start "file://$(pwd)/setup-monitor.html" &> /dev/null &
-    else
-        echo "📱 Setup-Monitor verfügbar unter: file://$(pwd)/setup-monitor.html"
-    fi
-else
-    echo "📱 Setup-Monitor verfügbar unter: file://$(pwd)/setup-monitor.html"
-fi
-
-# Prüfe ob HTML-Monitor existiert
-if [ ! -f setup-monitor.html ]; then
-    echo "❌ setup-monitor.html nicht gefunden!"
-    echo "Stelle sicher, dass alle Dateien korrekt heruntergeladen wurden."
-    exit 1
-fi
-
-echo "✅ Setup-Monitor gefunden: setup-monitor.html"
-
-# Starte Setup-Prozess
-echo "🔧 Starte Setup-Prozess..."
-echo ""
 
 # Erweiterte Umgebungs-Checks
 echo "🔍 Prüfe Umgebungs-Variablen..."
@@ -164,38 +135,64 @@ fi
 
 echo "✅ Build erfolgreich."
 
-# Starte Development Server mit Enhanced Options
-echo "🎉 Setup v0.9.0 abgeschlossen!"
+# Starte Development Server
+echo "🎉 Setup v0.10.0 abgeschlossen!"
 echo ""
 echo "🚀 Starte Development Server..."
+echo ""
+
+# Starte Next.js Development Server
+npm run dev &
+SERVER_PID=$!
+
+# Warte bis Server läuft
+echo "⏳ Warte auf Server-Start..."
+sleep 5
+
+# Öffne Browser mit Setup-Monitor (nur wenn Browser verfügbar)
+if [ "$browser_found" = true ] && [ "$no_browser" = false ]; then
+    echo "📊 Öffne Setup-Monitor im Browser..."
+    if command -v open &> /dev/null; then
+        open "http://localhost:3000/setup-monitor" &> /dev/null &
+    elif command -v xdg-open &> /dev/null; then
+        xdg-open "http://localhost:3000/setup-monitor" &> /dev/null &
+    elif command -v start &> /dev/null; then
+        start "http://localhost:3000/setup-monitor" &> /dev/null &
+    else
+        echo "📱 Setup-Monitor verfügbar unter: http://localhost:3000/setup-monitor"
+    fi
+else
+    echo "📱 Setup-Monitor verfügbar unter: http://localhost:3000/setup-monitor"
+fi
+
+echo "✅ Setup abgeschlossen!"
+echo "🌐 VSS Website läuft unter: http://localhost:3000"
+echo "📊 Setup-Monitor verfügbar unter: http://localhost:3000/setup-monitor"
+echo "🎯 SplitShowcase Komponente mit Three.js Shader: http://localhost:3000"
 echo ""
 echo "📱 Die Website wird verfügbar sein unter:"
 echo "   http://localhost:3000"
 echo ""
-echo "🎯 Features zum Testen (v0.8.0):"
-echo "   • Above-the-fold Diagonal Split (HeroSplit)"
-echo "   • Interactive Split-Screen Layout"
-echo "   • Diagonal Divider mit 45° Animationen"
-echo "   • VSS Brand Logo mit Glass Morphism"
-echo "   • Container-Scroll-Animation (Framer Motion)"
-echo "   • Responsive Design (Mobile/Tablet/Desktop)"
-echo "   • VSS Brand Colors (Blue/Green/Orange)"
-echo "   • Enhanced Setup-Monitor v0.9.0"
+echo "🎯 Features zum Testen (v0.10.0):"
+echo "   • SplitShowcase Komponente mit diagonalem Split (/)"
+echo "   • Three.js Shader Hintergrund mit originalen RGB-Farben"
+echo "   • Inverse Maus-Interaktionslogik (Shader läuft wo Maus NICHT ist)"
+echo "   • MOBILFUNK (unten links) und FAHRSTUHL (oben rechts) Bereiche"
+echo "   • Smooth CSS Clip-Path Animationen"
+echo "   • 60fps Performance mit Optimized Three.js Implementation"
+echo "   • Responsive Design für alle Gerätegrößen"
+echo "   • Professional Typography und Layout"
 echo ""
-echo "🔧 v0.9.0 Setup Verbesserungen:"
-echo "   • Erweiterte Browser-Detection"
+echo "🔧 v0.10.0 Setup Verbesserungen:"
+echo "   • Integrierte Setup-Monitor Route in Next.js"
+echo "   • Enhanced Setup-Monitor mit Live-Logs"
+echo "   • Verbesserte Browser-Detection"
 echo "   • Bessere Error Handling & Troubleshooting"
 echo "   • Silent Mode Support (VSS_SILENT_MODE)"
 echo "   • Container-Umgebung Support"
-echo "   • Enhanced Node.js Version Checks"
 echo ""
-echo "⏹️  Drücken Sie Ctrl+C zum Stoppen des Servers"
-echo ""
+echo "⚡ Drücken Sie Ctrl+C zum Beenden"
 
-# Starte Server mit entsprechenden Optionen
-if [ "$silent_mode" = true ]; then
-    echo "🔇 Starte im Silent Mode..."
-    npm run dev &
-else
-    npm run dev
-fi
+# Warte auf Ctrl+C
+trap 'echo ""; echo "🛑 Stoppe Development Server..."; kill $SERVER_PID; exit' INT
+wait $SERVER_PID
