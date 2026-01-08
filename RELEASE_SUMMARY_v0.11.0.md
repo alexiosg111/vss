@@ -137,7 +137,7 @@ v0.11:    ~35s (zurück zu npm only)
 
 ### 🏆 **Best Practices v0.11:**
 - Bewährte Lösungen nicht ohne Not ändern
-- Docker nur für Production/Deployment nötig
+- Docker ist für lokale Entwicklung nicht nötig (v0.11 liefert bewusst keinen Docker-Workflow mehr)
 - Development sollte so einfach wie möglich sein
 - Kompatibilität wichtiger als Innovation
 

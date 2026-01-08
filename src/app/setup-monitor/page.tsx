@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { CheckCircle, AlertCircle, Loader2, ExternalLink, Github, Play, Monitor } from 'lucide-react'
 
 const SetupMonitor = () => {
@@ -12,25 +13,28 @@ const SetupMonitor = () => {
   useEffect(() => {
     const simulateSetup = async () => {
       const steps = [
-        '🚀 VSS Website Setup v0.10.0 wird gestartet...',
+        '🚀 VSS Website Setup v0.11.0 wird gestartet...',
+        '🔄 Clean Setup ohne Docker (npm-only)',
         '🔍 Prüfe Browser-Verfügbarkeit...',
         '✅ Browser verfügbar',
         '📦 Installiere Dependencies...',
-        '✅ Three.js Shader Dependencies installiert',
-        '🔧 Build Prozess wird gestartet...',
-        '✅ TypeScript Kompilierung erfolgreich',
+        '✅ Dependencies installiert (Three.js / Framer Motion)',
+        '🔨 Teste Build...',
         '✅ Next.js Build erfolgreich',
         '📊 SplitShowcase Komponente geladen',
-        '🎨 Shader Hintergrund aktiviert',
+        '🎨 Three.js Shader Hintergrund aktiviert',
+        '🖱️ Inverse Maus-Interaktionslogik aktiv',
         '✅ Setup erfolgreich abgeschlossen!'
       ]
+
+      setStatus('running')
 
       for (let i = 0; i < steps.length; i++) {
         setLogs(prev => [...prev, steps[i]])
         setProgress((i + 1) / steps.length * 100)
         await new Promise(resolve => setTimeout(resolve, 800))
       }
-      
+
       setStatus('completed')
       setIsCompleted(true)
     }
@@ -71,7 +75,7 @@ const SetupMonitor = () => {
           <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
             VSS Website Setup Monitor
           </h1>
-          <p className="text-slate-300 text-lg">Release v0.10.0 - SplitShowcase Diagonal Split</p>
+          <p className="text-slate-300 text-lg">Release v0.11.0 - Clean Setup ohne Docker</p>
           <div className="flex items-center justify-center gap-4 mt-4">
             {getStatusIcon()}
             <span className="text-xl font-semibold">
@@ -133,20 +137,20 @@ const SetupMonitor = () => {
                 Testen Sie die neue SplitShowcase Komponente mit diagonalem Split und Three.js Shader-Hintergrund.
               </p>
               <div className="flex gap-3">
-                <a
+                <Link
                   href="/"
                   className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors"
                 >
                   <Play size={16} />
                   Homepage öffnen
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/preview"
                   className="flex items-center gap-2 bg-slate-600 hover:bg-slate-700 px-4 py-2 rounded-lg transition-colors"
                 >
                   <ExternalLink size={16} />
                   Preview Seite
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -156,7 +160,7 @@ const SetupMonitor = () => {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-slate-400">Version:</span>
-                  <span className="text-white font-semibold">v0.10.0</span>
+                  <span className="text-white font-semibold">v0.11.0</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Features:</span>
@@ -193,15 +197,15 @@ const SetupMonitor = () => {
                 🎉 Setup erfolgreich abgeschlossen!
               </h3>
               <p className="text-green-200 mb-4">
-                Die VSS Website v0.10.0 mit SplitShowcase Komponente ist bereit für den Einsatz.
+                Die VSS Website v0.11.0 mit SplitShowcase und Clean Setup (ohne Docker) ist bereit.
               </p>
               <div className="flex justify-center gap-4">
-                <a
+                <Link
                   href="/"
                   className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg font-semibold transition-colors"
                 >
                   Website besuchen
-                </a>
+                </Link>
                 <button
                   onClick={() => window.location.reload()}
                   className="bg-slate-600 hover:bg-slate-700 px-6 py-3 rounded-lg font-semibold transition-colors"

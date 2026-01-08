@@ -178,7 +178,7 @@ npm run start          # Startet Production Server
 
 **v0.11.0 Lehren:**
 - Bewährte Lösungen nicht ohne Not ändern
-- Docker nur für Production/Deployment nötig
+- Docker ist für lokale Entwicklung nicht nötig (v0.11 liefert bewusst keinen Docker-Workflow mehr)
 - Development sollte so einfach wie möglich sein
 - Kompatibilität ist wichtiger als Innovation
 

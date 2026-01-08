@@ -1,5 +1,5 @@
 @echo off
-echo 🚀 VSS Website Setup wird gestartet...
+echo 🚀 VSS Website Setup v0.11.0 wird gestartet...
 
 echo 📊 Prüfe Setup-Monitor...
 
@@ -99,12 +99,12 @@ echo.
 echo 📱 Die Website wird verfügbar sein unter:
 echo    http://localhost:3000
 echo.
-echo 🎯 Features zum Testen:
-echo    • Container-Scroll-Animation (Framer Motion)
+echo 🎯 Features zum Testen (v0.11.0):
+echo    • SplitShowcase Diagonal Split (Homepage)
+echo    • Three.js Shader Background (Original RGB Farben)
+echo    • Inverse Maus-Interaktionslogik
+echo    • Preview: /preview und Setup-Monitor: /setup-monitor
 echo    • Responsive Design (Mobile/Tablet/Desktop)
-echo    • VSS Brand Colors (Blue/Green/Orange)
-echo    • Industrial High-Tech Design
-echo    • SEO-optimierte Meta-Tags
 echo.
 echo ⏹️  Drücken Sie Ctrl+C zum Stoppen des Servers
 echo.
