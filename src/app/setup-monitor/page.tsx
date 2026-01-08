@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { CheckCircle, AlertCircle, Loader2, ExternalLink, Github, Play, Monitor } from 'lucide-react'
 
 const SetupMonitor = () => {
@@ -136,20 +137,20 @@ const SetupMonitor = () => {
                 Testen Sie die neue SplitShowcase Komponente mit diagonalem Split und Three.js Shader-Hintergrund.
               </p>
               <div className="flex gap-3">
-                <a
+                <Link
                   href="/"
                   className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors"
                 >
                   <Play size={16} />
                   Homepage öffnen
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/preview"
                   className="flex items-center gap-2 bg-slate-600 hover:bg-slate-700 px-4 py-2 rounded-lg transition-colors"
                 >
                   <ExternalLink size={16} />
                   Preview Seite
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -199,12 +200,12 @@ const SetupMonitor = () => {
                 Die VSS Website v0.11.0 mit SplitShowcase und Clean Setup (ohne Docker) ist bereit.
               </p>
               <div className="flex justify-center gap-4">
-                <a
+                <Link
                   href="/"
                   className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg font-semibold transition-colors"
                 >
                   Website besuchen
-                </a>
+                </Link>
                 <button
                   onClick={() => window.location.reload()}
                   className="bg-slate-600 hover:bg-slate-700 px-6 py-3 rounded-lg font-semibold transition-colors"
