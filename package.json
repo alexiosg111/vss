@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "private": true,
-  "description": "VSS Website Redesign with SplitShowcase Diagonal Split - Release v0.10.0",
+  "description": "VSS Website Redesign with SplitShowcase Diagonal Split - Release v0.11.0 - Clean Setup",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,9 +10,9 @@
     "lint": "next lint",
     "setup": "./setup.sh",
     "preview": "./preview.sh",
-    "docker:dev": "docker-compose up vss-website",
-    "docker:prod": "docker-compose --profile production up --build",
-    "docker:down": "docker-compose down",
+    "docker:dev": "echo 'Docker removed in v0.11 - use npm run dev instead'",
+    "docker:prod": "echo 'Docker removed in v0.11 - use npm run build && npm run start'",
+    "docker:down": "echo 'Docker removed in v0.11'",
     "test": "npm run build",
     "deploy:vercel": "vercel --prod",
     "deploy:static": "next export",
@@ -65,7 +65,10 @@
     "split-showcase",
     "three-js",
     "shader-effects",
-    "inverse-logic"
+    "inverse-logic",
+    "clean-setup",
+    "no-docker",
+    "simple-dev"
   ],
   "author": "VSS Development Team",
   "license": "MIT",
@@ -75,7 +78,7 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.10.0",
+    "version": "0.11.0",
     "date": "2024-01-08",
     "features": [
       "SplitShowcase Component with Diagonal Split",
@@ -86,12 +89,16 @@
       "Full-Screen Interactive Landing Experience"
     ],
     "improvements": [
-      "Enhanced Visual Impact with Shader Effects",
-      "Improved User Engagement through Inverse Logic",
-      "Better Performance with Optimized Three.js Implementation",
-      "Responsive Design for All Device Sizes",
-      "Smooth 60fps Animations and Transitions",
-      "Professional Typography and Layout"
+      "Clean Setup Without Docker Dependencies",
+      "Back to Simple npm Development Setup",
+      "Removed Docker Complexity from v0.9+",
+      "Restored Simple Development Workflow",
+      "Better Compatibility and Reliability",
+      "Faster Setup Process"
+    ],
+    "breakingChanges": [
+      "Docker support removed - use npm run dev instead",
+      "Simplified development environment setup"
     ]
   }
 }
