@@ -19,11 +19,13 @@
     "analyze": "cross-env ANALYZE=true npm run build"
   },
   "dependencies": {
+    "@types/three": "^0.182.0",
     "framer-motion": "^12.24.0",
     "lucide-react": "^0.263.1",
     "next": "^15.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "three": "^0.182.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
