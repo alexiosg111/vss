@@ -13,19 +13,17 @@ const SplitShowcase: React.FC = () => {
 
     const rect = containerRef.current.getBoundingClientRect()
     const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    
-    // Calculate diagonal line from top-left to bottom-right
-    // Line equation: y = (height/width) * x
-    const diagonalY = (rect.height / rect.width) * x
-    
+
+    // Vertical line in the middle: x < width / 2
+    const midX = rect.width / 2
+
     // Inverse logic: determine which side should be ACTIVE (white text on black)
     // Active side is where the shader effect should run (where mouse is NOT)
-    if (y > diagonalY) {
-      // Mouse is below diagonal (bottom-left area) -> activate right side (shader top-right)
+    if (x < midX) {
+      // Mouse is on left side -> activate right side (shader on right)
       setActiveSide('right')
     } else {
-      // Mouse is above diagonal (top-right area) -> activate left side (shader bottom-left)
+      // Mouse is on right side -> activate left side (shader on left)
       setActiveSide('left')
     }
   }
@@ -43,19 +41,19 @@ const SplitShowcase: React.FC = () => {
       </div>
 
       {/* OVERLAYS (Decken den Shader mit slate-50 ab, wo er inaktiv ist) */}
-      
-      {/* Linkes Overlay (Dreieck unten links) */}
-      <div 
+
+      {/* Linkes Overlay (Linke Hälfte) */}
+      <div
         className={`absolute inset-0 bg-slate-50 z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           activeSide === 'right' ? 'clip-left-full' : 'clip-left-none'
-        }`} 
+        }`}
       />
-      
-      {/* Rechtes Overlay (Dreieck oben rechts) */}
-      <div 
+
+      {/* Rechtes Overlay (Rechte Hälfte) */}
+      <div
         className={`absolute inset-0 bg-slate-50 z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           activeSide === 'left' ? 'clip-right-full' : 'clip-right-none'
-        }`} 
+        }`}
       />
 
       {/* INHALT / TEXT */}
@@ -95,18 +93,18 @@ const SplitShowcase: React.FC = () => {
         </div>
       </div>
 
-      {/* CLICKABLE HITBOXES (Genau an der Diagonalen getrennt) */}
+      {/* CLICKABLE HITBOXES (Vertikale Linie in der Mitte) */}
       <div className="absolute inset-0 z-30 pointer-events-none">
-        <Link 
-          href="#mobilfunk" 
+        <Link
+          href="#mobilfunk"
           className="absolute inset-0 pointer-events-auto cursor-pointer"
-          style={{ clipPath: 'polygon(0 0, 0 100%, 100% 100%)' }}
+          style={{ clipPath: 'polygon(0 0, 50% 0, 50% 100%, 0 100%)' }}
           title="Mobilfunk Lösungen"
         />
-        <Link 
-          href="#aufzuge" 
+        <Link
+          href="#aufzuge"
           className="absolute inset-0 pointer-events-auto cursor-pointer"
-          style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }}
+          style={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)' }}
           title="Aufzug Systeme"
         />
       </div>
@@ -114,16 +112,16 @@ const SplitShowcase: React.FC = () => {
       {/* CSS Styles für Clip-Paths */}
       <style jsx global>{`
         .clip-left-full {
-          clip-path: polygon(0 0, 0 100%, 100% 100%);
+          clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
         }
         .clip-left-none {
-          clip-path: polygon(0 0, 0 0, 0 0);
+          clip-path: polygon(0 0, 0 0, 0 0, 0 0);
         }
         .clip-right-full {
-          clip-path: polygon(0 0, 100% 0, 100% 100%);
+          clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
         }
         .clip-right-none {
-          clip-path: polygon(100% 0, 100% 0, 100% 0);
+          clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);
         }
       `}</style>
     </div>
