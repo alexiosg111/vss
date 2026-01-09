@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "private": true,
-  "description": "VSS Website Redesign with SplitShowcase Diagonal Split - Release v0.11.0 - Clean Setup",
+  "description": "VSS Website Redesign with SplitShowcase Diagonal Split - Release v0.12.0 - Fixed Hitbox & Shader",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -78,27 +78,24 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.11.0",
-    "date": "2024-01-08",
+    "version": "0.12.0",
+    "date": "2024-01-09",
     "features": [
-      "SplitShowcase Component with Diagonal Split",
-      "Three.js Shader Background with Original RGB Colors",
-      "Inverse Mouse Interaction Logic",
-      "MOBILFUNK (Bottom-Left) and FAHRSTUHL (Top-Right) Sections",
-      "Smooth CSS Clip-Path Animations",
-      "Full-Screen Interactive Landing Experience"
+      "Fixed Diagonal Hitbox Calculation (y = mx + c)",
+      "Corrected Inverse Mouse Interaction Logic",
+      "Restored Vibrant RGB Shader Colors",
+      "Added Interactive Mouse Glow to Shader",
+      "Added Clickable Service Area Hitboxes",
+      "Smooth CSS Clip-Path Transitions (700ms)"
     ],
     "improvements": [
-      "Clean Setup Without Docker Dependencies",
-      "Back to Simple npm Development Setup",
-      "Removed Docker Complexity from v0.9+",
-      "Restored Simple Development Workflow",
-      "Better Compatibility and Reliability",
-      "Faster Setup Process"
+      "Precise transition point at the diagonal split",
+      "Improved Shader Performance and Visuals",
+      "Direct links to Service sections from Hero",
+      "Better UX with clear interactive states"
     ],
     "breakingChanges": [
-      "Docker support removed - use npm run dev instead",
-      "Simplified development environment setup"
+      "None"
     ]
   }
 }
