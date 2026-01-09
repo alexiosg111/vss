@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "private": true,
-  "description": "VSS Website Redesign with SplitShowcase Vertical Line Hitbox - Release v0.13.0 - New Color-Shift Effect",
+  "description": "VSS Website Redesign with SplitShowcase Diagonal Hitbox & Inline Shader - Release v0.14.0 - Fixed Diagonal Layout",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -57,8 +57,8 @@
     "enhanced-monitoring",
     "stats-dashboard",
     "hero-split",
-    "vertical-split",
-    "vertical-line-hitbox",
+    "diagonal-split",
+    "diagonal-hitbox",
     "above-the-fold",
     "split-screen",
     "enhanced-setup",
@@ -67,7 +67,7 @@
     "three-js",
     "shader-effects",
     "inverse-logic",
-    "color-shift-effect",
+    "inline-shader",
     "clean-setup",
     "no-docker",
     "simple-dev"
@@ -80,25 +80,29 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.13.0",
+    "version": "0.14.0",
     "date": "2025-01-09",
     "features": [
-      "Vertical Line Hitbox replaces diagonal interaction (x < width/2)",
-      "New Color-Shift Effect integrated with shader + overlays",
-      "Improved intuitive interaction model with clear left/right split",
-      "Enhanced Shader Background with RGB colors and mouse interaction",
-      "Smooth CSS Clip-Path Transitions (700ms) for vertical overlays",
-      "Clickable Service Areas aligned with vertical split"
+      "Fixed diagonal hitbox with corrected logic (y < x)",
+      "New inline ShaderCanvas component with custom shader",
+      "Improved diagonal split with triangle overlays",
+      "Inverse hover logic preserved - shader where mouse is NOT",
+      "Smooth 700ms CSS transitions with cubic-bezier",
+      "Modern color scheme: #f8fafc inactive, #000000 active",
+      "Removed styled-jsx compatibility issues with standard CSS"
     ],
     "improvements": [
-      "More intuitive user experience with simple left/right interaction",
-      "Better visual separation between services",
-      "Preserved inverse hover logic for dynamic effect",
-      "Optimized overlay transitions for seamless color shifts"
+      "Corrected diagonal layout implementation",
+      "Inline shader for better performance and compatibility",
+      "Cleaner code structure without external shader file",
+      "Hex colors for consistent styling",
+      "Better TypeScript type safety"
     ],
     "breakingChanges": [
-      "Hitbox changed from diagonal to vertical line",
-      "Overlay clip-paths updated from triangles to rectangles"
+      "SplitShowcase completely rewritten with inline shader",
+      "Removed OriginalShader.tsx dependency",
+      "Hitbox logic corrected to proper diagonal (y < x)",
+      "Styled-jsx replaced with standard CSS tags"
     ]
   }
 }
