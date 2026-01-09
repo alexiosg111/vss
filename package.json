@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.12.0",
+  "version": "0.14.0",
   "private": true,
-  "description": "VSS Website Redesign with SplitShowcase Diagonal Split - Release v0.12.0 - Fixed Hitbox & Shader",
+  "description": "VSS Website Redesign with SplitShowcase Diagonal Hitbox & Inline Shader - Release v0.14.0 - Fixed Diagonal Layout",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -58,6 +58,7 @@
     "stats-dashboard",
     "hero-split",
     "diagonal-split",
+    "diagonal-hitbox",
     "above-the-fold",
     "split-screen",
     "enhanced-setup",
@@ -66,6 +67,7 @@
     "three-js",
     "shader-effects",
     "inverse-logic",
+    "inline-shader",
     "clean-setup",
     "no-docker",
     "simple-dev"
@@ -78,24 +80,29 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.12.0",
-    "date": "2024-01-09",
+    "version": "0.14.0",
+    "date": "2025-01-09",
     "features": [
-      "Fixed Diagonal Hitbox Calculation (y = mx + c)",
-      "Corrected Inverse Mouse Interaction Logic",
-      "Restored Vibrant RGB Shader Colors",
-      "Added Interactive Mouse Glow to Shader",
-      "Added Clickable Service Area Hitboxes",
-      "Smooth CSS Clip-Path Transitions (700ms)"
+      "Fixed diagonal hitbox with corrected logic (y < x)",
+      "New inline ShaderCanvas component with custom shader",
+      "Improved diagonal split with triangle overlays",
+      "Inverse hover logic preserved - shader where mouse is NOT",
+      "Smooth 700ms CSS transitions with cubic-bezier",
+      "Modern color scheme: #f8fafc inactive, #000000 active",
+      "Removed styled-jsx compatibility issues with standard CSS"
     ],
     "improvements": [
-      "Precise transition point at the diagonal split",
-      "Improved Shader Performance and Visuals",
-      "Direct links to Service sections from Hero",
-      "Better UX with clear interactive states"
+      "Corrected diagonal layout implementation",
+      "Inline shader for better performance and compatibility",
+      "Cleaner code structure without external shader file",
+      "Hex colors for consistent styling",
+      "Better TypeScript type safety"
     ],
     "breakingChanges": [
-      "None"
+      "SplitShowcase completely rewritten with inline shader",
+      "Removed OriginalShader.tsx dependency",
+      "Hitbox logic corrected to proper diagonal (y < x)",
+      "Styled-jsx replaced with standard CSS tags"
     ]
   }
 }

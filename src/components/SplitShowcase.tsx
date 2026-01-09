@@ -1,72 +1,146 @@
-'use client'
+"use client"
 
-import React, { useRef, useState, useEffect } from 'react'
-import Link from 'next/link'
-import OriginalShader from './OriginalShader'
+import { useState, useRef, useEffect } from "react"
+import * as THREE from "three"
 
-const SplitShowcase: React.FC = () => {
+// --- 1. DIE SHADER KOMPONENTE ---
+const ShaderCanvas = () => {
   const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!containerRef.current) return
+    const container = containerRef.current
+
+    // 1. Shader Code (Original Farben)
+    const vertexShader = `void main() { gl_Position = vec4( position, 1.0 ); }`
+
+    const fragmentShader = `
+      #define TWO_PI 6.2831853072
+      #define PI 3.14159265359
+      precision highp float;
+      uniform vec2 resolution;
+      uniform float time;
+
+      void main(void) {
+        vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
+        float t = time*0.05;
+        float lineWidth = 0.002;
+
+        vec3 color = vec3(0.0);
+        for(int j = 0; j < 3; j++){
+          for(int i=0; i < 5; i++){
+            color[j] += lineWidth*float(i*i) / abs(fract(t - 0.01*float(j)+float(i)*0.01)*5.0 - length(uv) + mod(uv.x+uv.y, 0.2));
+          }
+        }
+
+        gl_FragColor = vec4(color[0],color[1],color[2],1.0);
+      }
+    `
+
+    // 2. Three.js Setup
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false })
+    container.appendChild(renderer.domElement)
+
+    const scene = new THREE.Scene()
+    const camera = new THREE.Camera()
+    camera.position.z = 1
+    const geometry = new THREE.PlaneGeometry(2, 2)
+    const uniforms = {
+      time: { type: "f", value: 1.0 },
+      resolution: { type: "v2", value: new THREE.Vector2() },
+    }
+    const material = new THREE.ShaderMaterial({ uniforms, vertexShader, fragmentShader })
+    const mesh = new THREE.Mesh(geometry, material)
+    scene.add(mesh)
+
+    // 3. Resize & Animation
+    const onResize = () => {
+      renderer.setSize(container.clientWidth, container.clientHeight)
+      uniforms.resolution.value.x = container.clientWidth
+      uniforms.resolution.value.y = container.clientHeight
+    }
+    window.addEventListener('resize', onResize)
+    onResize()
+
+    const animate = () => {
+      requestAnimationFrame(animate)
+      uniforms.time.value += 0.05
+      renderer.render(scene, camera)
+    }
+    animate()
+
+    return () => {
+      window.removeEventListener('resize', onResize)
+      renderer.dispose()
+      geometry.dispose()
+      material.dispose()
+      container.innerHTML = ""
+    }
+  }, [])
+
+  return <div ref={containerRef} className="w-full h-full absolute inset-0" />
+}
+
+// --- 2. DIE HAUPTKOMPONENTE ---
+
+export default function SplitShowcase() {
   const [activeSide, setActiveSide] = useState<'left' | 'right'>('left')
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return
-
     const rect = containerRef.current.getBoundingClientRect()
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
-    
-    // Calculate diagonal line from top-left to bottom-right
-    // Line equation: y = (height/width) * x
-    const diagonalY = (rect.height / rect.width) * x
-    
-    // Inverse logic: determine which side should be ACTIVE (white text on black)
-    // Active side is where the shader effect should run (where mouse is NOT)
-    if (y > diagonalY) {
-      // Mouse is below diagonal (bottom-left area) -> activate right side (shader top-right)
-      setActiveSide('right')
-    } else {
-      // Mouse is above diagonal (top-right area) -> activate left side (shader bottom-left)
+
+    // Logik: Wenn y < x -> Maus ist Oben Rechts (Fahrstuhl)
+    const isRightSide = y < x
+
+    // Inverse Logik: Wenn Maus Rechts -> Shader Links
+    if (isRightSide) {
       setActiveSide('left')
+    } else {
+      setActiveSide('right')
     }
   }
 
   return (
-    <div 
+    <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full h-screen overflow-hidden font-sans bg-slate-50 selection:bg-purple-500 selection:text-white"
+      className="relative w-full h-screen overflow-hidden font-sans bg-[#f8fafc]"
     >
-      
-      {/* SHADER HINTERGRUND (Läuft auf der ganzen Fläche) */}
+
+      {/* SHADER HINTERGRUND */}
       <div className="absolute inset-0 bg-black z-0">
-        <OriginalShader className="w-full h-full" />
+        <ShaderCanvas />
       </div>
 
-      {/* OVERLAYS (Decken den Shader mit slate-50 ab, wo er inaktiv ist) */}
-      
-      {/* Linkes Overlay (Dreieck unten links) */}
-      <div 
-        className={`absolute inset-0 bg-slate-50 z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          activeSide === 'right' ? 'clip-left-full' : 'clip-left-none'
-        }`} 
-      />
-      
-      {/* Rechtes Overlay (Dreieck oben rechts) */}
-      <div 
-        className={`absolute inset-0 bg-slate-50 z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          activeSide === 'left' ? 'clip-right-full' : 'clip-right-none'
-        }`} 
+      {/* ÜBERLAGE (Helles Grau deckt den Shader ab) */}
+
+      {/* Linke Überlage (Dreieck unten links) */}
+      <div
+        className={`absolute inset-0 bg-[#f8fafc] z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          activeSide === 'right' ? 'shape-left-visible' : 'shape-left-hidden'
+        }`}
       />
 
-      {/* INHALT / TEXT */}
-      <div className="relative z-20 w-full h-full pointer-events-none select-none">
-        
-        {/* MOBILFUNK (Unten Links) */}
-        <div className={`absolute bottom-[25%] left-[15%] md:left-[20%] flex flex-col transition-colors duration-500 ${
-          activeSide === 'left' ? 'text-white drop-shadow-md' : 'text-slate-900'
+      {/* Rechte Überlage (Dreieck oben rechts) */}
+      <div
+        className={`absolute inset-0 bg-[#f8fafc] z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          activeSide === 'left' ? 'shape-right-visible' : 'shape-right-hidden'
+        }`}
+      />
+
+      {/* INHALT TEXT */}
+      <div className="relative z-20 w-full h-full pointer-events-none select-none p-8 md:p-16">
+
+        {/* MOBILFUNK (Links Unten) */}
+        <div className={`absolute bottom-[25%] left-[10%] md:left-[20%] flex flex-col transition-colors duration-500 ${
+          activeSide === 'left' ? 'text-white' : 'text-[#1e293b]'
         }`}>
           <span className={`text-xs font-bold tracking-[0.3em] uppercase mb-2 transition-colors duration-500 ${
-            activeSide === 'left' ? 'text-white/60' : 'text-slate-500'
+            activeSide === 'left' ? 'text-white/70' : 'text-slate-400'
           }`}>
             Connectivity
           </span>
@@ -75,12 +149,12 @@ const SplitShowcase: React.FC = () => {
           </h1>
         </div>
 
-        {/* FAHRSTUHL (Oben Rechts) */}
-        <div className={`absolute top-[25%] right-[15%] md:right-[20%] flex flex-col items-end text-right transition-colors duration-500 ${
-          activeSide === 'right' ? 'text-white drop-shadow-md' : 'text-slate-900'
+        {/* FAHRSTUHL (Rechts Oben) */}
+        <div className={`absolute top-[25%] right-[10%] md:right-[20%] flex flex-col items-end text-right transition-colors duration-500 ${
+          activeSide === 'right' ? 'text-white' : 'text-[#1e293b]'
         }`}>
           <span className={`text-xs font-bold tracking-[0.3em] uppercase mb-2 transition-colors duration-500 ${
-            activeSide === 'right' ? 'text-white/60' : 'text-slate-500'
+            activeSide === 'right' ? 'text-white/70' : 'text-slate-400'
           }`}>
             Vertical Systems
           </span>
@@ -88,46 +162,29 @@ const SplitShowcase: React.FC = () => {
             FAHRSTUHL
           </h1>
         </div>
-        
-        {/* Logo Platzhalter */}
-        <div className="absolute top-6 left-6 md:top-8 md:left-8">
-             <span className="font-black text-slate-900/20 text-3xl tracking-tighter">VSS</span>
+
+        {/* LOGO */}
+        <div className="absolute top-8 left-8">
+          <span className="font-black text-[#1e293b]/10 text-4xl tracking-tighter">VSS</span>
         </div>
+
       </div>
 
-      {/* CLICKABLE HITBOXES (Genau an der Diagonalen getrennt) */}
-      <div className="absolute inset-0 z-30 pointer-events-none">
-        <Link 
-          href="#mobilfunk" 
-          className="absolute inset-0 pointer-events-auto cursor-pointer"
-          style={{ clipPath: 'polygon(0 0, 0 100%, 100% 100%)' }}
-          title="Mobilfunk Lösungen"
-        />
-        <Link 
-          href="#aufzuge" 
-          className="absolute inset-0 pointer-events-auto cursor-pointer"
-          style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }}
-          title="Aufzug Systeme"
-        />
-      </div>
-
-      {/* CSS Styles für Clip-Paths */}
-      <style jsx global>{`
-        .clip-left-full {
+      {/* STYLES (Standard CSS statt styled-jsx für bessere Kompatibilität) */}
+      <style>{`
+        .shape-left-visible {
           clip-path: polygon(0 0, 0 100%, 100% 100%);
         }
-        .clip-left-none {
+        .shape-left-hidden {
           clip-path: polygon(0 0, 0 0, 0 0);
         }
-        .clip-right-full {
+        .shape-right-visible {
           clip-path: polygon(0 0, 100% 0, 100% 100%);
         }
-        .clip-right-none {
+        .shape-right-hidden {
           clip-path: polygon(100% 0, 100% 0, 100% 0);
         }
       `}</style>
     </div>
   )
 }
-
-export default SplitShowcase
