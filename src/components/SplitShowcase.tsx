@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useRef, useState, useEffect } from 'react'
+import Link from 'next/link'
 import OriginalShader from './OriginalShader'
 
 const SplitShowcase: React.FC = () => {
@@ -15,17 +16,17 @@ const SplitShowcase: React.FC = () => {
     const y = e.clientY - rect.top
     
     // Calculate diagonal line from top-left to bottom-right
-    // Line equation: y = x (for a 45-degree diagonal)
-    const diagonalY = x
+    // Line equation: y = (height/width) * x
+    const diagonalY = (rect.height / rect.width) * x
     
     // Inverse logic: determine which side should be ACTIVE (white text on black)
     // Active side is where the shader effect should run (where mouse is NOT)
     if (y > diagonalY) {
-      // Mouse is below diagonal (bottom-left area) - activate left side
-      setActiveSide('left')
-    } else {
-      // Mouse is above diagonal (top-right area) - activate right side  
+      // Mouse is below diagonal (bottom-left area) -> activate right side (shader top-right)
       setActiveSide('right')
+    } else {
+      // Mouse is above diagonal (top-right area) -> activate left side (shader bottom-left)
+      setActiveSide('left')
     }
   }
 
@@ -38,7 +39,7 @@ const SplitShowcase: React.FC = () => {
       
       {/* SHADER HINTERGRUND (Läuft auf der ganzen Fläche) */}
       <div className="absolute inset-0 bg-black z-0">
-        <OriginalShader />
+        <OriginalShader className="w-full h-full" />
       </div>
 
       {/* OVERLAYS (Decken den Shader mit slate-50 ab, wo er inaktiv ist) */}
@@ -92,6 +93,22 @@ const SplitShowcase: React.FC = () => {
         <div className="absolute top-6 left-6 md:top-8 md:left-8">
              <span className="font-black text-slate-900/20 text-3xl tracking-tighter">VSS</span>
         </div>
+      </div>
+
+      {/* CLICKABLE HITBOXES (Genau an der Diagonalen getrennt) */}
+      <div className="absolute inset-0 z-30 pointer-events-none">
+        <Link 
+          href="#mobilfunk" 
+          className="absolute inset-0 pointer-events-auto cursor-pointer"
+          style={{ clipPath: 'polygon(0 0, 0 100%, 100% 100%)' }}
+          title="Mobilfunk Lösungen"
+        />
+        <Link 
+          href="#aufzuge" 
+          className="absolute inset-0 pointer-events-auto cursor-pointer"
+          style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }}
+          title="Aufzug Systeme"
+        />
       </div>
 
       {/* CSS Styles für Clip-Paths */}

@@ -83,21 +83,22 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
         // Combine patterns for complex effect
         float combined = pattern1 * 0.5 + pattern2 * 0.3 + pattern3 * 0.2;
 
-        // Create original RGB color scheme
-        vec3 color1 = vec3(1.0, 0.2, 0.4); // Red-pink
-        vec3 color2 = vec3(0.2, 0.8, 1.0); // Blue-cyan  
-        vec3 color3 = vec3(0.4, 1.0, 0.2); // Green-lime
+        // Create original RGB color scheme - more vibrant
+        vec3 color1 = vec3(1.0, 0.1, 0.4); // Red-pink
+        vec3 color2 = vec3(0.1, 0.7, 1.0); // Blue-cyan  
+        vec3 color3 = vec3(0.4, 1.0, 0.1); // Green-lime
 
         // Mix colors based on combined pattern
-        vec3 finalColor = mix(color1, color2, smoothstep(0.2, 0.8, combined));
+        vec3 finalColor = mix(color1, color2, smoothstep(0.1, 0.6, combined));
         finalColor = mix(finalColor, color3, smoothstep(0.4, 0.9, combined));
 
-        // Add some brightness variation
-        finalColor *= 0.8 + 0.2 * sin(t + combined * 10.0);
+        // Use mouse for interaction - dynamic lighting effect
+        float mouseDist = distance(uv, u_mouse);
+        float mouseGlow = exp(-mouseDist * 4.0);
+        finalColor += mouseGlow * vec3(0.8, 0.9, 1.0) * 0.4;
 
-        // Convert to grayscale for more subtle effect
-        float gray = dot(finalColor, vec3(0.299, 0.587, 0.114));
-        finalColor = vec3(gray) * 1.2;
+        // Add some brightness variation
+        finalColor *= 0.7 + 0.3 * sin(t + combined * 10.0);
 
         gl_FragColor = vec4(finalColor, 1.0);
       }
@@ -138,6 +139,17 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
 
     animate()
 
+    // Handle mouse move for shader interaction
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = container.getBoundingClientRect()
+      uniforms.u_mouse.value.set(
+        (e.clientX - rect.left) / rect.width,
+        1.0 - (e.clientY - rect.top) / rect.height
+      )
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+
     // Handle resize
     const handleResize = () => {
       if (!container) return
@@ -154,7 +166,10 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize)
-      container.removeChild(renderer.domElement)
+      window.removeEventListener('mousemove', handleMouseMove)
+      if (container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement)
+      }
       geometry.dispose()
       material.dispose()
       renderer.dispose()
