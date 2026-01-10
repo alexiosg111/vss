@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.12.0",
+  "version": "0.15.0",
   "private": true,
-  "description": "VSS Website Redesign with SplitShowcase Diagonal Split - Release v0.12.0 - Fixed Hitbox & Shader",
+  "description": "VSS Website Redesign - Release v0.15.0 - ContainerScroll, Mobilfunk/Fahrstuhl Sections, Hitbox Correction",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -78,21 +78,22 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.12.0",
-    "date": "2024-01-09",
+    "version": "0.15.0",
+    "date": "2025-01-10",
     "features": [
-      "Fixed Diagonal Hitbox Calculation (y = mx + c)",
-      "Corrected Inverse Mouse Interaction Logic",
-      "Restored Vibrant RGB Shader Colors",
-      "Added Interactive Mouse Glow to Shader",
-      "Added Clickable Service Area Hitboxes",
-      "Smooth CSS Clip-Path Transitions (700ms)"
+      "ContainerScroll Animation with framer-motion",
+      "Mobilfunk Section with tablet redesign and animations",
+      "Fahrstuhl Section with tablet redesign and animations",
+      "Smooth scroll navigation to service sections",
+      "Clickable hitboxes with correct section IDs (#mobilfunk, #fahrstuhl)",
+      "Responsive tablet animations with floating elements"
     ],
     "improvements": [
-      "Precise transition point at the diagonal split",
-      "Improved Shader Performance and Visuals",
-      "Direct links to Service sections from Hero",
-      "Better UX with clear interactive states"
+      "Smooth 60fps animations with cubic-bezier easing",
+      "Interactive section navigation from split hero",
+      "Enhanced service sections with framer-motion",
+      "Optimized mobile and iPad responsive design",
+      "Scroll behavior smooth enabled globally"
     ],
     "breakingChanges": [
       "None"

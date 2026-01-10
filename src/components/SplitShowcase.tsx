@@ -97,17 +97,19 @@ const SplitShowcase: React.FC = () => {
 
       {/* CLICKABLE HITBOXES (Genau an der Diagonalen getrennt) */}
       <div className="absolute inset-0 z-30 pointer-events-none">
-        <Link 
-          href="#mobilfunk" 
+        {/* Mobilfunk Hitbox: Bottom-left triangle (below diagonal) */}
+        <Link
+          href="#mobilfunk"
           className="absolute inset-0 pointer-events-auto cursor-pointer"
           style={{ clipPath: 'polygon(0 0, 0 100%, 100% 100%)' }}
           title="Mobilfunk Lösungen"
         />
-        <Link 
-          href="#aufzuge" 
+        {/* Fahrstuhl Hitbox: Top-right triangle (above diagonal) */}
+        <Link
+          href="#fahrstuhl"
           className="absolute inset-0 pointer-events-auto cursor-pointer"
           style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }}
-          title="Aufzug Systeme"
+          title="Fahrstuhl Systeme"
         />
       </div>
 
