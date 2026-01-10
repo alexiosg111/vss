@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.12.0",
+  "version": "0.15.0",
   "private": true,
-  "description": "VSS Website Redesign with SplitShowcase Diagonal Split - Release v0.12.0 - Fixed Hitbox & Shader",
+  "description": "VSS Website Redesign with SplitShowcase Diagonal Split - Release v0.15.0 - Diagonal Hitbox Alignment Fix",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -78,21 +78,15 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.12.0",
-    "date": "2024-01-09",
+    "version": "0.15.0",
+    "date": "2026-01-10",
     "features": [
-      "Fixed Diagonal Hitbox Calculation (y = mx + c)",
-      "Corrected Inverse Mouse Interaction Logic",
-      "Restored Vibrant RGB Shader Colors",
-      "Added Interactive Mouse Glow to Shader",
-      "Added Clickable Service Area Hitboxes",
-      "Smooth CSS Clip-Path Transitions (700ms)"
+      "Fixed: Diagonal hitbox now precisely aligned with separation line",
+      "Unified split-line math for hover detection, overlays, and clickable hitboxes"
     ],
     "improvements": [
-      "Precise transition point at the diagonal split",
-      "Improved Shader Performance and Visuals",
-      "Direct links to Service sections from Hero",
-      "Better UX with clear interactive states"
+      "Improved interaction accuracy for split screen",
+      "More robust behavior across screen sizes via layout-aware split calculation"
     ],
     "breakingChanges": [
       "None"
