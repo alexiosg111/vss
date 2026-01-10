@@ -82,11 +82,14 @@
     "date": "2026-01-10",
     "features": [
       "Fixed: Diagonal hitbox now precisely aligned with separation line",
-      "Unified split-line math for hover detection, overlays, and clickable hitboxes"
+      "Unified split-line math for hover detection, overlays, and clickable hitboxes",
+      "Added: Mobilfunk section with smooth tablet-style scroll animation",
+      "Fixed: MOBILFUNK navigation now scrolls to a visible #mobilfunk section"
     ],
     "improvements": [
       "Improved interaction accuracy for split screen",
-      "More robust behavior across screen sizes via layout-aware split calculation"
+      "More robust behavior across screen sizes via layout-aware split calculation",
+      "Clearer Mobilfunk content structure aligned with the existing Mobilfunk offering"
     ],
     "breakingChanges": [
       "None"

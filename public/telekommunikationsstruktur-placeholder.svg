@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 0 1400 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#10b981" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.95"/>
+    </linearGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1400" height="720" fill="url(#bg)"/>
+  <rect width="1400" height="720" fill="url(#grid)" opacity="0.35"/>
+
+  <g fill="rgba(0,0,0,0.18)">
+    <circle cx="240" cy="220" r="140"/>
+    <circle cx="1180" cy="520" r="180"/>
+  </g>
+
+  <g>
+    <text x="700" y="320" text-anchor="middle" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="56" font-weight="800" fill="rgba(255,255,255,0.95)">
+      Telekommunikationsstruktur
+    </text>
+    <text x="700" y="385" text-anchor="middle" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="22" font-weight="600" fill="rgba(255,255,255,0.85)">
+      Placeholder Visualisierung (Bild kann später ersetzt werden)
+    </text>
+  </g>
+
+  <g fill="rgba(255,255,255,0.9)">
+    <path d="M690 478h20v42h-20z"/>
+    <path d="M662 497h76v20h-76z"/>
+    <circle cx="700" cy="498" r="7" fill="rgba(255,255,255,0.95)"/>
+  </g>
+</svg>

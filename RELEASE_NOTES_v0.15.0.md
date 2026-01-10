@@ -9,6 +9,12 @@
 
 - **Fixed: Diagonal hitbox now precisely aligned with separation line**
 - **Improved interaction accuracy for split screen**
+- **Fixed: MOBILFUNK navigation now scrolls to a visible section (`#mobilfunk`)**
+
+### ✨ Additions
+
+- Added new **Mobilfunk** section with smooth tablet-style scroll animation (ContainerScroll / Framer Motion).
+- Added `/components/ui/container-scroll-animation.tsx` and demo component for reuse across pages.
 
 ### 🧠 Technische Details (SplitShowcase)
 
