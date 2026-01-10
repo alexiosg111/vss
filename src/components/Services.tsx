@@ -99,7 +99,8 @@ const Services = () => {
               return (
                 <div 
                   key={service.id}
-                  className="group card p-8 hover:shadow-vss transition-all duration-500 transform hover:-translate-y-2"
+                  id={service.id === 'aufzuge' ? 'aufzuge' : undefined}
+                  className="group card p-8 hover:shadow-vss transition-all duration-500 transform hover:-translate-y-2 scroll-mt-24"
                 >
                   <div className="space-y-6">
                     
