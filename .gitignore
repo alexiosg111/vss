@@ -115,5 +115,9 @@ jspm_packages/
 
 # VSS specific
 /public/assets/
-/public/images/
 /public/logos/
+
+# Docker files (removed in v0.11.0 - clean setup)
+Dockerfile
+Dockerfile.dev
+docker-compose.yml

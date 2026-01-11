@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.12.0",
+  "version": "0.20.0",
   "private": true,
-  "description": "VSS Website Redesign with SplitShowcase Diagonal Split - Release v0.12.0 - Fixed Hitbox & Shader",
+  "description": "VSS Website Redesign - Release v0.20.0 - Header Dark Mode",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -78,24 +78,28 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.12.0",
-    "date": "2024-01-09",
+    "version": "0.20.0",
+    "date": "2025-01-11",
     "features": [
-      "Fixed Diagonal Hitbox Calculation (y = mx + c)",
-      "Corrected Inverse Mouse Interaction Logic",
-      "Restored Vibrant RGB Shader Colors",
-      "Added Interactive Mouse Glow to Shader",
-      "Added Clickable Service Area Hitboxes",
-      "Smooth CSS Clip-Path Transitions (700ms)"
+      "Added global Header component with dark mode toggle",
+      "Responsive navigation (Services, Mobilfunk, Fahrstuhl, Kontakt)",
+      "Clean, modern header design",
+      "System preference detection for dark/light mode",
+      "Toggle button with Sun/Moon icons",
+      "Logo with VSS branding",
+      "Smooth background color transitions"
     ],
     "improvements": [
-      "Precise transition point at the diagonal split",
-      "Improved Shader Performance and Visuals",
-      "Direct links to Service sections from Hero",
-      "Better UX with clear interactive states"
+      "Global header instead of section-specific headers",
+      "Centralized navigation state",
+      "Dark mode available for all sections",
+      "Improved user experience with theme control",
+      "Consistent branding across all pages"
     ],
     "breakingChanges": [
-      "None"
+      "Header moved to global component",
+      "Section-specific headers removed"
+      "Dark mode state management changed"
     ]
   }
 }
