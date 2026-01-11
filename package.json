@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "private": true,
-  "description": "VSS Website Redesign - Release v0.16.0 - Fixed Setup Script",
+  "description": "VSS Website Redesign - Release v0.17.0 - Clean Setup & Removed Docker Files",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -78,21 +78,23 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.16.0",
+    "version": "0.17.0",
     "date": "2025-01-10",
     "features": [
-      "Fixed setup.sh script for v0.15.0 compatibility",
-      "Updated setup script version to v0.16.0",
-      "Corrected setup feature descriptions",
-      "Fixed shebang line in setup script"
+      "Removed Docker files (Dockerfile, Dockerfile.dev, docker-compose.yml)",
+      "Removed setup-v0.11.sh script",
+      "Updated .gitignore to ignore Docker files",
+      "Setup script verified and working",
+      "Clean setup without Docker (v0.8 style)"
     ],
     "improvements": [
-      "Setup script now matches v0.15.0 features",
-      "Build process verified and working",
-      "All v0.15.0 features intact"
+      "Repository is now truly clean of Docker files",
+      "Setup script matches v0.15.0/v0.16.0 features",
+      "Build process verified",
+      "All v0.15.0 features intact and working"
     ],
     "breakingChanges": [
-      "None"
+      "Docker files removed - use npm run dev instead"
     ]
   }
 }
