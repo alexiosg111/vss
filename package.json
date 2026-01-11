@@ -78,25 +78,28 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.18.0",
+    "version": "0.20.0",
     "date": "2025-01-11",
     "features": [
-      "Redesigned Mobilfunk section with black background",
-      "Tablet frame with image display (no ContainerScroll)",
-      "Title over tablet: 'Telekommunikationsstruktur'",
-      "Subtitle over tablet: 'Mit uns in die digitale Zukunft'",
-      "Clean, dark design for visual impact",
-      "Tablet camera dot added for realism"
+      "Added global Header component with dark mode toggle",
+      "Responsive navigation (Services, Mobilfunk, Fahrstuhl, Kontakt)",
+      "Clean, modern header design",
+      "System preference detection for dark/light mode",
+      "Toggle button with Sun/Moon icons",
+      "Logo with VSS branding",
+      "Smooth background color transitions"
     ],
     "improvements": [
-      "Removed ContainerScroll from Mobilfunk section",
-      "Black background for better visual contrast",
-      "Direct image display in tablet frame",
-      "Simplified animation (scale up only)",
-      "Services grid with hover effects"
+      "Global header instead of section-specific headers",
+      "Centralized navigation state",
+      "Dark mode available for all sections",
+      "Improved user experience with theme control",
+      "Consistent branding across all pages"
     ],
     "breakingChanges": [
-      "Mobilfunk section redesigned - dark theme"
+      "Header moved to global component",
+      "Section-specific headers removed"
+      "Dark mode state management changed"
     ]
   }
 }
