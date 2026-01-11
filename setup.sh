@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# VSS Website Setup Script v0.11.0 - Clean Setup ohne Docker
-echo "🚀 VSS Website Setup v0.11.0 wird gestartet..."
+# VSS Website Setup Script v0.15.0 - Clean Setup ohne Docker
+echo "🚀 VSS Website Setup v0.15.0 wird gestartet..."
 echo "🔄 Clean Setup ohne Docker (wie v0.8)"
 
 # Einfache Browser-Detection
@@ -127,19 +127,22 @@ echo "✅ Setup abgeschlossen!"
 echo "🌐 VSS Website läuft unter: http://localhost:3000"
 echo "📊 Setup-Monitor verfügbar unter: http://localhost:3000/setup-monitor"
 echo ""
-echo "🎯 Features zum Testen (v0.11.0):"
+echo "🎯 Features zum Testen (v0.15.0):"
 echo "   • SplitShowcase Komponente mit diagonalem Split (/)"
-echo "   • Three.js Shader Hintergrund mit originalen RGB-Farben"
-echo "   • Inverse Maus-Interaktionslogik (Shader läuft wo Maus NICHT ist)"
-echo "   • MOBILFUNK (unten links) und FAHRSTUHL (oben rechts) Bereiche"
-echo "   • Smooth CSS Clip-Path Animationen"
-echo "   • Clean Setup ohne Docker"
+echo "   • ContainerScroll Animation mit 3D Tablet-Effekt"
+echo "   • Mobilfunk Sektion (#mobilfunk) mit Telekommunikationsstruktur"
+echo "   • Fahrstuhl Sektion (#fahrstuhl) mit Aufzug-Steuerfeld"
+echo "   • Smooth Scroll Navigation von Hero zu Sektionen"
+echo "   • Klickbare Hitboxes (#mobilfunk, #fahrstuhl)"
+echo "   • Responsive Design für Mobile/Tablet/Desktop"
+echo "   • 60fps Animationen mit cubic-bezier easing"
 echo ""
-echo "🔧 v0.11.0 Setup Verbesserungen:"
-echo "   • Docker entfernt - einfacher npm Setup"
-echo "   • Zurück zu bewährter v0.8 Setup-Logik"
-echo "   • Bessere Kompatibilität und Zuverlässigkeit"
-echo "   • Schnellerer Setup-Prozess"
+echo "🔧 v0.15.0 Features:"
+echo "   • ContainerScroll Animation (framer-motion)"
+echo "   • Mobilfunk & Fahrstuhl Sektionen mit Tablet-Design"
+echo "   • SVG Bild für Telekommunikationsstruktur"
+echo "   • Smooth Scroll Verhalten (CSS global)"
+echo "   • Optimierte Animationen für alle Geräte"
 echo ""
 echo "⚡ Drücken Sie Ctrl+C zum Beenden"
 

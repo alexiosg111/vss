@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "private": true,
-  "description": "VSS Website Redesign - Release v0.15.0 - ContainerScroll, Mobilfunk/Fahrstuhl Sections, Hitbox Correction",
+  "description": "VSS Website Redesign - Release v0.16.0 - Fixed Setup Script",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -78,22 +78,18 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.15.0",
+    "version": "0.16.0",
     "date": "2025-01-10",
     "features": [
-      "ContainerScroll Animation with framer-motion",
-      "Mobilfunk Section with tablet redesign and animations",
-      "Fahrstuhl Section with tablet redesign and animations",
-      "Smooth scroll navigation to service sections",
-      "Clickable hitboxes with correct section IDs (#mobilfunk, #fahrstuhl)",
-      "Responsive tablet animations with floating elements"
+      "Fixed setup.sh script for v0.15.0 compatibility",
+      "Updated setup script version to v0.16.0",
+      "Corrected setup feature descriptions",
+      "Fixed shebang line in setup script"
     ],
     "improvements": [
-      "Smooth 60fps animations with cubic-bezier easing",
-      "Interactive section navigation from split hero",
-      "Enhanced service sections with framer-motion",
-      "Optimized mobile and iPad responsive design",
-      "Scroll behavior smooth enabled globally"
+      "Setup script now matches v0.15.0 features",
+      "Build process verified and working",
+      "All v0.15.0 features intact"
     ],
     "breakingChanges": [
       "None"
