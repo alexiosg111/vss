@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "private": true,
-  "description": "VSS Website Redesign - Release v0.17.0 - Clean Setup & Removed Docker Files",
+  "description": "VSS Website Redesign - Release v0.18.0 - Redesigned Mobilfunk Section",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -78,23 +78,25 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.17.0",
-    "date": "2025-01-10",
+    "version": "0.18.0",
+    "date": "2025-01-11",
     "features": [
-      "Removed Docker files (Dockerfile, Dockerfile.dev, docker-compose.yml)",
-      "Removed setup-v0.11.sh script",
-      "Updated .gitignore to ignore Docker files",
-      "Setup script verified and working",
-      "Clean setup without Docker (v0.8 style)"
+      "Redesigned Mobilfunk section with black background",
+      "Tablet frame with image display (no ContainerScroll)",
+      "Title over tablet: 'Telekommunikationsstruktur'",
+      "Subtitle over tablet: 'Mit uns in die digitale Zukunft'",
+      "Clean, dark design for visual impact",
+      "Tablet camera dot added for realism"
     ],
     "improvements": [
-      "Repository is now truly clean of Docker files",
-      "Setup script matches v0.15.0/v0.16.0 features",
-      "Build process verified",
-      "All v0.15.0 features intact and working"
+      "Removed ContainerScroll from Mobilfunk section",
+      "Black background for better visual contrast",
+      "Direct image display in tablet frame",
+      "Simplified animation (scale up only)",
+      "Services grid with hover effects"
     ],
     "breakingChanges": [
-      "Docker files removed - use npm run dev instead"
+      "Mobilfunk section redesigned - dark theme"
     ]
   }
 }

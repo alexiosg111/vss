@@ -3,7 +3,6 @@ import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ContainerScroll } from '@/components/ui/container-scroll-animation';
 
 const MobilfunkSection: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -13,54 +12,53 @@ const MobilfunkSection: React.FC = () => {
     <section
       id="mobilfunk"
       ref={ref}
-      className="relative w-full min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 py-20 px-4 md:px-8 overflow-hidden"
+      className="relative w-full min-h-screen bg-black py-20 px-4 md:px-8"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
+        {/* Tablet Display mit Bild */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0, scale: 0.9, y: 50 }}
+          animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-12"
+          className="relative mx-auto max-w-2xl"
         >
-          <span className="text-sm font-bold tracking-[0.3em] uppercase text-vss-blue mb-4 block">
-            Connectivity Solutions
-          </span>
-          <h2 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter mb-6">
-            MOBILFUNK
-          </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Zuständigkeit für das Mobilfunk-Infrastrukturmanagement mit Fokus auf Planung,
-            Bau und Instandhaltung von Sendeanlagen und Breitbandnetzen.
-          </p>
-        </motion.div>
+          {/* Tablet Frame */}
+          <div className="relative bg-slate-900 rounded-[2.5rem] p-3 shadow-2xl">
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-1 bg-slate-700 rounded-full"></div>
 
-        {/* ContainerScroll Animation mit Tablet */}
-        <div className="flex flex-col overflow-hidden py-10">
-          <ContainerScroll
-            titleComponent={
-              <div className="text-center">
-                <h1 className="text-4xl md:text-6xl font-semibold text-slate-900">
-                  Telekommunikationsstruktur
-                </h1>
-                <p className="text-2xl md:text-4xl font-bold mt-4 text-vss-blue">
-                  Mit uns in die digitale Zukunft
-                </p>
-              </div>
-            }
-          >
-            <div className="relative h-full w-full bg-gradient-to-br from-vss-blue/10 via-white to-vss-green/10 flex items-center justify-center">
+            {/* Title über dem Tablet */}
+            <div className="text-center mb-8 mt-4">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="text-3xl md:text-5xl font-bold text-white mb-4"
+              >
+                Telekommunikationsstruktur
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="text-xl md:text-3xl font-semibold text-vss-blue"
+              >
+                Mit uns in die digitale Zukunft
+              </motion.p>
+            </div>
+
+            {/* Tablet Screen mit Bild */}
+            <div className="relative bg-slate-50 rounded-[2rem] overflow-hidden aspect-[4/3]">
               <Image
                 src="/images/telecom-structure.svg"
                 alt="Telekommunikationsstruktur Visualisierung"
                 fill
-                className="object-contain"
+                className="object-contain p-4"
                 draggable={false}
                 priority
               />
             </div>
-          </ContainerScroll>
-        </div>
+          </div>
+        </motion.div>
 
         {/* Services Overview */}
         <motion.div
