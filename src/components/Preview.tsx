@@ -54,7 +54,7 @@ const PreviewPage = () => {
       icon: AlertCircle,
       title: 'Production Ready',
       description: 'Vollständig funktional',
-      status: '✅ v0.12.0',
+      status: '✅ v0.21.0',
       details: 'Alle Kernkomponenten erfolgreich implementiert'
     }
   ]
@@ -82,7 +82,7 @@ const PreviewPage = () => {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-dark-900">VSS Website Preview</h1>
-                <p className="text-sm text-dark-600">Version 0.12.0 - SplitShowcase Diagonal Split</p>
+                <p className="text-sm text-dark-600">Version 0.21.0 - SplitShowcase Diagonal Split</p>
               </div>
             </div>
             

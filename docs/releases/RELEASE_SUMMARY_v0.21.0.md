@@ -1,8 +1,8 @@
-# Release Summary v0.12.0 - VSS Website
+# Release Summary v0.21.0 - VSS Website
 
 ## Status: COMPLETE & READY
 
-### ✅ Kernpunkte der Version 0.12.0:
+### ✅ Kernpunkte der Version 0.21.0:
 
 1. **Hitbox Fix:** Die diagonale Trennung in der Hero-Sektion funktioniert nun mathematisch exakt.
 2. **UX Korrektur:** Die inverse Interaktionslogik wurde richtiggestellt (Shader läuft dort, wo die Maus nicht ist).
@@ -16,4 +16,4 @@
 
 ### 🚀 Nächste Schritte:
 - Monitoring der Benutzerinteraktion mit dem neuen Split-Screen.
-- Vorbereitung für v0.13.0 (Content-Updates).
+- Vorbereitung für v0.22.0 (Content-Updates).

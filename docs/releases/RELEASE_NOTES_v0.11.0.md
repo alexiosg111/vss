@@ -166,7 +166,7 @@ npm run start          # Startet Production Server
 
 **Previous:** v0.10.0 (SplitShowcase mit Docker-Problemen)  
 **Current:** v0.11.0 (Clean Setup ohne Docker)  
-**Next:** v0.12.0 (Geplant: Feature-Updates)
+**Next:** v0.21.0 (Geplant: Feature-Updates)
 
 ### 💡 Lessons Learned
 

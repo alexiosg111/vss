@@ -2,7 +2,7 @@
 
 Eine moderne Next.js-Website mit Tailwind CSS für Vertical Service Solutions, fokussiert auf Industrie-Technik und Mobilfunk-Infrastruktur.
 
-## 🚀 Version 0.12.0 - Fixed Hitbox & Shader
+## 🚀 Version 0.21.0 - Fixed Hitbox & Shader
 
 Dieses Release markiert den Übergang zu einem stabilen, performanten und visuell beeindruckenden Web-Auftritt. Der Fokus liegt auf einer präzisen interaktiven Hero-Sektion und einem vereinfachten Development-Workflow.
 
@@ -79,7 +79,7 @@ Klicken Sie auf die großen Bereiche im Hero, um direkt zu den entsprechenden Se
     /CTA.tsx            # Kontakt & Testimonials
     /Footer.tsx         # Footer & Social Links
 /public                 # Statische Assets & Icons
-setup.sh               # Linux/Mac Setup (v0.12.0)
+setup.sh               # Linux/Mac Setup (v0.21.0)
 setup.bat              # Windows Setup
 ANALYSIS.md            # Projekt-Analyse & Status
 ```
@@ -97,4 +97,4 @@ Die Website ist "Vercel-ready". Einfach das Repository mit Vercel verknüpfen f�
 
 ---
 
-**VSS Website Redesign v0.12.0 | Next.js 15 + Three.js + Tailwind CSS | Industrial High-Tech Design**
+**VSS Website Redesign v0.21.0 | Next.js 15 + Three.js + Tailwind CSS | Industrial High-Tech Design**

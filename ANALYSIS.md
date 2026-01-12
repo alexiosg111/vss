@@ -45,7 +45,7 @@ Status: Abgeschlossen. Das Design-System, die Farbpalette und die technologische
 
 ---
 
-## Aktueller Release: v0.12.0 - "Fixed Hitbox & Shader"
+## Aktueller Release: v0.21.0 - "Fixed Hitbox & Shader"
 Dieses Release markiert einen wichtigen Meilenstein in der UX-Optimierung und Code-Reinigung.
 
 **Highlights:**
