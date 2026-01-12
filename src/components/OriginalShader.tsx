@@ -18,8 +18,7 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
     // Scene setup
     const scene = new THREE.Scene()
 
-    // Fullscreen quad with an orthographic camera.
-    // Important: camera must be in front of the plane, otherwise the quad can get clipped / render incorrectly.
+    // Fullscreen quad with an orthographic camera
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10)
     camera.position.z = 1
 
@@ -45,81 +44,40 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
     
     container.appendChild(renderer.domElement)
 
-    // Fragment Shader (Original RGB Colors Preserved)
+    // Fragment Shader - Animated RGB Stripes
     const fragmentShader = `
       uniform float u_time;
       uniform vec2 u_resolution;
       uniform vec2 u_mouse;
 
-      // Hash function for randomness
-      float hash(vec2 p) {
-        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-      }
-
-      // Noise function
-      float noise(vec2 p) {
-        vec2 i = floor(p);
-        vec2 f = fract(p);
-        float a = hash(i);
-        float b = hash(i + vec2(1.0, 0.0));
-        float c = hash(i + vec2(0.0, 1.0));
-        float d = hash(i + vec2(1.0, 1.0));
-        vec2 u = f * f * (3.0 - 2.0 * f);
-        return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
-      }
-
-      // Fractal Brownian Motion
-      float fbm(vec2 p) {
-        float value = 0.0;
-        float amplitude = 0.5;
-        for (int i = 0; i < 6; i++) {
-          value += amplitude * noise(p);
-          p *= 2.0;
-          amplitude *= 0.5;
-        }
-        return value;
-      }
-
       void main() {
         vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-        vec2 centered = uv - 0.5;
-        centered.x *= u_resolution.x / u_resolution.y;
-
-        // Time-based animation
-        float t = u_time * 0.5;
-
-        // Create flowing pattern
-        vec2 flow = centered + vec2(
-          sin(centered.y * 3.0 + t) * 0.1,
-          cos(centered.x * 3.0 + t) * 0.1
-        );
-
-        // Generate noise patterns
-        float pattern1 = fbm(flow * 3.0 + t);
-        float pattern2 = fbm(flow * 6.0 - t * 0.7);
-        float pattern3 = fbm(flow * 12.0 + t * 0.3);
-
-        // Combine patterns for complex effect
-        float combined = pattern1 * 0.5 + pattern2 * 0.3 + pattern3 * 0.2;
-
-        // Create original RGB color scheme (v0.12 colors)
-        vec3 color1 = vec3(1.0, 0.1, 0.4); // Red-pink
-        vec3 color2 = vec3(0.1, 0.7, 1.0); // Blue-cyan  
-        vec3 color3 = vec3(0.4, 1.0, 0.1); // Green-lime
-
-        // Mix colors based on combined pattern
-        vec3 finalColor = mix(color1, color2, smoothstep(0.1, 0.6, combined));
-        finalColor = mix(finalColor, color3, smoothstep(0.4, 0.9, combined));
-
-        // Use mouse for interaction - dynamic lighting effect
+        
+        // Create vertical stripes
+        float stripeWidth = 50.0;
+        float stripe = mod(gl_FragCoord.x + u_time * 50.0, stripeWidth * 3.0);
+        
+        vec3 color;
+        
+        // RGB stripes
+        if (stripe < stripeWidth) {
+          color = vec3(1.0, 0.0, 0.0); // Red
+        } else if (stripe < stripeWidth * 2.0) {
+          color = vec3(0.0, 1.0, 0.0); // Green
+        } else {
+          color = vec3(0.0, 0.0, 1.0); // Blue
+        }
+        
+        // Add some fade at edges
+        float fade = smoothstep(0.0, 0.1, uv.y) * smoothstep(1.0, 0.9, uv.y);
+        color *= fade;
+        
+        // Mouse glow
         float mouseDist = distance(uv, u_mouse);
-        float mouseGlow = exp(-mouseDist * 4.0);
-        finalColor += mouseGlow * vec3(0.8, 0.9, 1.0) * 0.4;
-
-        // Add some brightness variation
-        finalColor *= 0.7 + 0.3 * sin(t + combined * 10.0);
-
-        gl_FragColor = vec4(finalColor, 1.0);
+        float mouseGlow = exp(-mouseDist * 5.0) * 0.3;
+        color += vec3(mouseGlow);
+        
+        gl_FragColor = vec4(color, 1.0);
       }
     `
 
@@ -132,8 +90,6 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
 
     const uniforms = {
       u_time: { value: 0 },
-      // Important: gl_FragCoord is in *drawing buffer pixels*, not CSS pixels.
-      // We will sync this value via renderer.getDrawingBufferSize() in resize().
       u_resolution: { value: new THREE.Vector2(1, 1) },
       u_mouse: { value: new THREE.Vector2(-10, -10) }
     }
@@ -162,9 +118,7 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
 
     animate()
 
-    // Pointer interaction (mouse + touch)
-    // Note: the shader canvas is behind overlays in SplitShowcase, so we listen on window
-    // and translate coordinates into the shader container.
+    // Pointer interaction
     const handlePointerMove = (e: PointerEvent) => {
       const rect = container.getBoundingClientRect()
 
@@ -173,7 +127,6 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
       const x = (e.clientX - rect.left) / rect.width
       const y = 1.0 - (e.clientY - rect.top) / rect.height
 
-      // If pointer is outside, disable glow
       if (x < 0 || x > 1 || y < 0 || y > 1) {
         uniforms.u_mouse.value.set(-10, -10)
         return
@@ -185,7 +138,7 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
     window.addEventListener('pointermove', handlePointerMove, { passive: true })
     window.addEventListener('pointerdown', handlePointerMove, { passive: true })
 
-    // Resize (observer-based so it works with responsive layouts)
+    // Resize
     const drawingBufferSize = new THREE.Vector2()
 
     const resize = () => {
@@ -197,7 +150,6 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
       renderer.setSize(newWidth, newHeight)
 
-      // u_resolution MUST match the actual drawing buffer size for gl_FragCoord to work correctly
       renderer.getDrawingBufferSize(drawingBufferSize)
       uniforms.u_resolution.value.copy(drawingBufferSize)
     }
