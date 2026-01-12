@@ -23,13 +23,26 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10)
     camera.position.z = 1
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' })
+    const renderer = new THREE.WebGLRenderer({ 
+      antialias: true, 
+      alpha: true, 
+      powerPreference: 'high-performance' 
+    })
 
-    const width = container.clientWidth
-    const height = container.clientHeight
+    // Initial size setup
+    const width = container.clientWidth || window.innerWidth
+    const height = container.clientHeight || window.innerHeight
 
     renderer.setSize(width, height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    
+    // Make canvas fill container
+    if (renderer.domElement) {
+      renderer.domElement.style.width = '100%'
+      renderer.domElement.style.height = '100%'
+      renderer.domElement.style.display = 'block'
+    }
+    
     container.appendChild(renderer.domElement)
 
     // Fragment Shader (Original RGB Colors Preserved)
@@ -121,11 +134,12 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
       }
     `
 
-    // Shader uniforms
     const uniforms = {
       u_time: { value: 0 },
-      u_resolution: { value: new THREE.Vector2(width, height) },
-      u_mouse: { value: new THREE.Vector2(0, 0) }
+      // Important: gl_FragCoord is in *drawing buffer pixels*, not CSS pixels.
+      // We will sync this value via renderer.getDrawingBufferSize() in resize().
+      u_resolution: { value: new THREE.Vector2(1, 1) },
+      u_mouse: { value: new THREE.Vector2(-10, -10) }
     }
 
     // Create shader material
@@ -153,25 +167,31 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
     animate()
 
     // Pointer interaction (mouse + touch)
+    // Note: the shader canvas is behind overlays in SplitShowcase, so we listen on window
+    // and translate coordinates into the shader container.
     const handlePointerMove = (e: PointerEvent) => {
       const rect = container.getBoundingClientRect()
 
       if (rect.width === 0 || rect.height === 0) return
 
-      uniforms.u_mouse.value.set(
-        (e.clientX - rect.left) / rect.width,
-        1.0 - (e.clientY - rect.top) / rect.height
-      )
+      const x = (e.clientX - rect.left) / rect.width
+      const y = 1.0 - (e.clientY - rect.top) / rect.height
+
+      // If pointer is outside, disable glow
+      if (x < 0 || x > 1 || y < 0 || y > 1) {
+        uniforms.u_mouse.value.set(-10, -10)
+        return
+      }
+
+      uniforms.u_mouse.value.set(x, y)
     }
 
-    const handlePointerLeave = () => {
-      uniforms.u_mouse.value.set(-10, -10)
-    }
-
-    container.addEventListener('pointermove', handlePointerMove)
-    container.addEventListener('pointerleave', handlePointerLeave)
+    window.addEventListener('pointermove', handlePointerMove, { passive: true })
+    window.addEventListener('pointerdown', handlePointerMove, { passive: true })
 
     // Resize (observer-based so it works with responsive layouts)
+    const drawingBufferSize = new THREE.Vector2()
+
     const resize = () => {
       const newWidth = container.clientWidth
       const newHeight = container.clientHeight
@@ -180,7 +200,10 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
 
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
       renderer.setSize(newWidth, newHeight)
-      uniforms.u_resolution.value.set(newWidth, newHeight)
+
+      // u_resolution MUST match the actual drawing buffer size for gl_FragCoord to work correctly
+      renderer.getDrawingBufferSize(drawingBufferSize)
+      uniforms.u_resolution.value.copy(drawingBufferSize)
     }
 
     resize()
@@ -193,8 +216,8 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
       if (frameId) cancelAnimationFrame(frameId)
 
       resizeObserver.disconnect()
-      container.removeEventListener('pointermove', handlePointerMove)
-      container.removeEventListener('pointerleave', handlePointerLeave)
+      window.removeEventListener('pointermove', handlePointerMove)
+      window.removeEventListener('pointerdown', handlePointerMove)
 
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement)
