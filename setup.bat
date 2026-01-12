@@ -1,5 +1,5 @@
 @echo off
-echo 🚀 VSS Website Setup wird gestartet...
+echo 🚀 VSS Website Setup v0.12.0 wird gestartet...
 
 echo 📊 Prüfe Setup-Monitor...
 
@@ -20,7 +20,7 @@ start "file://%CD%\setup-monitor.html"
 REM Warte 2 Sekunden damit der Browser öffnet
 timeout /t 2 /nobreak >nul
 
-echo 🔧 Starte Setup-Prozess...
+echo 🔧 Starte Setup-Prozess v0.12.0...
 echo.
 
 REM Prüfe Node.js
@@ -92,19 +92,18 @@ if errorlevel 1 (
 echo ✅ Build erfolgreich.
 
 REM Starte Development Server
-echo 🎉 Setup abgeschlossen!
+echo 🎉 Setup v0.12.0 abgeschlossen!
 echo.
 echo 🚀 Starte Development Server...
 echo.
 echo 📱 Die Website wird verfügbar sein unter:
 echo    http://localhost:3000
 echo.
-echo 🎯 Features zum Testen:
-echo    • Container-Scroll-Animation (Framer Motion)
-echo    • Responsive Design (Mobile/Tablet/Desktop)
-echo    • VSS Brand Colors (Blue/Green/Orange)
-echo    • Industrial High-Tech Design
-echo    • SEO-optimierte Meta-Tags
+echo 🎯 Features zum Testen (v0.12.0):
+echo    • SplitShowcase Komponente mit präziser diagonaler Hitbox
+echo    • WebGL Shader mit Mouse Glow Effect
+echo    • Inverse Maus-Interaktionslogik
+echo    • Direkte Navigation zu Services
 echo.
 echo ⏹️  Drücken Sie Ctrl+C zum Stoppen des Servers
 echo.

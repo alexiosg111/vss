@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# VSS Website Setup Script v0.11.0 - Clean Setup ohne Docker
-echo "🚀 VSS Website Setup v0.11.0 wird gestartet..."
-echo "🔄 Clean Setup ohne Docker (wie v0.8)"
+# VSS Website Setup Script v0.12.0 - Fixed Hitbox & Shader
+echo "🚀 VSS Website Setup v0.12.0 wird gestartet..."
+echo "🔄 Clean Setup ohne Docker (v0.12.0)"
 
 # Einfache Browser-Detection
 echo "🔍 Prüfe Browser-Verfügbarkeit..."
@@ -94,7 +94,7 @@ fi
 echo "✅ Build erfolgreich."
 
 # Starte Development Server
-echo "🎉 Setup v0.11.0 abgeschlossen!"
+echo "🎉 Setup v0.12.0 abgeschlossen!"
 echo ""
 echo "🚀 Starte Development Server..."
 echo ""
@@ -127,22 +127,21 @@ echo "✅ Setup abgeschlossen!"
 echo "🌐 VSS Website läuft unter: http://localhost:3000"
 echo "📊 Setup-Monitor verfügbar unter: http://localhost:3000/setup-monitor"
 echo ""
-echo "🎯 Features zum Testen (v0.11.0):"
-echo "   • SplitShowcase Komponente mit diagonalem Split (/)"
-echo "   • Three.js Shader Hintergrund mit originalen RGB-Farben"
-echo "   • Inverse Maus-Interaktionslogik (Shader läuft wo Maus NICHT ist)"
-echo "   • MOBILFUNK (unten links) und FAHRSTUHL (oben rechts) Bereiche"
-echo "   • Smooth CSS Clip-Path Animationen"
-echo "   • Clean Setup ohne Docker"
-echo ""
-echo "🔧 v0.11.0 Setup Verbesserungen:"
-echo "   • Docker entfernt - einfacher npm Setup"
-echo "   • Zurück zu bewährter v0.8 Setup-Logik"
-echo "   • Bessere Kompatibilität und Zuverlässigkeit"
-echo "   • Schnellerer Setup-Prozess"
-echo ""
-echo "⚡ Drücken Sie Ctrl+C zum Beenden"
-
-# Warte auf Ctrl+C
-trap 'echo ""; echo "🛑 Stoppe Development Server..."; kill $SERVER_PID; exit' INT
-wait $SERVER_PID
+echo "🎯 Features zum Testen (v0.12.0):"
+echo "   • SplitShowcase Komponente mit präziser diagonaler Hitbox"
+131: echo "   • WebGL Shader mit Mouse Glow & Vibrant Colors"
+132: echo "   • MOBILFUNK & FAHRSTUHL Bereiche mit direkter Navigation"
+133: echo "   • Smooth CSS Transitions (700ms cubic-bezier)"
+134: echo "   • Clean Setup ohne Docker"
+135: echo ""
+136: echo "🔧 v0.12.0 Fixes & Upgrades:"
+137: echo "   • Mathematisch korrekte Hitbox-Trennung"
+138: echo "   • Korrigierte Inverse Interaktions-Logik"
+139: echo "   • Interaktive Click-Bereiche im Hero"
+140: echo "   • Optimierte Performance"
+141: echo ""
+142: echo "⚡ Drücken Sie Ctrl+C zum Beenden"
+143: 
+144: # Warte auf Ctrl+C
+145: trap 'echo ""; echo "🛑 Stoppe Development Server..."; kill $SERVER_PID; exit' INT
+146: wait $SERVER_PID
