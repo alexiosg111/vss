@@ -13,12 +13,18 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
   useEffect(() => {
     if (!mountRef.current) return
 
+    const container = mountRef.current
+
     // Scene setup
     const scene = new THREE.Scene()
-    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1)
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
 
-    const container = mountRef.current
+    // Fullscreen quad with an orthographic camera.
+    // Important: camera must be in front of the plane, otherwise the quad can get clipped / render incorrectly.
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10)
+    camera.position.z = 1
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' })
+
     const width = container.clientWidth
     const height = container.clientHeight
 
@@ -83,22 +89,26 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
         // Combine patterns for complex effect
         float combined = pattern1 * 0.5 + pattern2 * 0.3 + pattern3 * 0.2;
 
-        // Create original RGB color scheme - more vibrant
-        vec3 color1 = vec3(1.0, 0.1, 0.4); // Red-pink
-        vec3 color2 = vec3(0.1, 0.7, 1.0); // Blue-cyan  
-        vec3 color3 = vec3(0.4, 1.0, 0.1); // Green-lime
+        // Create original RGB color scheme - more vibrant and balanced
+        vec3 color1 = vec3(1.0, 0.2, 0.5); // Vibrant Red-pink
+        vec3 color2 = vec3(0.2, 0.8, 1.0); // Bright Blue-cyan  
+        vec3 color3 = vec3(0.5, 1.0, 0.3); // Vivid Green-lime
 
-        // Mix colors based on combined pattern
-        vec3 finalColor = mix(color1, color2, smoothstep(0.1, 0.6, combined));
-        finalColor = mix(finalColor, color3, smoothstep(0.4, 0.9, combined));
+        // Mix colors based on combined pattern with better contrast
+        vec3 finalColor = mix(color1, color2, smoothstep(0.2, 0.7, combined));
+        finalColor = mix(finalColor, color3, smoothstep(0.5, 0.95, combined));
 
         // Use mouse for interaction - dynamic lighting effect
         float mouseDist = distance(uv, u_mouse);
-        float mouseGlow = exp(-mouseDist * 4.0);
-        finalColor += mouseGlow * vec3(0.8, 0.9, 1.0) * 0.4;
+        float mouseGlow = exp(-mouseDist * 3.5) * 0.5;
+        finalColor += mouseGlow * vec3(1.0, 1.0, 1.2);
 
-        // Add some brightness variation
-        finalColor *= 0.7 + 0.3 * sin(t + combined * 10.0);
+        // Add brightness variation with better range
+        float brightness = 0.85 + 0.25 * sin(t + combined * 8.0);
+        finalColor *= brightness;
+        
+        // Ensure colors stay vibrant
+        finalColor = clamp(finalColor, 0.0, 1.0);
 
         gl_FragColor = vec4(finalColor, 1.0);
       }
@@ -130,43 +140,62 @@ const OriginalShader: React.FC<OriginalShaderProps> = ({ className = '' }) => {
     const mesh = new THREE.Mesh(geometry, material)
     scene.add(mesh)
 
+    const clock = new THREE.Clock()
+    let frameId: number | null = null
+
     // Animation loop
     const animate = () => {
-      uniforms.u_time.value += 0.016 // ~60fps
+      uniforms.u_time.value = clock.getElapsedTime()
       renderer.render(scene, camera)
-      requestAnimationFrame(animate)
+      frameId = requestAnimationFrame(animate)
     }
 
     animate()
 
-    // Handle mouse move for shader interaction
-    const handleMouseMove = (e: MouseEvent) => {
+    // Pointer interaction (mouse + touch)
+    const handlePointerMove = (e: PointerEvent) => {
       const rect = container.getBoundingClientRect()
+
+      if (rect.width === 0 || rect.height === 0) return
+
       uniforms.u_mouse.value.set(
         (e.clientX - rect.left) / rect.width,
         1.0 - (e.clientY - rect.top) / rect.height
       )
     }
 
-    window.addEventListener('mousemove', handleMouseMove)
+    const handlePointerLeave = () => {
+      uniforms.u_mouse.value.set(-10, -10)
+    }
 
-    // Handle resize
-    const handleResize = () => {
-      if (!container) return
-      
+    container.addEventListener('pointermove', handlePointerMove)
+    container.addEventListener('pointerleave', handlePointerLeave)
+
+    // Resize (observer-based so it works with responsive layouts)
+    const resize = () => {
       const newWidth = container.clientWidth
       const newHeight = container.clientHeight
-      
+
+      if (newWidth === 0 || newHeight === 0) return
+
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
       renderer.setSize(newWidth, newHeight)
       uniforms.u_resolution.value.set(newWidth, newHeight)
     }
 
-    window.addEventListener('resize', handleResize)
+    resize()
+
+    const resizeObserver = new ResizeObserver(() => resize())
+    resizeObserver.observe(container)
 
     // Cleanup
     return () => {
-      window.removeEventListener('resize', handleResize)
-      window.removeEventListener('mousemove', handleMouseMove)
+      if (frameId) cancelAnimationFrame(frameId)
+
+      resizeObserver.disconnect()
+      container.removeEventListener('pointermove', handlePointerMove)
+      container.removeEventListener('pointerleave', handlePointerLeave)
+
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement)
       }
