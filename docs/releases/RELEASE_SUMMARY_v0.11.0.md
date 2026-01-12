@@ -154,7 +154,7 @@ v0.11:    ~35s (zurück zu npm only)
 ### 🔄 **Version History:**
 - **Previous:** v0.10.0 (SplitShowcase mit Docker-Problemen)
 - **Current:** v0.11.0 (Clean Setup ohne Docker)
-- **Next:** v0.12.0 (Geplant: Feature-Updates)
+- **Next:** v0.21.0 (Geplant: Feature-Updates)
 
 ### 🚀 **Erfolg:**
 Die v0.11.0 kombiniert die bewährte Einfachheit von v0.8 mit den modernen Features von v0.10 - ein stabiler, zuverlässiger und benutzerfreundlicher Development-Workflow ist wiederhergestellt!

@@ -12,7 +12,7 @@ const SetupMonitor = () => {
   useEffect(() => {
     const simulateSetup = async () => {
       const steps = [
-        '🚀 VSS Website Setup v0.10.0 wird gestartet...',
+        '🚀 VSS Website Setup v0.21.0 wird gestartet...',
         '🔍 Prüfe Browser-Verfügbarkeit...',
         '✅ Browser verfügbar',
         '📦 Installiere Dependencies...',
@@ -20,8 +20,8 @@ const SetupMonitor = () => {
         '🔧 Build Prozess wird gestartet...',
         '✅ TypeScript Kompilierung erfolgreich',
         '✅ Next.js Build erfolgreich',
-        '📊 SplitShowcase Komponente geladen',
-        '🎨 Shader Hintergrund aktiviert',
+        '📊 SplitShowcase Komponente mit Fixes geladen',
+        '🎨 Shader Mouse Glow Effekt aktiviert',
         '✅ Setup erfolgreich abgeschlossen!'
       ]
 
@@ -71,7 +71,7 @@ const SetupMonitor = () => {
           <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
             VSS Website Setup Monitor
           </h1>
-          <p className="text-slate-300 text-lg">Release v0.10.0 - SplitShowcase Diagonal Split</p>
+          <p className="text-slate-300 text-lg">Release v0.21.0 - Fixed Hitbox & Shader</p>
           <div className="flex items-center justify-center gap-4 mt-4">
             {getStatusIcon()}
             <span className="text-xl font-semibold">
@@ -130,7 +130,7 @@ const SetupMonitor = () => {
             <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
               <h3 className="text-lg font-semibold mb-4">🚀 Vorschau</h3>
               <p className="text-slate-300 mb-4">
-                Testen Sie die neue SplitShowcase Komponente mit diagonalem Split und Three.js Shader-Hintergrund.
+                Testen Sie die optimierte SplitShowcase Komponente mit korrigierter Hitbox und neuem Shader Mouse Glow Effekt.
               </p>
               <div className="flex gap-3">
                 <a
@@ -156,7 +156,7 @@ const SetupMonitor = () => {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-slate-400">Version:</span>
-                  <span className="text-white font-semibold">v0.10.0</span>
+                  <span className="text-white font-semibold">v0.21.0</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Features:</span>
@@ -193,7 +193,7 @@ const SetupMonitor = () => {
                 🎉 Setup erfolgreich abgeschlossen!
               </h3>
               <p className="text-green-200 mb-4">
-                Die VSS Website v0.10.0 mit SplitShowcase Komponente ist bereit für den Einsatz.
+                Die VSS Website v0.21.0 mit optimierter SplitShowcase Komponente ist bereit für den Einsatz.
               </p>
               <div className="flex justify-center gap-4">
                 <a

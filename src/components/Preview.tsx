@@ -17,45 +17,45 @@ const PreviewPage = () => {
   const features = [
     {
       icon: Zap,
-      title: '3D Scroll Animation',
-      description: 'Container-Scroll-Animation mit Framer Motion',
+      title: 'SplitShowcase',
+      description: 'Diagonaler Split-Screen mit WebGL Shader',
       status: '✅ Active',
-      details: 'Rotation (20°→0°) und Skalierung beim Scrollen'
+      details: 'Präzise Hitbox-Trennung & Inverse Logik'
     },
     {
       icon: Palette,
-      title: 'VSS Brand Colors',
-      description: 'Blue, Green, Orange Farbschema',
+      title: 'Shader Effects',
+      description: 'Interactive Mouse Glow Effect',
       status: '✅ Integrated',
-      details: '#0284c7, #10b981, #f59e0b'
+      details: 'Vibrant RGB Colors & 60fps Performance'
     },
     {
       icon: MobileIcon,
       title: 'Responsive Design',
       description: 'Mobile-first Approach',
       status: '✅ Optimized',
-      details: 'Skalierung 0.7→0.9 auf Mobile'
+      details: 'Angepasste Positionierung für alle Devices'
     },
     {
       icon: Code,
-      title: 'TypeScript',
-      description: 'Strict mode, 0 Fehler',
-      status: '✅ Clean',
-      details: 'Vollständige TypeScript-Integration'
+      title: 'Clean Setup',
+      description: 'No Docker, pure npm setup',
+      status: '✅ Simplified',
+      details: 'Schnellere Installation und höhere Stabilität'
     },
     {
       icon: CheckCircle,
       title: 'Performance',
-      description: '156 kB First Load JS',
-      status: '✅ Optimized',
-      details: 'Bundle-Splitting und Optimierung'
+      description: 'Optimized Bundle Size',
+      status: '✅ Ready',
+      details: 'Effizientes Shader-Rendering & Asset-Loading'
     },
     {
       icon: AlertCircle,
-      title: 'Build Status',
-      description: 'Production-ready',
-      status: '✅ Ready',
-      details: '4/4 Seiten erfolgreich generiert'
+      title: 'Production Ready',
+      description: 'Vollständig funktional',
+      status: '✅ v0.21.0',
+      details: 'Alle Kernkomponenten erfolgreich implementiert'
     }
   ]
 
@@ -82,7 +82,7 @@ const PreviewPage = () => {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-dark-900">VSS Website Preview</h1>
-                <p className="text-sm text-dark-600">Version 0.1.0 - Container-Scroll-Animation</p>
+                <p className="text-sm text-dark-600">Version 0.21.0 - SplitShowcase Diagonal Split</p>
               </div>
             </div>
             

@@ -1,8 +1,8 @@
-# VSS Website Release v0.12.0 - Fixed Hitbox & Shader
+# VSS Website Release v0.21.0 - Fixed Hitbox & Shader
 
-## 🎉 Release 0.12.0: Präzise Interaktion & Visuelle Upgrades
+## 🎉 Release 0.21.0: Präzise Interaktion & Visuelle Upgrades
 
-**Version Bump:** 0.11.0 → 0.12.0  
+**Version Bump:** 0.11.0 → 0.21.0  
 **Build Status:** ✅ SUCCESSFUL  
 **Type:** Feature Fix & UX Enhancement Release  
 
@@ -41,7 +41,7 @@ Dieses Release behebt kritische Interaktionsprobleme in der `SplitShowcase` Komp
 - **MOBILFUNK** (unten links) -> Link zu `#mobilfunk`.
 - **FAHRSTUHL** (oben rechts) -> Link zu `#aufzuge`.
 
-### 📊 Build-Results v0.12.0
+### 📊 Build-Results v0.21.0
 
 **Build erfolgreich:**
 - ✅ Next.js 15.5.9 Compilation
@@ -50,4 +50,4 @@ Dieses Release behebt kritische Interaktionsprobleme in der `SplitShowcase` Komp
 
 ---
 
-**Release v0.12.0** verbessert die Benutzererfahrung durch präzisere Steuerung und ansprechendere Visuals, während die funktionale Verbindung zwischen dem Hero-Bereich und den Services hergestellt wird.
+**Release v0.21.0** verbessert die Benutzererfahrung durch präzisere Steuerung und ansprechendere Visuals, während die funktionale Verbindung zwischen dem Hero-Bereich und den Services hergestellt wird.

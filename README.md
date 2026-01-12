@@ -1,33 +1,32 @@
 # VSS Website Redesign - Vertical Service Solutions
 
-Eine moderne Next.js-Website mit Tailwind CSS für Vertical Service Solutions, inspiriert von 21st.dev Design-Patterns.
+Eine moderne Next.js-Website mit Tailwind CSS für Vertical Service Solutions, fokussiert auf Industrie-Technik und Mobilfunk-Infrastruktur.
 
-## 🚀 Version 0.1.0 - Initial Release + Setup System
+## 🚀 Version 0.21.0 - Fixed Hitbox & Shader
 
-### ✅ Verfügbare Features
+Dieses Release markiert den Übergang zu einem stabilen, performanten und visuell beeindruckenden Web-Auftritt. Der Fokus liegt auf einer präzisen interaktiven Hero-Sektion und einem vereinfachten Development-Workflow.
 
-- **Modern Design:** Industrial High-Tech Styling basierend auf 21st.dev Ästhetik
-- **3D Scroll Animation:** Container-Scroll-Animation mit Framer Motion
-- **One-Click Setup:** Automatische Installation und Preview
-- **Responsive:** Mobile-first Design für alle Geräte
-- **Fast:** Next.js 15 mit TypeScript und optimierten Builds (156 kB First Load JS)
-- **Accessible:** WCAG-konforme Implementierung
-- **SEO-optimiert:** Meta-Tags, Open Graph, strukturierte Daten
-- **Docker Ready:** Vollständige Containerisierung
-- **Testing Suite:** Umfassende Test-Dokumentation
+### ✅ Kern-Features
+
+- **SplitShowcase Hero:** Innovativer diagonaler Split-Screen (/) mit Three.js WebGL-Hintergrund.
+- **Inverse Mouse Logic:** Dynamische Interaktion – der Shader-Effekt aktiviert sich dort, wo die Maus gerade *nicht* ist, für maximale Lesbarkeit.
+- **WebGL Shader:** Hochperformante Fraktal-Brownian-Motion (fbm) Muster mit interaktivem "Mouse Glow" Effekt.
+- **Clean Setup:** Optimierter Workflow ohne Docker für schnellere Installation und höhere Stabilität.
+- **Responsive Design:** Vollständig optimiert für Mobile, Tablet und Desktop.
+- **Performance:** 60fps Animationen und optimierte Bundle-Größen.
+- **SEO & Social:** Vollständige Metadata-Integration für Google, OpenGraph und Twitter.
 
 ## 🛠️ Tech Stack
 
 - **Framework:** Next.js 15+ (App Router)
 - **Styling:** Tailwind CSS
+- **WebGL/3D:** Three.js ^0.182.0
 - **Sprache:** TypeScript
 - **Icons:** Lucide React
-- **Animationen:** Framer Motion
-- **Fonts:** Inter & JetBrains Mono (Google Fonts)
-- **Containerisierung:** Docker + Docker Compose
-- **Deployment:** Vercel-ready
+- **Animationen:** CSS Clip-Path & Standard Transitions (700ms cubic-bezier)
+- **Fonts:** Inter & JetBrains Mono
 
-## ⚡ Quick Start - Sofortiges Testen
+## ⚡ Quick Start - Setup in 60 Sekunden
 
 ### 🖥️ Desktop (Linux/Mac)
 ```bash
@@ -36,7 +35,7 @@ cd vss
 chmod +x setup.sh
 ./setup.sh
 ```
-**Automatisch:** Setup + Browser öffnet http://localhost:3000/preview
+**Effekt:** Installiert Dependencies, baut das Projekt und startet den Dev-Server bei http://localhost:3000.
 
 ### 🪟 Windows
 ```cmd
@@ -44,212 +43,58 @@ git clone https://github.com/alexiosg111/vss.git
 cd vss
 setup.bat
 ```
-**Automatisch:** Setup + Browser öffnet http://localhost:3000/preview
-
-### 🐳 Docker (Alle Plattformen)
-```bash
-git clone https://github.com/alexiosg111/vss.git
-cd vss
-docker-compose up vss-website
-```
-**URL:** http://localhost:3000
-
-### ⚡ Live Preview
-```bash
-git clone https://github.com/alexiosg111/vss.git
-cd vss
-chmod +x preview.sh
-./preview.sh
-```
-**Automatisch:** Setup + Server + Browser + Preview-Seite
+**Effekt:** Automatisiertes Setup für Windows-Umgebungen.
 
 ### 🔧 Manuell
 ```bash
-git clone https://github.com/alexiosg111/vss.git
-cd vss
 npm install
 npm run dev
-# Öffnen: http://localhost:3000
-# Preview: http://localhost:3000/preview
 ```
 
-## 🎯 Test-Features
+## 🎯 Highlights zum Testen
 
-### Container-Scroll-Animation testen:
-1. **URL:** http://localhost:3000
-2. **Scrollen:** Zur dunklen Sektion mit Animation
-3. **Erwartung:** Card rotiert 20°→0°, skaliert, 60fps smooth
+### 1. Diagonale Interaktion (Hero)
+Besuchen Sie die Homepage und bewegen Sie die Maus über den Hero-Bereich. Die Trennung zwischen **MOBILFUNK** und **FAHRSTUHL** erfolgt exakt an der diagonalen Linie.
 
-### Responsive Design testen:
-1. **F12** → Device Toolbar (Mobile Icon)
-2. **Mobile:** iPhone/Android - optimierte Skalierung
-3. **Tablet:** iPad - angepasste Layouts
-4. **Desktop:** Vollständige Features
+### 2. Shader Mouse Glow
+Achten Sie auf den subtilen Lichteffekt, der Ihrer Maus im Shader-Hintergrund folgt, während die inverse Logik den Fokus auf dem aktiven Text hält.
 
-### Preview-Seite testen:
-1. **URL:** http://localhost:3000/preview
-2. **Features:** Viewport Testing, Status Overview, Performance Metrics
-3. **Live Toggle:** Preview-Modus aktivieren/deaktivieren
+### 3. Direkte Navigation
+Klicken Sie auf die großen Bereiche im Hero, um direkt zu den entsprechenden Service-Sektionen zu springen.
 
-### Cross-Browser testen:
-- ✅ Chrome, Firefox, Safari, Edge
-- ✅ Container-Scroll-Animation in allen Browsern
-
-## 🏗️ Erweiterte Setup-Optionen
-
-### Production Docker
-```bash
-docker-compose --profile production up --build
-```
-
-### Erweiterte npm Scripts
-```bash
-npm run setup          # Setup Script ausführen
-npm run preview        # Live Preview starten
-npm run docker:dev     # Docker Development
-npm run docker:prod    # Docker Production
-npm run test           # Build Test
-npm run analyze        # Bundle Analyse
-npm run lint           # Code Linting
-```
-
-## 📊 Performance & Monitoring
-
-### Erwartete Werte:
-- **First Load JS:** 156 kB (optimiert)
-- **Lighthouse Score:** 90+ (alle Kategorien)
-- **Container Animation:** 60fps smooth
-- **Mobile Performance:** 90+ Score
-- **Bundle Impact:** +45KB für Framer Motion
-
-### Debug Tools:
-- **Browser DevTools:** F12 → Performance/Lighthouse
-- **Preview Page:** http://localhost:3000/preview
-- **Console:** Framer Motion Debugging
-- **Network:** Throttling Tests (Slow 3G)
-
-## 🐛 Troubleshooting
-
-### Häufige Probleme:
-
-**Port 3000 belegt:**
-```bash
-kill -9 $(lsof -ti:3000)
-PORT=3001 npm run dev
-```
-
-**Build Fehler:**
-```bash
-rm -rf node_modules package-lock.json
-npm install
-npm run build
-```
-
-**Docker Probleme:**
-```bash
-docker-compose down
-docker system prune -f
-docker-compose up --build
-```
-
-**Animation nicht sichtbar:**
-1. Browser Console prüfen
-2. Framer Motion Installation: `npm list framer-motion`
-3. Incognito/Private Mode testen
-
-## 📁 Erweiterte Projektstruktur
+## 📁 Projektstruktur
 
 ```
 /src
   /app
-    /page.tsx           # Hauptseite
-    /layout.tsx         # Root Layout
-    /preview/
-      /page.tsx         # Preview-Seite
-    /globals.css        # Global Styles
+    /page.tsx           # Hauptseite mit SplitShowcase
+    /layout.tsx         # Root Layout mit SEO Meta-Tags
+    /setup-monitor/     # Visueller Setup-Status
+    /preview/           # Feature Showcase
   /components
-    /ui/
-      /container-scroll-animation.tsx  # 3D Scroll Animation
-    /Header.tsx         # Navigation
-    /Hero.tsx           # Hero + Animation
-    /Services.tsx       # Services
-    /CTA.tsx            # Kontakt
-    /Footer.tsx          # Footer
-    /Preview.tsx         # Preview Interface
-    /demo.tsx           # VSS Demo
-/styles
-  /globals.css          # Tailwind + Custom
-/public                 # Static Assets
-Dockerfile             # Production Container
-Dockerfile.dev         # Development Container
-docker-compose.yml     # Multi-Container Setup
-nginx.conf             # Production Nginx
-setup.sh               # Linux/Mac Setup
+    /SplitShowcase.tsx  # Hero-Komponente mit Diagonalsplit
+    /OriginalShader.tsx # Three.js WebGL Implementierung
+    /Header.tsx         # Navigation & Branding
+    /Services.tsx       # Geschäftsbereiche & Benefits
+    /CTA.tsx            # Kontakt & Testimonials
+    /Footer.tsx         # Footer & Social Links
+/public                 # Statische Assets & Icons
+setup.sh               # Linux/Mac Setup (v0.21.0)
 setup.bat              # Windows Setup
-preview.sh             # Live Preview Script
-TESTING.md             # Umfassende Test-Anleitung
+ANALYSIS.md            # Projekt-Analyse & Status
 ```
 
-## 🚀 Deployment
+## 🏗️ Entwicklung & Deployment
 
-### Vercel (Empfohlen)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/alexiosg111/vss)
+### Scripts
+- `npm run dev` - Startet Development Server
+- `npm run build` - Erstellt Production Build
+- `npm run start` - Startet Production Server
+- `npm run lint` - Code Qualität prüfen
 
-### Docker Production
-```bash
-docker build -t vss-website .
-docker run -p 3000:3000 vss-website
-```
-
-### Static Export
-```bash
-npm run build
-# Output: .next/ Ordner
-```
-
-## 🔧 Entwicklung
-
-### Neue Features hinzufügen:
-1. **Komponente erstellen** in `/src/components/`
-2. **TypeScript definieren** für Type Safety
-3. **Tailwind verwenden** für Styling
-4. **In Page importieren**
-5. **Testen** mit Preview-System
-
-### Container-Scroll-Animation verwenden:
-```tsx
-import { ContainerScroll } from '@/components/ui/container-scroll-animation'
-
-<ContainerScroll
-  titleComponent={<h1>Your Title</h1>}
->
-  <YourContent />
-</ContainerScroll>
-```
-
-## 📞 Support & Testing
-
-- **Repository:** https://github.com/alexiosg111/vss
-- **Testing Guide:** `./TESTING.md`
-- **Preview Page:** http://localhost:3000/preview
-- **Version:** v0.1.0 + Setup System
-- **Branch:** feat-vss-redesign-nextjs-tailwind-21stdev
-
-## 📄 Changelog
-
-### v0.1.0 + Setup System (Latest)
-- ✨ **One-Click Setup:** Linux/Mac/Windows Scripts
-- ✨ **Live Preview:** Automatische Browser-Öffnung
-- ✨ **Interactive Preview Page:** Viewport Testing, Status Overview
-- ✨ **Docker Integration:** Development + Production Container
-- ✨ **Testing Suite:** Umfassende Test-Dokumentation
-- ✨ **Cross-Platform:** Windows/Linux/Mac Kompatibilität
-- ✨ **Container-Scroll-Animation:** 3D Effects mit Framer Motion
-- ✨ **VSS Brand Integration:** Industrial High-Tech Design
-- ✨ **Performance Optimiert:** 156 kB First Load JS
+### Deployment
+Die Website ist "Vercel-ready". Einfach das Repository mit Vercel verknüpfen für automatische CI/CD Deployments.
 
 ---
 
-**🎯 Sofort starten:** `./setup.sh` (Linux/Mac) oder `setup.bat` (Windows)
-
-**VSS Website Redesign v0.1.0 | Next.js 15 + Tailwind CSS + Framer Motion + Setup System | Industrial High-Tech Design**
+**VSS Website Redesign v0.21.0 | Next.js 15 + Three.js + Tailwind CSS | Industrial High-Tech Design**

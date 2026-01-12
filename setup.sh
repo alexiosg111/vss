@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# VSS Website Setup Script v0.11.0 - Clean Setup ohne Docker
-echo "🚀 VSS Website Setup v0.11.0 wird gestartet..."
-echo "🔄 Clean Setup ohne Docker (wie v0.8)"
+# VSS Website Setup Script v0.21.0 - Fixed Hitbox & Shader
+echo "🚀 VSS Website Setup v0.21.0 wird gestartet..."
+echo "🔄 Clean Setup ohne Docker (v0.21.0)"
 
 # Einfache Browser-Detection
 echo "🔍 Prüfe Browser-Verfügbarkeit..."
@@ -94,7 +94,7 @@ fi
 echo "✅ Build erfolgreich."
 
 # Starte Development Server
-echo "🎉 Setup v0.11.0 abgeschlossen!"
+echo "🎉 Setup v0.21.0 abgeschlossen!"
 echo ""
 echo "🚀 Starte Development Server..."
 echo ""
@@ -127,19 +127,18 @@ echo "✅ Setup abgeschlossen!"
 echo "🌐 VSS Website läuft unter: http://localhost:3000"
 echo "📊 Setup-Monitor verfügbar unter: http://localhost:3000/setup-monitor"
 echo ""
-echo "🎯 Features zum Testen (v0.11.0):"
-echo "   • SplitShowcase Komponente mit diagonalem Split (/)"
-echo "   • Three.js Shader Hintergrund mit originalen RGB-Farben"
-echo "   • Inverse Maus-Interaktionslogik (Shader läuft wo Maus NICHT ist)"
-echo "   • MOBILFUNK (unten links) und FAHRSTUHL (oben rechts) Bereiche"
-echo "   • Smooth CSS Clip-Path Animationen"
+echo "🎯 Features zum Testen (v0.21.0):"
+echo "   • SplitShowcase Komponente mit präziser diagonaler Hitbox"
+echo "   • WebGL Shader mit Mouse Glow & Vibrant Colors"
+echo "   • MOBILFUNK & FAHRSTUHL Bereiche mit direkter Navigation"
+echo "   • Smooth CSS Transitions (700ms cubic-bezier)"
 echo "   • Clean Setup ohne Docker"
 echo ""
-echo "🔧 v0.11.0 Setup Verbesserungen:"
-echo "   • Docker entfernt - einfacher npm Setup"
-echo "   • Zurück zu bewährter v0.8 Setup-Logik"
-echo "   • Bessere Kompatibilität und Zuverlässigkeit"
-echo "   • Schnellerer Setup-Prozess"
+echo "🔧 v0.21.0 Fixes & Upgrades:"
+echo "   • Mathematisch korrekte Hitbox-Trennung"
+echo "   • Korrigierte Inverse Interaktions-Logik"
+echo "   • Interaktive Click-Bereiche im Hero"
+echo "   • Optimierte Performance"
 echo ""
 echo "⚡ Drücken Sie Ctrl+C zum Beenden"
 
