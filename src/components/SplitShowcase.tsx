@@ -13,19 +13,14 @@ const SplitShowcase: React.FC = () => {
 
     const rect = containerRef.current.getBoundingClientRect()
     const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
     
-    // Calculate diagonal line from top-left to bottom-right
-    // Line equation: y = (height/width) * x
-    const diagonalY = (rect.height / rect.width) * x
-    
-    // Inverse logic: determine which side should be ACTIVE (white text on black)
-    // Active side is where the shader effect should run (where mouse is NOT)
-    if (y > diagonalY) {
-      // Mouse is below diagonal (bottom-left area) -> activate right side (shader top-right)
+    // Vertikale Linie in der Mitte
+    // Inverse logic: Shader läuft auf der Seite wo die Maus NICHT ist
+    if (x < rect.width / 2) {
+      // Mouse is on left side -> activate right side (shader right)
       setActiveSide('right')
     } else {
-      // Mouse is above diagonal (top-right area) -> activate left side (shader bottom-left)
+      // Mouse is on right side -> activate left side (shader left)
       setActiveSide('left')
     }
   }
@@ -44,25 +39,25 @@ const SplitShowcase: React.FC = () => {
 
       {/* OVERLAYS (Decken den Shader mit slate-50 ab, wo er inaktiv ist) */}
       
-      {/* Linkes Overlay (Dreieck unten links) */}
+      {/* Linkes Overlay (Vertikale linke Hälfte) */}
       <div 
         className={`absolute inset-0 bg-slate-50 z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          activeSide === 'right' ? 'clip-left-full' : 'clip-left-none'
+          activeSide === 'right' ? 'clip-left-vertical-full' : 'clip-left-vertical-none'
         }`} 
       />
       
-      {/* Rechtes Overlay (Dreieck oben rechts) */}
+      {/* Rechtes Overlay (Vertikale rechte Hälfte) */}
       <div 
         className={`absolute inset-0 bg-slate-50 z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          activeSide === 'left' ? 'clip-right-full' : 'clip-right-none'
+          activeSide === 'left' ? 'clip-right-vertical-full' : 'clip-right-vertical-none'
         }`} 
       />
 
       {/* INHALT / TEXT */}
       <div className="relative z-20 w-full h-full pointer-events-none select-none">
         
-        {/* MOBILFUNK (Unten Links) */}
-        <div className={`absolute bottom-[25%] left-[15%] md:left-[20%] flex flex-col transition-colors duration-500 ${
+        {/* MOBILFUNK (Links - zentriert vertikal) */}
+        <div className={`absolute left-[10%] md:left-[15%] top-1/2 -translate-y-1/2 flex flex-col transition-colors duration-500 ${
           activeSide === 'left' ? 'text-white drop-shadow-md' : 'text-slate-900'
         }`}>
           <span className={`text-xs font-bold tracking-[0.3em] uppercase mb-2 transition-colors duration-500 ${
@@ -75,8 +70,8 @@ const SplitShowcase: React.FC = () => {
           </h1>
         </div>
 
-        {/* FAHRSTUHL (Oben Rechts) */}
-        <div className={`absolute top-[25%] right-[15%] md:right-[20%] flex flex-col items-end text-right transition-colors duration-500 ${
+        {/* FAHRSTUHL (Rechts - zentriert vertikal) */}
+        <div className={`absolute right-[10%] md:right-[15%] top-1/2 -translate-y-1/2 flex flex-col items-end text-right transition-colors duration-500 ${
           activeSide === 'right' ? 'text-white drop-shadow-md' : 'text-slate-900'
         }`}>
           <span className={`text-xs font-bold tracking-[0.3em] uppercase mb-2 transition-colors duration-500 ${
@@ -95,35 +90,35 @@ const SplitShowcase: React.FC = () => {
         </div>
       </div>
 
-      {/* CLICKABLE HITBOXES (Genau an der Diagonalen getrennt) */}
+      {/* CLICKABLE HITBOXES (Vertikal in der Mitte getrennt) */}
       <div className="absolute inset-0 z-30 pointer-events-none">
         <Link 
           href="#mobilfunk" 
           className="absolute inset-0 pointer-events-auto cursor-pointer"
-          style={{ clipPath: 'polygon(0 0, 0 100%, 100% 100%)' }}
+          style={{ clipPath: 'polygon(0 0, 50% 0, 50% 100%, 0 100%)' }}
           title="Mobilfunk Lösungen"
         />
         <Link 
           href="#aufzuge" 
           className="absolute inset-0 pointer-events-auto cursor-pointer"
-          style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }}
+          style={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)' }}
           title="Aufzug Systeme"
         />
       </div>
 
-      {/* CSS Styles für Clip-Paths */}
+      {/* CSS Styles für Clip-Paths (Vertikal) */}
       <style jsx global>{`
-        .clip-left-full {
-          clip-path: polygon(0 0, 0 100%, 100% 100%);
+        .clip-left-vertical-full {
+          clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
         }
-        .clip-left-none {
-          clip-path: polygon(0 0, 0 0, 0 0);
+        .clip-left-vertical-none {
+          clip-path: polygon(0 0, 0 0, 0 0, 0 0);
         }
-        .clip-right-full {
-          clip-path: polygon(0 0, 100% 0, 100% 100%);
+        .clip-right-vertical-full {
+          clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
         }
-        .clip-right-none {
-          clip-path: polygon(100% 0, 100% 0, 100% 0);
+        .clip-right-vertical-none {
+          clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);
         }
       `}</style>
     </div>
