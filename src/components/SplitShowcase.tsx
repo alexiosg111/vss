@@ -3,7 +3,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import Link from 'next/link'
 import FragmentShader from './FragmentShader'
-import FragmentOverlay from './FragmentOverlay'
 
 const SplitShowcase: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -58,10 +57,6 @@ const SplitShowcase: React.FC = () => {
           activeSide === 'left' ? 'clip-right-full' : 'clip-right-none'
         }`} 
       />
-
-      {/* FRAGMENT OVERLAYS (Visueller Fragmentierungs-Effekt) */}
-      <FragmentOverlay isActive={activeSide === 'left'} side="left" />
-      <FragmentOverlay isActive={activeSide === 'right'} side="right" />
 
       {/* INHALT / TEXT */}
       <div className="relative z-20 w-full h-full pointer-events-none select-none">
