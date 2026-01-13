@@ -2,7 +2,7 @@
   "name": "vss-website-redesign",
   "version": "0.12.0",
   "private": true,
-  "description": "VSS Website Redesign with SplitShowcase Diagonal Split - Release v0.12.0 - Fixed Hitbox & Shader",
+  "description": "VSS Website Redesign - Release v0.12.0 - Fragment Design Implementation with Voronoi Shader & Glassmorphism",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -68,7 +68,13 @@
     "inverse-logic",
     "clean-setup",
     "no-docker",
-    "simple-dev"
+    "simple-dev",
+    "fragment-design",
+    "voronoi-shader",
+    "glassmorphism",
+    "fragment-overlay",
+    "webgl-fragments",
+    "shattered-glass"
   ],
   "author": "VSS Development Team",
   "license": "MIT",
@@ -79,23 +85,30 @@
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
     "version": "0.12.0",
-    "date": "2024-01-09",
+    "date": "2024-01-13",
     "features": [
-      "Fixed Diagonal Hitbox Calculation (y = mx + c)",
-      "Corrected Inverse Mouse Interaction Logic",
-      "Restored Vibrant RGB Shader Colors",
-      "Added Interactive Mouse Glow to Shader",
-      "Added Clickable Service Area Hitboxes",
-      "Smooth CSS Clip-Path Transitions (700ms)"
+      "Fragment Design Implementation - Complete Visual Overhaul",
+      "FragmentShader.tsx - Voronoi-based WebGL Shader with Multi-Layer Fragments",
+      "FragmentOverlay.tsx - Dynamic CSS Fragment Animations with Glassmorphism",
+      "3-Layer Fragment System (4x, 8x, 12x density scales)",
+      "Voronoi Distance Functions for Organic Cell Patterns",
+      "Edge Detection with Glowing Fragment Highlights",
+      "Cell-based Color Variation (4-color palette)",
+      "Mouse-Proximity Pulsing Effects in Shader",
+      "Staggered Fragment Animations (0-200ms delays)",
+      "Backdrop-Blur Glassmorphism Effects"
     ],
     "improvements": [
-      "Precise transition point at the diagonal split",
-      "Improved Shader Performance and Visuals",
-      "Direct links to Service sections from Hero",
-      "Better UX with clear interactive states"
+      "Modern Shattered Glass Aesthetic",
+      "Organic Voronoi-based Tessellation",
+      "Dynamic Fragment Edge Highlights",
+      "Multi-Layer Depth Perception",
+      "60fps Performance with Complex Fragment Calculations",
+      "Enhanced Visual Interest and Technical Presentation"
     ],
     "breakingChanges": [
-      "None"
+      "Replaced OriginalShader with FragmentShader in SplitShowcase",
+      "New FragmentOverlay component integrated into layout"
     ]
   }
 }

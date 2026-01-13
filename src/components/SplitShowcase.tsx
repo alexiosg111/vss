@@ -2,7 +2,8 @@
 
 import React, { useRef, useState, useEffect } from 'react'
 import Link from 'next/link'
-import OriginalShader from './OriginalShader'
+import FragmentShader from './FragmentShader'
+import FragmentOverlay from './FragmentOverlay'
 
 const SplitShowcase: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -37,9 +38,9 @@ const SplitShowcase: React.FC = () => {
       className="relative w-full h-screen overflow-hidden font-sans bg-slate-50 selection:bg-purple-500 selection:text-white"
     >
       
-      {/* SHADER HINTERGRUND (Läuft auf der ganzen Fläche) */}
+      {/* FRAGMENT SHADER HINTERGRUND (Läuft auf der ganzen Fläche) */}
       <div className="absolute inset-0 bg-black z-0">
-        <OriginalShader className="w-full h-full" />
+        <FragmentShader className="w-full h-full" />
       </div>
 
       {/* OVERLAYS (Decken den Shader mit slate-50 ab, wo er inaktiv ist) */}
@@ -57,6 +58,10 @@ const SplitShowcase: React.FC = () => {
           activeSide === 'left' ? 'clip-right-full' : 'clip-right-none'
         }`} 
       />
+
+      {/* FRAGMENT OVERLAYS (Visueller Fragmentierungs-Effekt) */}
+      <FragmentOverlay isActive={activeSide === 'left'} side="left" />
+      <FragmentOverlay isActive={activeSide === 'right'} side="right" />
 
       {/* INHALT / TEXT */}
       <div className="relative z-20 w-full h-full pointer-events-none select-none">
