@@ -13,7 +13,7 @@ Eine moderne Next.js-Website mit Tailwind CSS für Vertical Service Solutions, i
 - **Fast:** Next.js 15 mit TypeScript und optimierten Builds (156 kB First Load JS)
 - **Accessible:** WCAG-konforme Implementierung
 - **SEO-optimiert:** Meta-Tags, Open Graph, strukturierte Daten
-- **Docker Ready:** Vollständige Containerisierung
+- **Clean Setup:** npm-only Setup ohne Docker (ab v0.11.0)
 - **Testing Suite:** Umfassende Test-Dokumentation
 
 ## 🛠️ Tech Stack
@@ -24,7 +24,7 @@ Eine moderne Next.js-Website mit Tailwind CSS für Vertical Service Solutions, i
 - **Icons:** Lucide React
 - **Animationen:** Framer Motion
 - **Fonts:** Inter & JetBrains Mono (Google Fonts)
-- **Containerisierung:** Docker + Docker Compose
+- **3D Graphics:** Three.js (WebGL Shaders)
 - **Deployment:** Vercel-ready
 
 ## ⚡ Quick Start - Sofortiges Testen
@@ -46,13 +46,16 @@ setup.bat
 ```
 **Automatisch:** Setup + Browser öffnet http://localhost:3000/preview
 
-### 🐳 Docker (Alle Plattformen)
+### 🚫 Docker
+Docker wird ab **v0.11.0** nicht mehr für Development benötigt.
+
+Wenn du die App starten willst, nutze bitte:
 ```bash
-git clone https://github.com/alexiosg111/vss.git
-cd vss
-docker-compose up vss-website
+./setup.sh
+# oder
+npm install
+npm run dev
 ```
-**URL:** http://localhost:3000
 
 ### ⚡ Live Preview
 ```bash
@@ -97,21 +100,19 @@ npm run dev
 
 ## 🏗️ Erweiterte Setup-Optionen
 
-### Production Docker
-```bash
-docker-compose --profile production up --build
-```
-
 ### Erweiterte npm Scripts
 ```bash
 npm run setup          # Setup Script ausführen
 npm run preview        # Live Preview starten
-npm run docker:dev     # Docker Development
-npm run docker:prod    # Docker Production
+npm run dev            # Development Server
+npm run build          # Production Build
+npm run start          # Production Server
 npm run test           # Build Test
 npm run analyze        # Bundle Analyse
 npm run lint           # Code Linting
 ```
+
+**Hinweis:** Docker-Commands wurden in v0.11.0 entfernt (siehe package.json)
 
 ## 📊 Performance & Monitoring
 

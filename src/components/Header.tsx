@@ -65,7 +65,7 @@ const Header = () => {
               Aufzüge
             </Link>
             <Link 
-              href="#mobilfunk" 
+              href="/mobilfunk" 
               className="text-dark-700 hover:text-vss-blue font-medium transition-colors duration-300"
             >
               Mobilfunk
@@ -128,7 +128,7 @@ const Header = () => {
                   Aufzüge
                 </Link>
                 <Link 
-                  href="#mobilfunk" 
+                  href="/mobilfunk" 
                   className="text-dark-700 hover:text-vss-blue font-medium py-2 transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
