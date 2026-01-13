@@ -1,8 +1,8 @@
 {
   "name": "vss-website-redesign",
-  "version": "0.12.0",
+  "version": "0.23.0",
   "private": true,
-  "description": "VSS Website Redesign - Release v0.12.0 - Fragment Design Implementation with Voronoi Shader & Glassmorphism",
+  "description": "VSS Website Redesign - Release v0.23.0 - Fragment Design Production Release with Enhanced Stability",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -84,7 +84,7 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "version": "0.12.0",
+    "version": "0.23.0",
     "date": "2024-01-13",
     "features": [
       "Fragment Design Implementation - Complete Visual Overhaul",
