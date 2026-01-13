@@ -13,13 +13,15 @@ const SplitShowcase: React.FC = () => {
 
     const rect = containerRef.current.getBoundingClientRect()
     const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
     
-    // Vertikale Linie in der Mitte - Simple: Shader auf der Seite wo Maus IST
-    if (x < rect.width / 2) {
-      // Mouse is on left side -> activate left side
+    // Diagonale Linie "/" - Wenn y < x -> Maus ist oben rechts
+    const isRightSide = y < x
+    
+    // Inverse Logik: Wenn Maus Rechts -> Shader Links
+    if (isRightSide) {
       setActiveSide('left')
     } else {
-      // Mouse is on right side -> activate right side
       setActiveSide('right')
     }
   }
@@ -38,35 +40,35 @@ const SplitShowcase: React.FC = () => {
 
       {/* OVERLAYS (Decken den Shader mit slate-50 ab, wo er inaktiv ist) */}
       
-      {/* Linkes Overlay (Vertikale linke Hälfte) */}
-      <div 
-        className="absolute inset-0 bg-slate-50 z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-        style={{
-          clipPath: activeSide === 'left' 
-            ? 'polygon(0 0, 0 0, 0 0, 0 0)' 
-            : 'polygon(0 0, 50% 0, 50% 100%, 0 100%)'
-        }}
-      />
-      
-      {/* Rechtes Overlay (Vertikale rechte Hälfte) */}
+      {/* Linkes Overlay (Diagonales Dreieck unten links) */}
       <div 
         className="absolute inset-0 bg-slate-50 z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
         style={{
           clipPath: activeSide === 'right' 
-            ? 'polygon(100% 0, 100% 0, 100% 0, 100% 0)' 
-            : 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)'
+            ? 'polygon(0 0, 0 100%, 100% 100%)' 
+            : 'polygon(0 0, 0 0, 0 0)'
+        }}
+      />
+      
+      {/* Rechtes Overlay (Diagonales Dreieck oben rechts) */}
+      <div 
+        className="absolute inset-0 bg-slate-50 z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+        style={{
+          clipPath: activeSide === 'left' 
+            ? 'polygon(0 0, 100% 0, 100% 100%)' 
+            : 'polygon(100% 0, 100% 0, 100% 0)'
         }}
       />
 
       {/* INHALT / TEXT */}
       <div className="relative z-20 w-full h-full pointer-events-none select-none">
         
-        {/* MOBILFUNK (Links - zentriert vertikal) */}
-        <div className={`absolute left-[10%] md:left-[15%] top-1/2 -translate-y-1/2 flex flex-col transition-colors duration-500 ${
-          activeSide === 'left' ? 'text-white drop-shadow-md' : 'text-slate-900'
+        {/* MOBILFUNK (Unten Links) */}
+        <div className={`absolute bottom-[25%] left-[10%] md:left-[20%] flex flex-col transition-colors duration-500 ${
+          activeSide === 'right' ? 'text-white drop-shadow-md' : 'text-slate-900'
         }`}>
           <span className={`text-xs font-bold tracking-[0.3em] uppercase mb-2 transition-colors duration-500 ${
-            activeSide === 'left' ? 'text-white/60' : 'text-slate-500'
+            activeSide === 'right' ? 'text-white/60' : 'text-slate-500'
           }`}>
             Connectivity
           </span>
@@ -75,12 +77,12 @@ const SplitShowcase: React.FC = () => {
           </h1>
         </div>
 
-        {/* FAHRSTUHL (Rechts - zentriert vertikal) */}
-        <div className={`absolute right-[10%] md:right-[15%] top-1/2 -translate-y-1/2 flex flex-col items-end text-right transition-colors duration-500 ${
-          activeSide === 'right' ? 'text-white drop-shadow-md' : 'text-slate-900'
+        {/* FAHRSTUHL (Oben Rechts) */}
+        <div className={`absolute top-[25%] right-[10%] md:right-[20%] flex flex-col items-end text-right transition-colors duration-500 ${
+          activeSide === 'left' ? 'text-white drop-shadow-md' : 'text-slate-900'
         }`}>
           <span className={`text-xs font-bold tracking-[0.3em] uppercase mb-2 transition-colors duration-500 ${
-            activeSide === 'right' ? 'text-white/60' : 'text-slate-500'
+            activeSide === 'left' ? 'text-white/60' : 'text-slate-500'
           }`}>
             Vertical Systems
           </span>
@@ -95,18 +97,18 @@ const SplitShowcase: React.FC = () => {
         </div>
       </div>
 
-      {/* CLICKABLE HITBOXES (Vertikal in der Mitte getrennt) */}
+      {/* CLICKABLE HITBOXES (Diagonal getrennt) */}
       <div className="absolute inset-0 z-30 pointer-events-none">
         <Link 
           href="#mobilfunk" 
           className="absolute inset-0 pointer-events-auto cursor-pointer"
-          style={{ clipPath: 'polygon(0 0, 50% 0, 50% 100%, 0 100%)' }}
+          style={{ clipPath: 'polygon(0 0, 0 100%, 100% 100%)' }}
           title="Mobilfunk Lösungen"
         />
         <Link 
           href="#aufzuge" 
           className="absolute inset-0 pointer-events-auto cursor-pointer"
-          style={{ clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)' }}
+          style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }}
           title="Aufzug Systeme"
         />
       </div>
