@@ -11,10 +11,10 @@ export function HeroScrollDemo() {
         titleComponent={
           <>
             <h1 className="text-4xl font-semibold text-black dark:text-white">
-              Entdecken Sie die Zukunft der
+              Telekommunikationsinfrastruktur
               <br />
               <span className="text-4xl md:text-[6rem] font-bold mt-1 leading-none text-gradient-vss">
-                Vertical Service Solutions
+                mit uns in die digitale Zukunft
               </span>
             </h1>
             <p className="text-xl text-dark-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">

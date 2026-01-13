@@ -13,193 +13,82 @@ const FragmentShader: React.FC<FragmentShaderProps> = ({ className = '' }) => {
   useEffect(() => {
     if (!mountRef.current) return
 
-    // Scene setup
-    const scene = new THREE.Scene()
-    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1)
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-
+    // Scene setup (v0.14.0 Original Shader)
     const container = mountRef.current
     const width = container.clientWidth
     const height = container.clientHeight
 
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false })
     renderer.setSize(width, height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     container.appendChild(renderer.domElement)
 
-    // Fragment Shader with Shattered/Fragmented Design
+    const scene = new THREE.Scene()
+    const camera = new THREE.Camera()
+    camera.position.z = 1
+
+    // Original v0.14.0 Shader (Bunte Linien)
+    const vertexShader = `void main() { gl_Position = vec4( position, 1.0 ); }`
+
     const fragmentShader = `
-      uniform float u_time;
-      uniform vec2 u_resolution;
-      uniform vec2 u_mouse;
+      #define TWO_PI 6.2831853072
+      #define PI 3.14159265359
+      precision highp float;
+      uniform vec2 resolution;
+      uniform float time;
 
-      // Hash function for randomness
-      float hash(vec2 p) {
-        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
-      }
+      void main(void) {
+        vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
+        float t = time*0.05;
+        float lineWidth = 0.002;
 
-      // Voronoi distance function for fragment cells
-      vec2 voronoi(vec2 x) {
-        vec2 p = floor(x);
-        vec2 f = fract(x);
-        
-        float minDist = 1.0;
-        vec2 minPoint = vec2(0.0);
-        
-        for(int j = -1; j <= 1; j++) {
-          for(int i = -1; i <= 1; i++) {
-            vec2 b = vec2(float(i), float(j));
-            vec2 r = b + hash(p + b) * 0.8 - f + 0.5;
-            float d = length(r);
-            
-            if(d < minDist) {
-              minDist = d;
-              minPoint = p + b;
-            }
+        vec3 color = vec3(0.0);
+        for(int j = 0; j < 3; j++){
+          for(int i=0; i < 5; i++){
+            color[j] += lineWidth*float(i*i) / abs(fract(t - 0.01*float(j)+float(i)*0.01)*5.0 - length(uv) + mod(uv.x+uv.y, 0.2));
           }
         }
-        
-        return vec2(minDist, hash(minPoint));
-      }
 
-      // Create sharp edges between fragments
-      float fragmentEdges(vec2 uv, float scale) {
-        vec2 vor = voronoi(uv * scale);
-        float edges = smoothstep(0.0, 0.05, vor.x);
-        return edges;
-      }
-
-      // Noise function
-      float noise(vec2 p) {
-        vec2 i = floor(p);
-        vec2 f = fract(p);
-        float a = hash(i);
-        float b = hash(i + vec2(1.0, 0.0));
-        float c = hash(i + vec2(0.0, 1.0));
-        float d = hash(i + vec2(1.0, 1.0));
-        vec2 u = f * f * (3.0 - 2.0 * f);
-        return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
-      }
-
-      void main() {
-        vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-        vec2 centered = uv - 0.5;
-        centered.x *= u_resolution.x / u_resolution.y;
-
-        // Time-based animation
-        float t = u_time * 0.3;
-
-        // Create multiple layers of fragments at different scales
-        float fragments1 = fragmentEdges(centered, 4.0 + sin(t * 0.5) * 0.5);
-        float fragments2 = fragmentEdges(centered, 8.0 + cos(t * 0.3) * 0.8);
-        float fragments3 = fragmentEdges(centered, 12.0);
-        
-        // Combine fragment layers
-        float combinedFragments = fragments1 * fragments2 * fragments3;
-
-        // Create color variation based on fragment cells
-        vec2 vor = voronoi(centered * 6.0 + t * 0.2);
-        float cellId = vor.y;
-        
-        // Original vibrant RGB colors with fragment-based variation
-        vec3 color1 = vec3(1.0, 0.1, 0.4); // Red-pink
-        vec3 color2 = vec3(0.1, 0.7, 1.0); // Blue-cyan  
-        vec3 color3 = vec3(0.4, 1.0, 0.1); // Green-lime
-        vec3 color4 = vec3(1.0, 0.6, 0.1); // Orange
-        
-        // Mix colors based on cell ID and position
-        vec3 finalColor = mix(color1, color2, cellId);
-        finalColor = mix(finalColor, color3, noise(centered * 3.0 + t));
-        finalColor = mix(finalColor, color4, smoothstep(0.3, 0.7, vor.x));
-
-        // Add fragment edges as bright highlights
-        float edgeGlow = 1.0 - combinedFragments;
-        edgeGlow = pow(edgeGlow, 3.0) * 0.5;
-        finalColor += vec3(edgeGlow);
-
-        // Mouse interaction - fragments react to proximity
-        float mouseDist = distance(uv, u_mouse);
-        float mouseEffect = exp(-mouseDist * 3.0);
-        
-        // Fragments pulse and brighten near mouse
-        finalColor += mouseEffect * vec3(0.8, 0.9, 1.0) * 0.6;
-        finalColor *= 1.0 + mouseEffect * 0.3;
-
-        // Add subtle pulsing animation
-        float pulse = 0.85 + 0.15 * sin(t * 2.0 + cellId * 6.28);
-        finalColor *= pulse;
-
-        // Fragment displacement effect
-        float displacement = (1.0 - combinedFragments) * 0.1;
-        finalColor *= 1.0 + displacement;
-
-        gl_FragColor = vec4(finalColor, 1.0);
+        gl_FragColor = vec4(color[0],color[1],color[2],1.0);
       }
     `
 
-    // Vertex Shader
-    const vertexShader = `
-      void main() {
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }
-    `
-
-    // Shader uniforms
+    // Shader uniforms (v0.14.0 style)
+    const geometry = new THREE.PlaneGeometry(2, 2)
     const uniforms = {
-      u_time: { value: 0 },
-      u_resolution: { value: new THREE.Vector2(width, height) },
-      u_mouse: { value: new THREE.Vector2(0, 0) }
+      time: { type: "f", value: 1.0 },
+      resolution: { type: "v2", value: new THREE.Vector2(width, height) }
     }
 
     // Create shader material
-    const material = new THREE.ShaderMaterial({
-      uniforms,
-      vertexShader,
-      fragmentShader
-    })
-
-    // Create plane geometry
-    const geometry = new THREE.PlaneGeometry(2, 2)
+    const material = new THREE.ShaderMaterial({ uniforms, vertexShader, fragmentShader })
     const mesh = new THREE.Mesh(geometry, material)
     scene.add(mesh)
 
-    // Animation loop
-    const animate = () => {
-      uniforms.u_time.value += 0.016 // ~60fps
-      renderer.render(scene, camera)
-      requestAnimationFrame(animate)
-    }
-
-    animate()
-
-    // Handle mouse move for shader interaction
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = container.getBoundingClientRect()
-      uniforms.u_mouse.value.set(
-        (e.clientX - rect.left) / rect.width,
-        1.0 - (e.clientY - rect.top) / rect.height
-      )
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-
-    // Handle resize
-    const handleResize = () => {
+    // Resize handler
+    const onResize = () => {
       if (!container) return
-      
       const newWidth = container.clientWidth
       const newHeight = container.clientHeight
-      
       renderer.setSize(newWidth, newHeight)
-      uniforms.u_resolution.value.set(newWidth, newHeight)
+      uniforms.resolution.value.x = newWidth
+      uniforms.resolution.value.y = newHeight
     }
+    window.addEventListener('resize', onResize)
+    onResize()
 
-    window.addEventListener('resize', handleResize)
+    // Animation loop
+    const animate = () => {
+      requestAnimationFrame(animate)
+      uniforms.time.value += 0.05
+      renderer.render(scene, camera)
+    }
+    animate()
 
     // Cleanup
     return () => {
-      window.removeEventListener('resize', handleResize)
-      window.removeEventListener('mousemove', handleMouseMove)
-      if (container.contains(renderer.domElement)) {
+      window.removeEventListener('resize', onResize)
+      if (container && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement)
       }
       geometry.dispose()
