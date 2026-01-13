@@ -14,14 +14,13 @@ const SplitShowcase: React.FC = () => {
     const rect = containerRef.current.getBoundingClientRect()
     const x = e.clientX - rect.left
     
-    // Vertikale Linie in der Mitte
-    // Inverse logic: Shader läuft auf der Seite wo die Maus NICHT ist
+    // Vertikale Linie in der Mitte - Simple: Shader auf der Seite wo Maus IST
     if (x < rect.width / 2) {
-      // Mouse is on left side -> activate right side (shader right)
-      setActiveSide('right')
-    } else {
-      // Mouse is on right side -> activate left side (shader left)
+      // Mouse is on left side -> activate left side
       setActiveSide('left')
+    } else {
+      // Mouse is on right side -> activate right side
+      setActiveSide('right')
     }
   }
 
@@ -42,14 +41,14 @@ const SplitShowcase: React.FC = () => {
       {/* Linkes Overlay (Vertikale linke Hälfte) */}
       <div 
         className={`absolute inset-0 bg-slate-50 z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          activeSide === 'right' ? 'clip-left-vertical-full' : 'clip-left-vertical-none'
+          activeSide === 'left' ? 'clip-left-vertical-none' : 'clip-left-vertical-full'
         }`} 
       />
       
       {/* Rechtes Overlay (Vertikale rechte Hälfte) */}
       <div 
         className={`absolute inset-0 bg-slate-50 z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          activeSide === 'left' ? 'clip-right-vertical-full' : 'clip-right-vertical-none'
+          activeSide === 'right' ? 'clip-right-vertical-none' : 'clip-right-vertical-full'
         }`} 
       />
 
