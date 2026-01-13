@@ -40,16 +40,22 @@ const SplitShowcase: React.FC = () => {
       
       {/* Linkes Overlay (Vertikale linke Hälfte) */}
       <div 
-        className={`absolute inset-0 bg-slate-50 z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          activeSide === 'left' ? 'clip-left-vertical-none' : 'clip-left-vertical-full'
-        }`} 
+        className="absolute inset-0 bg-slate-50 z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+        style={{
+          clipPath: activeSide === 'left' 
+            ? 'polygon(0 0, 0 0, 0 0, 0 0)' 
+            : 'polygon(0 0, 50% 0, 50% 100%, 0 100%)'
+        }}
       />
       
       {/* Rechtes Overlay (Vertikale rechte Hälfte) */}
       <div 
-        className={`absolute inset-0 bg-slate-50 z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          activeSide === 'right' ? 'clip-right-vertical-none' : 'clip-right-vertical-full'
-        }`} 
+        className="absolute inset-0 bg-slate-50 z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+        style={{
+          clipPath: activeSide === 'right' 
+            ? 'polygon(100% 0, 100% 0, 100% 0, 100% 0)' 
+            : 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)'
+        }}
       />
 
       {/* INHALT / TEXT */}
@@ -104,22 +110,6 @@ const SplitShowcase: React.FC = () => {
           title="Aufzug Systeme"
         />
       </div>
-
-      {/* CSS Styles für Clip-Paths (Vertikal) */}
-      <style jsx global>{`
-        .clip-left-vertical-full {
-          clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
-        }
-        .clip-left-vertical-none {
-          clip-path: polygon(0 0, 0 0, 0 0, 0 0);
-        }
-        .clip-right-vertical-full {
-          clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
-        }
-        .clip-right-vertical-none {
-          clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);
-        }
-      `}</style>
     </div>
   )
 }
