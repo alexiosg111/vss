@@ -1,0 +1,135 @@
+{
+  "$schema": "./schema.json",
+  "images": {
+    "hero/office-building.jpg": {
+      "usage": "Homepage Hero Section",
+      "category": "hero",
+      "size": {
+        "width": 1920,
+        "height": 1080,
+        "variant": "hero"
+      },
+      "alt": "Modernes VSS Bürogebäude",
+      "description": "Hauptsitz von Vertical Service Solutions"
+    },
+    "hero/industrial-machinery.jpg": {
+      "usage": "Services Hero Section",
+      "category": "hero",
+      "size": {
+        "width": 1920,
+        "height": 1080,
+        "variant": "hero"
+      },
+      "alt": "Industrielle Maschinen und Anlagen",
+      "description": "VSS Service-Leistungen"
+    },
+    "gallery/project-01.jpg": {
+      "usage": "Projekte Seite - Galerie",
+      "category": "gallery",
+      "size": {
+        "width": 800,
+        "height": 600,
+        "variant": "medium"
+      },
+      "alt": "Projekt Industrieanlage Wartung",
+      "description": "Wartungsarbeiten an Industrieanlage"
+    },
+    "gallery/project-02.jpg": {
+      "usage": "Projekte Seite - Galerie",
+      "category": "gallery",
+      "size": {
+        "width": 800,
+        "height": 600,
+        "variant": "medium"
+      },
+      "alt": "Projekt Installation",
+      "description": "Installation neuer Systeme"
+    },
+    "thumbnails/team-member-01.jpg": {
+      "usage": "Team Seite - Mitarbeiter Vorschau",
+      "category": "thumbnails",
+      "size": {
+        "width": 300,
+        "height": 300,
+        "variant": "small"
+      },
+      "alt": "Team Mitglied Portrait",
+      "description": "Professionelles Team-Portrait"
+    },
+    "team/engineer-01.jpg": {
+      "usage": "Team Seite - Vollbild",
+      "category": "team",
+      "size": {
+        "width": 600,
+        "height": 800,
+        "variant": "medium"
+      },
+      "alt": "Senior Ingenieur",
+      "description": "Leitender Ingenieur im Einsatz"
+    },
+    "projects/construction-site.jpg": {
+      "usage": "Projekt-Detail Seite",
+      "category": "projects",
+      "size": {
+        "width": 1200,
+        "height": 800,
+        "variant": "large"
+      },
+      "alt": "Baustelle Projektübersicht",
+      "description": "Detailansicht Baustellen-Projekt"
+    },
+    "projects/installation-work.jpg": {
+      "usage": "Projekt-Detail Seite",
+      "category": "projects",
+      "size": {
+        "width": 1200,
+        "height": 800,
+        "variant": "large"
+      },
+      "alt": "Installationsarbeiten",
+      "description": "Technische Installation vor Ort"
+    }
+  },
+  "categories": {
+    "hero": {
+      "name": "Hero Images",
+      "description": "Große Vollbild-Bilder für Hero Sections",
+      "dimensions": {
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    "gallery": {
+      "name": "Gallery Images",
+      "description": "Galerie-Bilder mittlerer Größe",
+      "dimensions": {
+        "width": 800,
+        "height": 600
+      }
+    },
+    "thumbnails": {
+      "name": "Thumbnails",
+      "description": "Kleine Vorschaubilder",
+      "dimensions": {
+        "width": 300,
+        "height": 300
+      }
+    },
+    "team": {
+      "name": "Team Photos",
+      "description": "Mitarbeiter-Portraits",
+      "dimensions": {
+        "width": 600,
+        "height": 800
+      }
+    },
+    "projects": {
+      "name": "Project Images",
+      "description": "Projekt-Detailbilder",
+      "dimensions": {
+        "width": 1200,
+        "height": 800
+      }
+    }
+  }
+}
