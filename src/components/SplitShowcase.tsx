@@ -17,8 +17,12 @@ const SplitShowcase: React.FC = () => {
     
     // Diagonal line: y = x (from top-left to bottom-right)
     // Inverse logic: Shader appears where mouse is NOT
-    const isRightSide = y < x
-
+    // Diagonal line: y = x (from top-left to bottom-right)
+    // Inverse logic: Shader appears where mouse is NOT
+    // Normalize coordinates to 0-1 range for proper diagonal detection
+    const normalizedX = x / rect.width
+    const normalizedY = y / rect.height
+    const isRightSide = normalizedY < normalizedX
     if (isRightSide) {
       // Mouse is on the right (FAHRSTUHL area) -> activate LEFT (MOBILFUNK gets shader)
       setActiveSide('left')
