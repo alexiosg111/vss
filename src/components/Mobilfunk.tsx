@@ -1,6 +1,8 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
+import { ContainerScroll } from './ui/container-scroll-animation'
 
 export default function Mobilfunk() {
   return (
@@ -15,12 +17,21 @@ export default function Mobilfunk() {
             mit uns in die digitale zukunft
           </p>
         </div>
-        
+
         {/* Platzhalter für zukünftiges Bild/Content */}
         <div className="max-w-4xl mx-auto">
-          <div className="aspect-video rounded-2xl bg-slate-800/50 border-2 border-slate-700 flex items-center justify-center">
-            <p className="text-slate-400 text-xl">Bild wird hier angezeigt sobald hochgeladen</p>
-          </div>
+          <ContainerScroll>
+            <div className="aspect-video rounded-2xl bg-slate-800/50 border-2 border-slate-700 flex items-center justify-center">
+              <Image
+                src="/fotos/gallery/mobile-network.jpg"
+                alt="Bild wird hier angezeigt sobald hochgeladen"
+                width={800}
+                height={600}
+                className="rounded-2xl object-cover"
+              />
+            </div>
+          </ContainerScroll>
+          <p className="text-slate-400 text-xl text-center mt-8">Bild wird hier angezeigt sobald hochgeladen</p>
         </div>
       </div>
     </section>
