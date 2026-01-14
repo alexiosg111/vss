@@ -15,18 +15,16 @@ const SplitShowcase: React.FC = () => {
     const x = e.clientX - rect.left
     const y = e.clientY - rect.top
     
-    // Calculate diagonal line from top-left to bottom-right
-    // Line equation: y = (height/width) * x
-    const diagonalY = (rect.height / rect.width) * x
-    
-    // Inverse logic: determine which side should be ACTIVE (white text on black)
-    // Active side is where the shader effect should run (where mouse is NOT)
-    if (y > diagonalY) {
-      // Mouse is below diagonal (bottom-left area) -> activate right side (shader top-right)
-      setActiveSide('right')
-    } else {
-      // Mouse is above diagonal (top-right area) -> activate left side (shader bottom-left)
+    // Diagonal line: y = x (from top-left to bottom-right)
+    // Inverse logic: Shader appears where mouse is NOT
+    const isRightSide = y < x
+
+    if (isRightSide) {
+      // Mouse is on the right (FAHRSTUHL area) -> activate LEFT (MOBILFUNK gets shader)
       setActiveSide('left')
+    } else {
+      // Mouse is on the left (MOBILFUNK area) -> activate RIGHT (FAHRSTUHL gets shader)
+      setActiveSide('right')
     }
   }
 
@@ -91,7 +89,7 @@ const SplitShowcase: React.FC = () => {
         
         {/* Logo Platzhalter */}
         <div className="absolute top-6 left-6 md:top-8 md:left-8">
-             <span className="font-black text-slate-900/20 text-3xl tracking-tighter">VSS</span>
+          <span className="font-black text-slate-900/20 text-3xl tracking-tighter">VSS</span>
         </div>
       </div>
 
@@ -103,6 +101,7 @@ const SplitShowcase: React.FC = () => {
           style={{ clipPath: 'polygon(0 0, 0 100%, 100% 100%)' }}
           title="Mobilfunk Lösungen"
         />
+
         <Link 
           href="#aufzuge" 
           className="absolute inset-0 pointer-events-auto cursor-pointer"
