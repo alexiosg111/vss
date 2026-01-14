@@ -3,6 +3,7 @@ import SplitShowcase from '@/components/SplitShowcase'
 import Services from '@/components/Services'
 import CTA from '@/components/CTA'
 import Footer from '@/components/Footer'
+import Mobilfunk from '@/components/Mobilfunk'
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Header />
       <SplitShowcase />
       <Services />
+            <Mobilfunk />
       <CTA />
       <Footer />
     </main>
