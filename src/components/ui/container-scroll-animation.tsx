@@ -27,51 +27,62 @@ export const ContainerScroll = ({
   }, []);
 
   const scaleDimensions = () => {
-    return isMobile ? [0.85, 1] : [0.9, 1];
+    return isMobile ? [0.7, 1] : [0.75, 1];
   };
 
-  const rotate = useTransform(scrollYProgress, [0, 0.5, 1], [15, 5, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [scaleDimensions()[0], 0.95, scaleDimensions()[1]]);
-  const translateY = useTransform(scrollYProgress, [0, 0.5, 1], [100, 50, 0]);
+  // Viel dynamischere Rotation mit stärkerem Effekt
+  const rotate = useTransform(scrollYProgress, [0, 0.5, 1], [25, 10, 0]);
+  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [15, 5, 0]);
+  
+  // Dynamischer Scale-Effekt
+  const scale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [scaleDimensions()[0], 0.9, scaleDimensions()[1]]
+  );
+  
+  // Stärkere Y-Translation für dramatischeren Effekt
+  const translateY = useTransform(scrollYProgress, [0, 0.5, 1], [150, 70, 0]);
+  
+  // Zusätzliche X-Translation für Bewegung
+  const translateX = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0, 0]);
+  
+  // Opacity-Fade für smooth appearance
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.5], [0.5, 0.8, 1]);
 
   return (
     <div
-      className="h-[100vh] flex items-center justify-center relative"
       ref={containerRef}
-    >
-      <Card rotate={rotate} translateY={translateY} scale={scale}>
-        {children}
-      </Card>
-    </div>
-  );
-};
-
-export const Card = ({
-  rotate,
-  scale,
-  translateY,
-  children,
-}: {
-  rotate: MotionValue<number>;
-  scale: MotionValue<number>;
-  translateY: MotionValue<number>;
-  children: React.ReactNode;
-}) => {
-  return (
-    <motion.div
+      className="relative h-[80vh] flex items-center justify-center p-2 md:p-20"
       style={{
-        rotateX: rotate,
-        scale,
-        translateY,
-        boxShadow:
-          "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
+        perspective: "1500px",
       }}
-      transition={{ type: "spring", stiffness: 100, damping: 30 }}
-      className="max-w-6xl mx-auto w-full border-4 border-[#6C6C6C] p-3 md:p-6 bg-[#222222] rounded-[30px] shadow-2xl"
     >
-      <div className="h-full w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-zinc-900">
-        {children}
-      </div>
-    </motion.div>
+      <motion.div
+        style={{
+          rotateX,
+          rotateZ: rotate,
+          scale,
+          y: translateY,
+          x: translateX,
+          opacity,
+        }}
+        className="w-full max-w-5xl"
+      >
+        <motion.div
+          whileHover={{
+            scale: 1.02,
+            rotateX: 5,
+            transition: { duration: 0.3 },
+          }}
+          className="rounded-2xl shadow-2xl"
+          style={{
+            transformStyle: "preserve-3d",
+          }}
+        >
+          {children}
+        </motion.div>
+      </motion.div>
+    </div>
   );
 };
