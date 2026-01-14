@@ -1,6 +1,5 @@
 #!/bin/bash
 # VSS Website Setup Script v0.34.0 - Fixed Setup without Build
-set -e  # Exit on error
 
 echo "🚀 VSS Website Setup v0.34.0"
 echo ""
