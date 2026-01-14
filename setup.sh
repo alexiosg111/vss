@@ -1,148 +1,83 @@
 #!/bin/bash
+# VSS Website Setup Script v0.34.0 - Fixed Setup without Build
+set -e  # Exit on error
 
-# VSS Website Setup Script v0.11.0 - Clean Setup ohne Docker
-echo "🚀 VSS Website Setup v0.11.0 wird gestartet..."
-echo "🔄 Clean Setup ohne Docker (wie v0.8)"
+echo "🚀 VSS Website Setup v0.34.0"
+echo ""
 
-# Einfache Browser-Detection
-echo "🔍 Prüfe Browser-Verfügbarkeit..."
-browser_found=false
-
-if command -v open &> /dev/null; then
-    echo "✅ macOS Browser (open) verfügbar"
-    browser_found=true
-elif command -v xdg-open &> /dev/null; then
-    echo "✅ Linux Browser (xdg-open) verfügbar"
-    browser_found=true
-elif command -v start &> /dev/null; then
-    echo "✅ Windows Browser (start) verfügbar"
-    browser_found=true
-else
-    echo "⚠️ Kein Browser verfügbar"
-fi
-
-# Prüfe Node.js
-echo "📦 Prüfe Node.js..."
+# Check Node.js
+echo "📦 Checking Node.js..."
 if ! command -v node &> /dev/null; then
-    echo "❌ Node.js ist nicht installiert. Bitte installieren Sie Node.js 18+ zuerst."
+    echo "❌ Node.js not installed. Please install Node.js 18+"
     echo "Download: https://nodejs.org/"
+    read -p "Press Enter to exit..."
     exit 1
 fi
+echo "✅ Node.js found: $(node --version)"
 
-node_version=$(node --version | cut -d'v' -f2)
-echo "✅ Node.js gefunden: v$node_version"
-
-# Prüfe npm
-echo "📦 Prüfe npm..."
+# Check npm
+echo "📦 Checking npm..."
 if ! command -v npm &> /dev/null; then
-    echo "❌ npm ist nicht installiert."
+    echo "❌ npm not installed"
+    read -p "Press Enter to exit..."
     exit 1
 fi
+echo "✅ npm found: v$(npm --version)"
 
-npm_version=$(npm --version)
-echo "✅ npm gefunden: v$npm_version"
-
-# Installiere Dependencies
-echo "📦 Installiere Dependencies..."
+# Install dependencies
+echo ""
+echo "📦 Installing dependencies..."
 npm install
-
 if [ $? -ne 0 ]; then
-    echo "❌ Fehler bei der Installation der Dependencies."
-    echo "🔧 Versuche Troubleshooting..."
-    echo "📝 Lösche node_modules und package-lock.json..."
+    echo "❌ npm install failed. Trying cleanup..."
+    echo "📝 Removing node_modules and package-lock.json..."
     rm -rf node_modules package-lock.json
-    echo "📦 Installiere erneut..."
+    echo "📦 Retrying install..."
     npm install
     if [ $? -ne 0 ]; then
-        echo "❌ Fehler bei der Installation persistiert."
+        echo "❌ Installation failed."
+        echo ""
+        echo "Possible solutions:"
+        echo "1. Delete node_modules and package-lock.json manually"
+        echo "2. Run: npm cache clean --force"
+        echo "3. Try: npm install --legacy-peer-deps"
+        read -p "Press Enter to exit..."
         exit 1
     fi
 fi
+echo "✅ Dependencies installed"
 
-echo "✅ Dependencies installiert."
-
-# Prüfe .env.local
+# Create .env.local
 if [ ! -f .env.local ]; then
-    echo "📝 Erstelle .env.local für lokale Entwicklung..."
+    echo ""
+    echo "📝 Creating .env.local..."
     cat > .env.local << EOL
-# VSS Website Environment Variables
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_COMPANY_NAME=Vertical Service Solutions
-NEXT_PUBLIC_COMPANY_PHONE=+49 (0) 123 456 789
-NEXT_PUBLIC_COMPANY_EMAIL=info@vertical-service-solutions.com
 NODE_ENV=development
 EOL
-    echo "✅ .env.local erstellt."
+    echo "✅ .env.local created"
 else
-    echo "✅ .env.local existiert bereits."
+    echo "✅ .env.local exists"
 fi
 
-# Erstelle notwendige Verzeichnisse
-echo "📁 Erstelle Verzeichnisse..."
+# Create directories
+echo ""
+echo "📁 Creating directories..."
 mkdir -p public/images
 mkdir -p public/logos
+mkdir -p public/fotos/gallery
+echo "✅ Directories created"
 
-# Build-Test
-echo "🔨 Teste Build..."
-npm run build
-
-if [ $? -ne 0 ]; then
-    echo "❌ Build-Test fehlgeschlagen."
-    exit 1
-fi
-
-echo "✅ Build erfolgreich."
-
-# Starte Development Server
-echo "🎉 Setup v0.11.0 abgeschlossen!"
+# Start development server
 echo ""
-echo "🚀 Starte Development Server..."
+echo "✅ Setup complete!"
+echo ""
+echo "🚀 Starting development server..."
+echo "🌐 Website will be available at: http://localhost:3000"
+echo ""
+echo "⚡ Press Ctrl+C to stop"
 echo ""
 
-# Starte Next.js Development Server
-npm run dev &
-SERVER_PID=$!
-
-# Warte bis Server läuft
-echo "⏳ Warte auf Server-Start..."
-sleep 5
-
-# Öffne Browser (nur wenn verfügbar)
-if [ "$browser_found" = true ]; then
-    echo "🌐 Öffne Website im Browser..."
-    if command -v open &> /dev/null; then
-        open "http://localhost:3000" &> /dev/null &
-    elif command -v xdg-open &> /dev/null; then
-        xdg-open "http://localhost:3000" &> /dev/null &
-    elif command -v start &> /dev/null; then
-        start "http://localhost:3000" &> /dev/null &
-    else
-        echo "📱 Website verfügbar unter: http://localhost:3000"
-    fi
-else
-    echo "📱 Website verfügbar unter: http://localhost:3000"
-fi
-
-echo "✅ Setup abgeschlossen!"
-echo "🌐 VSS Website läuft unter: http://localhost:3000"
-echo "📊 Setup-Monitor verfügbar unter: http://localhost:3000/setup-monitor"
-echo ""
-echo "🎯 Features zum Testen (v0.11.0):"
-echo "   • SplitShowcase Komponente mit diagonalem Split (/)"
-echo "   • Three.js Shader Hintergrund mit originalen RGB-Farben"
-echo "   • Inverse Maus-Interaktionslogik (Shader läuft wo Maus NICHT ist)"
-echo "   • MOBILFUNK (unten links) und FAHRSTUHL (oben rechts) Bereiche"
-echo "   • Smooth CSS Clip-Path Animationen"
-echo "   • Clean Setup ohne Docker"
-echo ""
-echo "🔧 v0.11.0 Setup Verbesserungen:"
-echo "   • Docker entfernt - einfacher npm Setup"
-echo "   • Zurück zu bewährter v0.8 Setup-Logik"
-echo "   • Bessere Kompatibilität und Zuverlässigkeit"
-echo "   • Schnellerer Setup-Prozess"
-echo ""
-echo "⚡ Drücken Sie Ctrl+C zum Beenden"
-
-# Warte auf Ctrl+C
-trap 'echo ""; echo "🛑 Stoppe Development Server..."; kill $SERVER_PID; exit' INT
-wait $SERVER_PID
+# Start server
+npm run dev
