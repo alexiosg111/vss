@@ -28,6 +28,7 @@ export default function Mobilfunk() {
                 fill
                 className="object-cover"
                 priority
+                                unoptimized
               />
             </div>
           </ContainerScroll>
@@ -37,4 +38,4 @@ export default function Mobilfunk() {
   )
 }
 
-                unoptimized
+              
