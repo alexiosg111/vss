@@ -14,12 +14,12 @@ export const ContainerScroll = ({
     target: containerRef,
   });
   const [isMobile, setIsMobile] = React.useState(false);
-    const [isTablet, setIsTablet] = React.useState(false);
+  const [isTablet, setIsTablet] = React.useState(false);
 
   React.useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
-            const width = window.innerWidth;
+      const width = window.innerWidth;
       setIsTablet(width > 768 && width <= 1024);
     };
     checkMobile();
@@ -30,15 +30,16 @@ export const ContainerScroll = ({
   }, []);
 
   const scaleDimensions = () => {
-    return isMobile ? [0.7, 0.9] : isTablet ? [0.9, 0.95] : [1.05, 1];  };
+    return isMobile ? [0.7, 0.9] : isTablet ? [0.9, 0.95] : [1.05, 1];
+  };
 
-
-    const rotateRange = () => {
+  const rotateRange = () => {
     return isMobile ? [20, 0] : isTablet ? [12, 0] : [15, 0];
   };
+
   const rotate = useTransform(scrollYProgress, [0, 1], rotateRange());
-    const scale = useTransform(scrollYProgress, [0, 1], scaleDimensi
-                                 ;const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
+  const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   return (
     <div
@@ -93,7 +94,7 @@ export const Card = ({
       }}
       className="max-w-5xl -mt-12 mx-auto h-[30rem] md:h-[40rem] w-full border-4 border-[#6C6C6C] p-2 md:p-6 bg-[#222222] rounded-[30px] shadow-2xl"
     >
-      <div className=" h-full w-full  overflow-hidden rounded-2xl bg-gray-100 dark:bg-zinc-900 md:rounded-2xl md:p-4 ">
+      <div className=" h-full w-full overflow-hidden rounded-2xl bg-gray-100 dark:bg-zinc-900 md:rounded-2xl md:p-4 ">
         {children}
       </div>
     </motion.div>
