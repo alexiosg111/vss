@@ -107,7 +107,7 @@ const SplitShowcase: React.FC = () => {
         />
 
         <Link 
-          href="#aufzuge" 
+          href="/aufzuege" 
           className="absolute inset-0 pointer-events-auto cursor-pointer"
           style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%)' }}
           title="Aufzug Systeme"
