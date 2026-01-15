@@ -87,7 +87,7 @@ const SplitShowcase: React.FC = () => {
             Vertical Systems
           </span>
           <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9]">
-            FAHRSTUHL
+            AUFZÜGE
           </h1>
         </div>
         
