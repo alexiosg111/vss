@@ -14,10 +14,13 @@ export const ContainerScroll = ({
     target: containerRef,
   });
   const [isMobile, setIsMobile] = React.useState(false);
+    const [isTablet, setIsTablet] = React.useState(false);
 
   React.useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
+            const width = window.innerWidth;
+      setIsTablet(width > 768 && width <= 1024);
     };
     checkMobile();
     window.addEventListener("resize", checkMobile);
@@ -27,11 +30,15 @@ export const ContainerScroll = ({
   }, []);
 
   const scaleDimensions = () => {
-    return isMobile ? [0.7, 0.9] : [1.05, 1];
-  };
+    return isMobile ? [0.7, 0.9] : isTablet ? [0.9, 0.95] : [1.05, 1];  };
 
-const rotate = useTransform(scrollYProgress, [0, 1], [15, 0]);  const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
-  const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
+    const rotateRange = () => {
+    return isMobile ? [20, 0] : isTablet ? [12, 0] : [15, 0];
+  };
+  const rotate = useTransform(scrollYProgress, [0, 1], rotateRange());
+    const scale = useTransform(scrollYProgress, [0, 1], scaleDimensi
+                                 ;const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   return (
     <div
