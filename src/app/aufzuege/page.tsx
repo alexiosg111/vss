@@ -100,7 +100,7 @@ const AufzuegePage = () => {
                   <strong>Energieeffizienz:</strong> Klasse A+++
                 </div>
                 <div>
-                  <strong>Lärmschutz:</strong> < 35 dB
+                  <strong>Lärmschutz:</strong> &lt; 35 dB
                 </div>
               </div>
             </div>
