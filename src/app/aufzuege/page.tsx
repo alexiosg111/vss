@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import ScrollExpandMedia from '@/components/ui/scroll-expansion-hero';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Building2, Wrench, Clock, Shield, CheckCircle } from 'lucide-react';
+import { Building2, Wrench, Clock, Shield, CheckCircle, Play, Video } from 'lucide-react';
 
 const AufzuegePage = () => {
   useEffect(() => {
@@ -14,12 +14,14 @@ const AufzuegePage = () => {
   return (
     <>
       <Header />
+      
+      {/* Video Hero Section with ScrollExpandMedia */}
       <ScrollExpandMedia
-        mediaType="image"
-        mediaSrc="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&h=1080&fit=crop&q=80"
+        mediaType="video"
+        mediaSrc="https://videos.pexels.com/video-files/6774466/6774466-uhd_2560_1440_25fps.mp4"
         bgImageSrc="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&h=1080&fit=crop&q=80"
-        title="Professionelle Aufzüge"
-        date="Zuverlässig & Sicher"
+        title="Professionelle Aufzugslösungen"
+        date="Modern · Sicher · Zuverlässig"
         scrollToExpand="Scrollen zum Erkunden"
         textBlend
       >
@@ -29,7 +31,8 @@ const AufzuegePage = () => {
           </h2>
           
           <div className='space-y-6'>
-            <div className='bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg'>
+            {/* Services Section */}
+            <div className='bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300'>
               <h3 className='text-2xl font-semibold mb-4 text-slate-900 dark:text-white flex items-center gap-3'>
                 <Building2 className='w-7 h-7 text-blue-600' />
                 Unsere Leistungen
@@ -49,12 +52,34 @@ const AufzuegePage = () => {
                 </li>
                 <li className='flex items-start gap-3'>
                   <CheckCircle className='w-6 h-6 text-green-600 flex-shrink-0 mt-1' />
-                  <span><strong>Reparatur:</strong> 24/7 Notdienst bei Störungen und Ausfällen</span>
+                  <span><strong>Notdienst:</strong> 24/7 Bereitschaft bei Störungen und Ausfällen</span>
                 </li>
               </ul>
             </div>
 
-            <div className='bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg'>
+            {/* Video Showcase Section */}
+            <div className='bg-gradient-to-br from-blue-600 to-blue-800 p-8 rounded-lg shadow-xl text-white'>
+              <h3 className='text-2xl font-semibold mb-4 flex items-center gap-3'>
+                <Video className='w-7 h-7' />
+                Sehen Sie unsere Projekte in Aktion
+              </h3>
+              <p className='text-lg mb-6 opacity-90'>
+                Erleben Sie die Qualität und Präzision unserer Aufzugsinstallationen in modernsten Gebäuden.
+              </p>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                <div className='bg-white/10 backdrop-blur-sm p-4 rounded-lg hover:bg-white/20 transition-all duration-300 cursor-pointer'>
+                  <Play className='w-12 h-12 mx-auto mb-3' />
+                  <p className='text-center font-semibold'>Wohngebäude</p>
+                </div>
+                <div className='bg-white/10 backdrop-blur-sm p-4 rounded-lg hover:bg-white/20 transition-all duration-300 cursor-pointer'>
+                  <Play className='w-12 h-12 mx-auto mb-3' />
+                  <p className='text-center font-semibold'>Bürokomplexe</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Safety & Quality Section */}
+            <div className='bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300'>
               <h3 className='text-2xl font-semibold mb-4 text-slate-900 dark:text-white flex items-center gap-3'>
                 <Shield className='w-7 h-7 text-blue-600' />
                 Sicherheit & Qualität
@@ -66,7 +91,8 @@ const AufzuegePage = () => {
               </p>
             </div>
 
-            <div className='bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg'>
+            {/* Fast Service Section */}
+            <div className='bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300'>
               <h3 className='text-2xl font-semibold mb-4 text-slate-900 dark:text-white flex items-center gap-3'>
                 <Clock className='w-7 h-7 text-blue-600' />
                 Schneller Service
@@ -78,7 +104,8 @@ const AufzuegePage = () => {
               </p>
             </div>
 
-            <div className='bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg'>
+            {/* Technical Specifications */}
+            <div className='bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300'>
               <h3 className='text-2xl font-semibold mb-4 text-slate-900 dark:text-white flex items-center gap-3'>
                 <Wrench className='w-7 h-7 text-blue-600' />
                 Technische Spezifikationen
@@ -105,6 +132,7 @@ const AufzuegePage = () => {
               </div>
             </div>
 
+            {/* Contact CTA */}
             <div className='bg-gradient-to-r from-blue-600 to-blue-800 p-8 rounded-lg shadow-xl text-white'>
               <h3 className='text-3xl font-bold mb-4'>
                 Kontaktieren Sie uns
@@ -130,6 +158,7 @@ const AufzuegePage = () => {
           </div>
         </div>
       </ScrollExpandMedia>
+      
       <Footer />
     </>
   );
