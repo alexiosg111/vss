@@ -1,10 +1,12 @@
 {
   "name": "vss-website-redesign",
-"1.1.1"  "scripts": {, "description": "VSS Website Redesign with SplitShowcase Diagonal Split - Release v0.12.0 - Fixed Hitbox & Shader",
+  "version": "2.0.0",
+  "description": "VSS Website Redesign - Release v2.0.0 - Major Version",
+  "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-  "version": "1.7.4",    "docker:dev": "echo 'Docker removed in v0.11 - use npm run dev instead'",
+    "docker:dev": "echo 'Docker removed in v0.11 - use npm run dev instead'",
     "docker:prod": "echo 'Docker removed in v0.11 - use npm run build && npm run start'",
     "docker:down": "echo 'Docker removed in v0.11'",
     "test": "npm run build",
@@ -72,33 +74,32 @@
   },
   "homepage": "https://github.com/alexiosg111/vss#readme",
   "release": {
-    "date": "2026-01-16",    "features": [
-          "features": [
-      "Optimized 3D Scroll Animation for Tablets (768-1024px)",
-      "Smoother Scale Transitions on iPad & Similar Devices",
-      "Reduced Rotation Angle for Better Tablet Experience",
-      "Enhanced Responsive Breakpoints"
-    ],
-          "improvements": [
-      "Better iPad & Android tablet detection",
-      "Refined animation parameters for mid-size screens",
-      "Consistent 60fps performance across all devices"
-    ],
-      "Fixed Diagonal Hitbox Calculation (y = mx + c)",
-      "Corrected Inverse Mouse Interaction Logic",
-      "Restored Vibrant RGB Shader Colors",
-      "Added Interactive Mouse Glow to Shader",
-      "Added Clickable Service Area Hitboxes",
-      "Smooth CSS Clip-Path Transitions (700ms)"
+    "date": "2026-01-16",
+    "type": "major",
+    "features": [
+      "SplitShowcase Diagonal Split-Screen Layout",
+      "Three.js WebGL Shader mit interaktiven Effekten",
+      "Inverse Maus-Interaktionslogik",
+      "Hitbox-Präzision auf diagonaler Trennlinie",
+      "Tablet-Optimierungen (768-1024px)",
+      "Windows setup.bat Fix für EPERM-Fehler",
+      "Funktionierende Navigation zu Services"
     ],
     "improvements": [
+      "Optimierte 3D Scroll Animation für Tablets",
+      "Smoother Scale Transitions auf iPad & ähnlichen Geräten",
+      "Reduzierter Rotationswinkel für bessere Tablet-Erfahrung",
+      "Enhanced Responsive Breakpoints",
+      "Bessere iPad & Android tablet detection",
+      "Refined animation parameters für mid-size screens",
+      "Consistent 60fps performance across all devices",
       "Precise transition point at the diagonal split",
       "Improved Shader Performance and Visuals",
       "Direct links to Service sections from Hero",
-      "Better UX with clear interactive states"
+      "Better UX mit clear interactive states"
     ],
     "breakingChanges": [
-      "None"
+      "None - Full backwards compatibility"
     ]
   }
 }
