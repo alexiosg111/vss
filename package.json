@@ -1,6 +1,6 @@
 {
   "name": "vss-website-redesign",
-"1.1.1"  "scripts": {, "description": "VSS Website Redesign with SplitShowcase Diagonal Split - Release v0.12.0 - Fixed Hitbox & Shader"
+"1.1.1"  "scripts": {, "description": "VSS Website Redesign with SplitShowcase Diagonal Split - Release v0.12.0 - Fixed Hitbox & Shader",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
