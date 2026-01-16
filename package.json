@@ -1,13 +1,10 @@
 {
   "name": "vss-website-redesign",
-"version": "1.1.0",  "description": "VSS Website Redesign with SplitShowcase Diagonal Split - Release v0.12.0 - Fixed Hitbox & Shader",
-  "scripts": {
+"1.1.1"  "scripts": {, "description": "VSS Website Redesign with SplitShowcase Diagonal Split - Release v0.12.0 - Fixed Hitbox & Shader"
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "setup": "./setup.sh",
-    "preview": "./preview.sh",
     "docker:dev": "echo 'Docker removed in v0.11 - use npm run dev instead'",
     "docker:prod": "echo 'Docker removed in v0.11 - use npm run build && npm run start'",
     "docker:down": "echo 'Docker removed in v0.11'",
