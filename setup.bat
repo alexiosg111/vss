@@ -2,9 +2,9 @@
 REM Navigiere ins Script-Verzeichnis
 cd /d "%~dp0"
 
-REM VSS Website Setup Script v1.1.0 - EPERM Fix + Verbesserte Fehlerbehandlung
+REM VSS Website Setup Script v1.1.1 - EPERM Fix + Directory Navigation Release
 echo ========================================
-echo   VSS Website Setup v1.1.0
+echo   VSS Website Setup v1.1.1
 echo   [EPERM Fix + Directory Navigation]
 echo ========================================
 echo.
