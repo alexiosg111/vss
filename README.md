@@ -2,7 +2,7 @@
 
 Eine moderne Next.js-Website mit Tailwind CSS für Vertical Service Solutions, inspiriert von 21st.dev Design-Patterns.
 
-> **Wichtig:** Führen Sie `setup.bat` (Windows) oder `./setup.sh` (Linux/Mac) direkt aus dem Repository-Ordner aus. NICHT `npm run setup` verwenden!
+> **Wichtig:** Führen Sie `setup.bat` (Windows) oder `./setup.sh` (Linux/Mac) direkt aus dem Repository-Ordner aus. Die Scripts navigieren automatisch ins Projekt-Verzeichnis. NICHT `npm run setup` verwenden!
 
 ## 🚀 Version 0.1.0 - Initial Release + Setup System
 
@@ -133,6 +133,16 @@ npm run lint           # Code Linting
 ## 🐛 Troubleshooting
 
 ### Häufige Probleme:
+
+**EPERM Fehler (Permission denied):**
+```cmd
+Error: EPERM: operation not permitted, open 'C:\WINDOWS\system32\package-lock.json'
+```
+**Lösung:**
+1. Stellen Sie sicher, dass `setup.bat` im VSS-Projektverzeichnis ausgeführt wird
+2. Führen Sie die Eingabeaufforderung als Administrator aus
+3. Schließen Sie alle anderen Anwendungen die auf package-lock.json zugreifen könnten
+4. Das Script navigiert jetzt automatisch ins richtige Verzeichnis
 
 **Port 3000 belegt:**
 ```bash

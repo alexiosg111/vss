@@ -1,8 +1,27 @@
 @echo off
-REM VSS Website Setup Script v1.0.0 - Simplified Fast Setup
+REM Navigiere ins Script-Verzeichnis
+cd /d "%~dp0"
+
+REM VSS Website Setup Script v1.1.0 - EPERM Fix + Verbesserte Fehlerbehandlung
 echo ========================================
-echo   VSS Website Setup v1.0.0
+echo   VSS Website Setup v1.1.0
+echo   [EPERM Fix + Directory Navigation]
 echo ========================================
+echo.
+
+REM Prüfe ob wir im richtigen Verzeichnis sind
+if not exist package.json (
+    echo [FEHLER] package.json nicht gefunden!
+    echo.
+    echo Das Script muss im VSS-Projektverzeichnis ausgefuehrt werden.
+    echo Stellen Sie sicher, dass Sie im korrekten Verzeichnis sind und
+    echo dass die package.json Datei existiert.
+    echo.
+    pause
+    exit /b 1
+)
+
+echo [OK] Projektverzeichnis gefunden
 echo.
 
 REM Prüfe Node.js
@@ -42,10 +61,26 @@ if errorlevel 1 (
     echo.
     echo [FEHLER] Installation fehlgeschlagen!
     echo.
-    echo Moegliche Loesungen:
-    echo 1. Loeschen Sie 'node_modules' und 'package-lock.json'
-    echo 2. Fuehren Sie aus: npm cache clean --force
-    echo 3. Versuchen Sie: npm install --legacy-peer-deps
+    
+    REM Prüfe auf spezifische EPERM/permission Fehler
+    where npm >nul 2>&1
+    if errorlevel 1 (
+        echo [DIAGNOSE] npm wurde nicht im Projektverzeichnis ausgefuehrt!
+        echo.
+        echo Moegliche Loesungen:
+        echo 1. Stellen Sie sicher, dass setup.bat im VSS-Projektverzeichnis ausgefuehrt wird
+        echo 2. Schliessen Sie alle anderen Anwendungen die auf package-lock.json zugreifen koennten
+        echo 3. Führen Sie die Eingabeaufforderung als Administrator aus
+        echo 4. Loeschen Sie 'node_modules' und 'package-lock.json' manuell
+    ) else (
+        echo Moegliche Loesungen:
+        echo 1. Loeschen Sie 'node_modules' und 'package-lock.json'
+        echo 2. Fuehren Sie aus: npm cache clean --force
+        echo 3. Versuchen Sie: npm install --legacy-peer-deps
+        echo 4. Stellen Sie sicher, dass keine anderen Anwendungen auf node_modules zugreifen
+    )
+    echo.
+    echo Aktuelles Verzeichnis: %CD%
     echo.
     pause
     exit /b 1
