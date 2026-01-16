@@ -2,6 +2,8 @@
 
 Eine moderne Next.js-Website mit Tailwind CSS für Vertical Service Solutions, inspiriert von 21st.dev Design-Patterns.
 
+> **Wichtig:** Führen Sie `setup.bat` (Windows) oder `./setup.sh` (Linux/Mac) direkt aus dem Repository-Ordner aus. NICHT `npm run setup` verwenden!
+
 ## 🚀 Version 0.1.0 - Initial Release + Setup System
 
 ### ✅ Verfügbare Features
